@@ -1,7 +1,6 @@
-<center>
-<img src="https://github.com/rafael-figueiredo-alves/eFirebase/blob/main/Imagens/Logo_eFirebase.png" width=50% height=50%>  
-</center>
----
+<p align="center">
+<img src="https://github.com/rafael-figueiredo-alves/eFirebase/blob/main/Imagens/Logo_eFirebase.png" width=75% height=75%>  
+</p>
 
 Framework para manipulação do Firebase no Delphi (em fase inicial de desenvolvimento)
 
