@@ -4,7 +4,7 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   UnitMain in 'UnitMain.pas' {Form2},
-  eFirebase.Interfaces in '..\..\source\eFirebase.Interfaces.pas';
+  eFirebase.rest in '..\..\source\Rest\eFirebase.rest.pas';
 
 {$R *.res}
 
