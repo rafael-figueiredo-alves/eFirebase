@@ -4,10 +4,14 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs;
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Memo.Types,
+  FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation, FMX.StdCtrls;
 
 type
   TForm2 = class(TForm)
+    Button1: TButton;
+    Memo1: TMemo;
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -19,6 +23,19 @@ var
 
 implementation
 
+uses
+  eFirebase.rest;
+
 {$R *.fmx}
+
+procedure TForm2.Button1Click(Sender: TObject);
+Var
+ FResposta : iResponse;
+begin
+  FResposta := TRest.New.BaseUrl('https://etasks-d6988.firebaseio.com/etasks/v1')
+                         .Resource('version.json')
+                         .Get;
+  memo1.Lines.Add(FResposta.content);
+end;
 
 end.
