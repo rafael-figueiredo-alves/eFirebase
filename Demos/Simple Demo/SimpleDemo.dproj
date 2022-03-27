@@ -277,6 +277,8 @@
         <DCCReference Include="..\..\source\eFirebase.request.pas"/>
         <DCCReference Include="..\..\source\eFirebase.response.contract.pas"/>
         <DCCReference Include="..\..\source\eFirebase.response.pas"/>
+        <DCCReference Include="..\..\source\eFirebase.request.lazarus.pas"/>
+        <DCCReference Include="..\..\source\eFirebase.response.lazarus.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -8,7 +8,9 @@ uses
   eFirebase.request.contract in '..\..\source\eFirebase.request.contract.pas',
   eFirebase.request in '..\..\source\eFirebase.request.pas',
   eFirebase.response.contract in '..\..\source\eFirebase.response.contract.pas',
-  eFirebase.response in '..\..\source\eFirebase.response.pas';
+  eFirebase.response in '..\..\source\eFirebase.response.pas',
+  eFirebase.request.lazarus in '..\..\source\eFirebase.request.lazarus.pas',
+  eFirebase.response.lazarus in '..\..\source\eFirebase.response.lazarus.pas';
 
 {$R *.res}
 
