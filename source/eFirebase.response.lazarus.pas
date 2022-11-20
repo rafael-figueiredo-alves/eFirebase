@@ -14,6 +14,7 @@ Type
     Destructor Destroy; Override;
     Class function New(const response: TIdHTTP): iResponse;
     function Content: string;
+    function StatusCode: integer;
   End;
 
 implementation
@@ -42,6 +43,11 @@ end;
 class function TResponseLazarus.New(const response: TIdHTTP): iResponse;
 begin
   Result := Self.Create(response);
+end;
+
+function TResponseLazarus.StatusCode: integer;
+begin
+  Result := FidHTTP.Response.ResponseCode;
 end;
 
 end.

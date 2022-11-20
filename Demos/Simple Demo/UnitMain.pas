@@ -35,7 +35,11 @@ begin
   FResposta := TRest.New.BaseUrl('https://etasks-d6988.firebaseio.com/etasks/v1')
                          .Resource('version.json')
                          .Get;
+//  FResposta := TRest.New2.BaseUrl('https://etasks-d6988.firebaseio.com/etasks/v1')
+//                         .Resource('version.json')
+//                         .Get;
   memo1.Lines.Add(FResposta.content);
+  ShowMessage(IntToStr(FResposta.StatusCode));
 end;
 
 end.

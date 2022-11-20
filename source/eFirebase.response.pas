@@ -14,6 +14,7 @@ Type
      Destructor Destroy; Override;
      Class function New(ARestResponse: TRESTResponse): iResponse;
      function Content: string;
+     function StatusCode: integer;
   End;
 
 implementation
@@ -39,6 +40,11 @@ end;
 class function TResponse.New(ARestResponse: TRESTResponse): iResponse;
 begin
   Result := Self.Create(ARestResponse);
+end;
+
+function TResponse.StatusCode: integer;
+begin
+  Result := FRestResponse.StatusCode;
 end;
 
 end.
