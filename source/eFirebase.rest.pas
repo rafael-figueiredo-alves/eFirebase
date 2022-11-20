@@ -14,6 +14,7 @@ Type
     Public
      Class function New: iRequest;
      class function New2: iRequest;
+     class function Versao: string;
   End;
 
 implementation
@@ -31,6 +32,11 @@ end;
 class function TRest.New2: iRequest;
 begin
   Result := TRequestLazarus.Create;
+end;
+
+class function TRest.Versao: string;
+begin
+  Result := '0.0.1-a';
 end;
 
 end.

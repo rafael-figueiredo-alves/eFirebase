@@ -3,7 +3,9 @@ unit eFirebase.response.lazarus;
 interface
 
 uses
-  eFirebase.response.contract, IdHTTP;
+  eFirebase.response.contract,
+  IdHTTP,
+  System.Classes;
 
 Type
   TResponseLazarus = Class(TInterfacedObject, iResponse)
@@ -15,12 +17,10 @@ Type
     Class function New(const response: TIdHTTP): iResponse;
     function Content: string;
     function StatusCode: integer;
+    function Headers: TStrings;
   End;
 
 implementation
-
-uses
-  System.Classes;
 
 { TResponseLazarus }
 
@@ -38,6 +38,11 @@ destructor TResponseLazarus.Destroy;
 begin
 
   inherited;
+end;
+
+function TResponseLazarus.Headers: TStrings;
+begin
+
 end;
 
 class function TResponseLazarus.New(const response: TIdHTTP): iResponse;

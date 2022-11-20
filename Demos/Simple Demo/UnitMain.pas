@@ -40,6 +40,8 @@ begin
 //                         .Get;
   memo1.Lines.Add(FResposta.content);
   ShowMessage(IntToStr(FResposta.StatusCode));
+  Memo1.Lines.Add(FResposta.Headers.Text);
+  Memo1.Lines.Add('Versão da biblioteca: ' + TRest.Versao);
 end;
 
 end.

@@ -3,7 +3,9 @@ unit eFirebase.response;
 interface
 
 uses
-  eFirebase.response.contract, rest.Client;
+  eFirebase.response.contract,
+  rest.Client,
+  System.Classes;
 
 Type
   TResponse = Class(TInterfacedObject, iResponse)
@@ -15,6 +17,7 @@ Type
      Class function New(ARestResponse: TRESTResponse): iResponse;
      function Content: string;
      function StatusCode: integer;
+     function Headers: TStrings;
   End;
 
 implementation
@@ -35,6 +38,11 @@ destructor TResponse.Destroy;
 begin
 
   inherited;
+end;
+
+function TResponse.Headers: TStrings;
+begin
+  Result := FRestResponse.Headers;
 end;
 
 class function TResponse.New(ARestResponse: TRESTResponse): iResponse;
