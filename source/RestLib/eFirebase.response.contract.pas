@@ -11,6 +11,8 @@ type
     function Content: string;
     function StatusCode: integer;
     function Headers: TStrings;
+    function StatusMsg: string;
+    function ErrorMessage: string;
   end;
 
 implementation

@@ -18,6 +18,8 @@ Type
      function Content: string;
      function StatusCode: integer;
      function Headers: TStrings;
+     function StatusMsg: string;
+     function ErrorMessage: string;
   End;
 
 implementation
@@ -40,6 +42,11 @@ begin
   inherited;
 end;
 
+function TResponse.ErrorMessage: string;
+begin
+  Result := FRestResponse.ErrorMessage;
+end;
+
 function TResponse.Headers: TStrings;
 begin
   Result := FRestResponse.Headers;
@@ -53,6 +60,11 @@ end;
 function TResponse.StatusCode: integer;
 begin
   Result := FRestResponse.StatusCode;
+end;
+
+function TResponse.StatusMsg: string;
+begin
+  Result := FRestResponse.StatusText;
 end;
 
 end.

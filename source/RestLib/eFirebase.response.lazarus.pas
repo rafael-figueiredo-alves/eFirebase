@@ -18,6 +18,8 @@ Type
     function Content: string;
     function StatusCode: integer;
     function Headers: TStrings;
+    function StatusMsg: string;
+    function ErrorMessage: string;
   End;
 
 implementation
@@ -40,6 +42,11 @@ begin
   inherited;
 end;
 
+function TResponseLazarus.ErrorMessage: string;
+begin
+
+end;
+
 function TResponseLazarus.Headers: TStrings;
 begin
 
@@ -53,6 +60,11 @@ end;
 function TResponseLazarus.StatusCode: integer;
 begin
   Result := FidHTTP.Response.ResponseCode;
+end;
+
+function TResponseLazarus.StatusMsg: string;
+begin
+
 end;
 
 end.

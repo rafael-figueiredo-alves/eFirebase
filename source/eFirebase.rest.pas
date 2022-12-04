@@ -20,7 +20,7 @@ Type
 implementation
 
 uses
-  eFirebase.request, eFirebase.request.lazarus;
+  eFirebase.request; //eFirebase.request.lazarus;
 
 { TMinhaClasse }
 
@@ -31,12 +31,12 @@ end;
 
 class function TRest.New2: iRequest;
 begin
-  Result := TRequestLazarus.Create;
+  //Result := TRequestLazarus.Create;
 end;
 
 class function TRest.Versao: string;
 begin
-  Result := '0.0.1-a';
+  Result := '0.0.2-a';
 end;
 
 end.

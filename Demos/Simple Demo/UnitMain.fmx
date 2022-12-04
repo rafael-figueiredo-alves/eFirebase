@@ -27,4 +27,11 @@ object Form2: TForm2
     Viewport.Width = 389.000000000000000000
     Viewport.Height = 253.000000000000000000
   end
+  object Button2: TButton
+    Position.X = 232.000000000000000000
+    Position.Y = 96.000000000000000000
+    TabOrder = 3
+    Text = 'Button2'
+    OnClick = Button2Click
+  end
 end

@@ -25,15 +25,23 @@ Type
     FResponse : iResponse;
     FStreamResult : tstringStream;
     FIdSSLIOHandlerSocketOpenSSL : TIdSSLIOHandlerSocketOpenSSL;
-    function BaseUrl(Const BaseUrl: string): iRequest;
-    function Resource(Const Resource: string): iRequest;
-    function Get: iResponse;
     Function ExecuteRequest(Method: tMethodRequest): iRequest;
     function MakeUrl: string;
   Public
     Constructor Create;
     Destructor Destroy; Override;
     Class function New: iRequest;
+    function BaseUrl(Const BaseUrl: string): iRequest;
+    function Resource(Const Resource: string): iRequest;
+    function Body(const body: string): iRequest;
+    function Token(Const pToken: string): iRequest;
+    function AddParameter(const Key, Value: string):iRequest;
+    function AddHeaders(const key, value: string):iRequest;
+    function Get    : iResponse;
+    function Post   : iResponse;
+    function Patch  : iResponse;
+    function Delete : iResponse;
+    function Put    : iResponse;
   End;
 
 implementation
@@ -43,10 +51,25 @@ uses
 
 { TRequestLazarus }
 
+function TRequestLazarus.AddHeaders(const key, value: string): iRequest;
+begin
+
+end;
+
+function TRequestLazarus.AddParameter(const Key, Value: string): iRequest;
+begin
+
+end;
+
 function TRequestLazarus.BaseUrl(const BaseUrl: string): iRequest;
 begin
   Result := Self;
   FBaseURL := BaseUrl;
+end;
+
+function TRequestLazarus.Body(const body: string): iRequest;
+begin
+
 end;
 
 constructor TRequestLazarus.Create;
@@ -63,6 +86,11 @@ begin
   FResponse := tResponseLazarus.new(FidHTTP);
 
   FStreamResult := TStringStream.Create;
+end;
+
+function TRequestLazarus.Delete: iResponse;
+begin
+
 end;
 
 destructor TRequestLazarus.Destroy;
@@ -103,10 +131,30 @@ begin
   Result := Self.Create;
 end;
 
+function TRequestLazarus.Patch: iResponse;
+begin
+
+end;
+
+function TRequestLazarus.Post: iResponse;
+begin
+
+end;
+
+function TRequestLazarus.Put: iResponse;
+begin
+
+end;
+
 function TRequestLazarus.Resource(const Resource: string): iRequest;
 begin
   Result := Self;
   FResource := Resource;
+end;
+
+function TRequestLazarus.Token(const pToken: string): iRequest;
+begin
+
 end;
 
 end.
