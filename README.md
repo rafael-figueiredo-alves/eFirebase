@@ -3,7 +3,7 @@
 </p>
 
 Framework para manipulação do Firebase no Delphi (em fase inicial de desenvolvimento)
-Versão atual: 0.0.2-a
+Versão atual: 0.0.3-a
 
 **Objetivos**
 - ser simples;
