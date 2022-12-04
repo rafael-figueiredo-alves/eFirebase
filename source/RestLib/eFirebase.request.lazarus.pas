@@ -19,11 +19,13 @@ Type
 
   TRequestLazarus = Class(TInterfacedObject, iRequest)
   Private
-    FidHTTP   : tidHTTP;
-    FBaseURL  : string;
-    FResource : string;
-    FResponse : iResponse;
+    FidHTTP       : tidHTTP;
+    FBaseURL      : string;
+    FResource     : string;
+    FResponse     : iResponse;
     FStreamResult : tstringStream;
+    FParams       : TStrings;
+    FBody         : TStream;
     FIdSSLIOHandlerSocketOpenSSL : TIdSSLIOHandlerSocketOpenSSL;
     Function ExecuteRequest(Method: tMethodRequest): iRequest;
     function MakeUrl: string;
@@ -53,12 +55,14 @@ uses
 
 function TRequestLazarus.AddHeaders(const key, value: string): iRequest;
 begin
-
+  Result := Self;
+  FidHTTP.Request.CustomHeaders.AddValue(key, value);
 end;
 
 function TRequestLazarus.AddParameter(const Key, Value: string): iRequest;
 begin
-
+  Result := Self;
+  FParams.Add(Key + '=' + Value);
 end;
 
 function TRequestLazarus.BaseUrl(const BaseUrl: string): iRequest;
@@ -69,7 +73,12 @@ end;
 
 function TRequestLazarus.Body(const body: string): iRequest;
 begin
-
+  Result := Self;
+  if not Assigned(FBody) then
+   FBody := TStringStream.Create(body, TEncoding.UTF8)
+  else
+   TStringStream(FBody).WriteString(body);
+  FBody.Position := 0;
 end;
 
 constructor TRequestLazarus.Create;
@@ -86,17 +95,24 @@ begin
   FResponse := tResponseLazarus.new(FidHTTP);
 
   FStreamResult := TStringStream.Create;
+
+  FParams := TStringList.Create;
 end;
 
 function TRequestLazarus.Delete: iResponse;
 begin
-
+  Result := FResponse;
+  ExecuteRequest(mrDELETE);
 end;
 
 destructor TRequestLazarus.Destroy;
 begin
   FreeAndNil(FidHTTP);
+  FreeAndNil(FIdSSLIOHandlerSocketOpenSSL);
+  FreeAndNil(FParams);
   FreeAndNil(FStreamResult);
+  if Assigned(FBody) then
+   FreeAndNil(FBody);
   inherited;
 end;
 
@@ -108,10 +124,22 @@ begin
           begin
             FidHTTP.Get(tidURI.URLEncode(MakeURL), FStreamResult);
           end;
-    mrPOST: ;
-    mrPUT: ;
-    mrPATCH: ;
-    mrDELETE: ;
+    mrPOST:
+          begin
+            FidHTTP.Post(tidURI.URLEncode(MakeURL), FBody, FStreamResult);
+          end;
+    mrPUT:
+          begin
+            FidHTTP.Put(tidURI.URLEncode(MakeURL), FBody, FStreamResult);
+          end;
+    mrPATCH:
+          begin
+            FidHTTP.Patch(tidURI.URLEncode(MakeURL), FBody, FStreamResult);
+          end;
+    mrDELETE:
+          begin
+            FidHTTP.Delete(tidURI.URLEncode(MakeURL), FStreamResult);
+          end;
   end;
 end;
 
@@ -122,8 +150,20 @@ begin
 end;
 
 function TRequestLazarus.MakeUrl: string;
+var Param: integer;
 begin
   Result := FBaseURL + '/' + FResource;
+
+  if FParams.Count > 0 then
+   begin
+     Result := Result + '?';
+     for Param := 0 to Pred(FParams.Count) do
+      begin
+        if Param > 0 then
+         Result := Result + '&';
+        Result := Result + FParams.Strings[Param];
+      end;
+   end;
 end;
 
 class function TRequestLazarus.New: iRequest;
@@ -133,17 +173,20 @@ end;
 
 function TRequestLazarus.Patch: iResponse;
 begin
-
+  Result := FResponse;
+  ExecuteRequest(mrPATCH);
 end;
 
 function TRequestLazarus.Post: iResponse;
 begin
-
+  Result := FResponse;
+  ExecuteRequest(mrPOST);
 end;
 
 function TRequestLazarus.Put: iResponse;
 begin
-
+  Result := FResponse;
+  ExecuteRequest(mrPUT);
 end;
 
 function TRequestLazarus.Resource(const Resource: string): iRequest;
@@ -154,7 +197,8 @@ end;
 
 function TRequestLazarus.Token(const pToken: string): iRequest;
 begin
-
+  Result := Self;
+  FParams.Add('auth=' + pToken);
 end;
 
 end.

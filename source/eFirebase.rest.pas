@@ -13,30 +13,27 @@ Type
   TRest = Class
     Public
      Class function New: iRequest;
-     class function New2: iRequest;
-     class function Versao: string;
+     class function GetVersion: string;
   End;
 
 implementation
 
 uses
-  eFirebase.request; //eFirebase.request.lazarus;
+  eFirebase.request, eFirebase.request.lazarus;
 
 { TMinhaClasse }
 
 class function TRest.New: iRequest;
 begin
+  {$IF defined(FPC_FULLVERSION)}
+  Result := TRequestLazarus.Create;
+  {$Endif}
   Result := TRequest.create;
 end;
 
-class function TRest.New2: iRequest;
+class function TRest.GetVersion: string;
 begin
-  //Result := TRequestLazarus.Create;
-end;
-
-class function TRest.Versao: string;
-begin
-  Result := '0.0.2-a';
+  Result := '0.0.3-a';
 end;
 
 end.

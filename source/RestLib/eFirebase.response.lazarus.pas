@@ -44,12 +44,12 @@ end;
 
 function TResponseLazarus.ErrorMessage: string;
 begin
-
+  Result := FidHTTP.Response.ResponseText;
 end;
 
 function TResponseLazarus.Headers: TStrings;
 begin
-
+  Result := FidHTTP.Response.RawHeaders;
 end;
 
 class function TResponseLazarus.New(const response: TIdHTTP): iResponse;
@@ -64,7 +64,7 @@ end;
 
 function TResponseLazarus.StatusMsg: string;
 begin
-
+  Result := FidHTTP.Response.ResponseText;
 end;
 
 end.
