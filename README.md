@@ -3,7 +3,7 @@
 </p>
 
 Framework para manipulação do Firebase no Delphi (em fase inicial de desenvolvimento)
-Versão atual: 0.0.1-a
+Versão atual: 0.0.2-a
 
 **Objetivos**
 - ser simples;
@@ -14,7 +14,7 @@ Versão atual: 0.0.1-a
 # Conteúdo da biblioteca
 [X] classes para conexão Rest dentro do Delphi (usando os componentes TRestRequest, TRestClient)
 [ ] classes para conexão Rest dentro do Lazarus/Delphi versões antigas (com uso da lib Indy)
-[ ] classes para uso dos servidos de autenticação do Firebase
+[ ] classes para uso dos serviços de autenticação do Firebase
 [ ] classes para uso dos serviços de banco de dados Firebase Realtime e Firestore
 [ ] classes para outros serviços do Firebase
 
