@@ -24,22 +24,20 @@ var
 implementation
 
 uses
-  eFirebase.rest;
+  eFirebase;
 
 {$R *.fmx}
 
 procedure TForm2.Button1Click(Sender: TObject);
-Var
- FResposta : iResponse;
+var
+  Teste : tConteudo;
 begin
-  FResposta := TRest.New.BaseUrl('https://etasks-d6988.firebaseio.com/etasks/v1')
-                         .Resource('version.json')
-                         .Get;
-  memo1.Lines.Add(FResposta.content);
-  ShowMessage(IntToStr(FResposta.StatusCode));
-  Memo1.Lines.Add(FResposta.Headers.Text);
-  Memo1.Lines.Add(FResposta.StatusMsg);
-  Memo1.Lines.Add('Versão da biblioteca: ' + TRest.GetVersion);
+  Teste := teFirebase.RestTest;
+  memo1.Lines.Add(Teste.Conteudo);
+  ShowMessage(IntToStr(Teste.StatusCode));
+  Memo1.Lines.Add(Teste.Headers);
+  Memo1.Lines.Add(Teste.StatusMsg);
+  Memo1.Lines.Add('Versão da biblioteca: ' + TeFirebase.GetVersion);
 end;
 
 end.

@@ -10,7 +10,8 @@ uses
   eFirebase.request in '..\..\source\RestLib\eFirebase.request.pas',
   eFirebase.response.contract in '..\..\source\RestLib\eFirebase.response.contract.pas',
   eFirebase.response.lazarus in '..\..\source\RestLib\eFirebase.response.lazarus.pas',
-  eFirebase.response in '..\..\source\RestLib\eFirebase.response.pas';
+  eFirebase.response in '..\..\source\RestLib\eFirebase.response.pas',
+  eFirebase in '..\..\source\eFirebase.pas';
 
 {$R *.res}
 

@@ -13,7 +13,6 @@ Type
   TRest = Class
     Public
      Class function New: iRequest;
-     class function GetVersion: string;
   End;
 
 implementation
@@ -29,11 +28,6 @@ begin
   Result := TRequestLazarus.Create;
   {$Endif}
   Result := TRequest.create;
-end;
-
-class function TRest.GetVersion: string;
-begin
-  Result := '0.0.3-a';
 end;
 
 end.
