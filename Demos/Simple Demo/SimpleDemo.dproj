@@ -272,7 +272,6 @@
             <Form>Form2</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="..\..\source\eFirebase.rest.pas"/>
         <DCCReference Include="..\..\source\RestLib\eFirebase.request.contract.pas"/>
         <DCCReference Include="..\..\source\RestLib\eFirebase.request.lazarus.pas"/>
         <DCCReference Include="..\..\source\RestLib\eFirebase.request.pas"/>
@@ -280,6 +279,11 @@
         <DCCReference Include="..\..\source\RestLib\eFirebase.response.lazarus.pas"/>
         <DCCReference Include="..\..\source\RestLib\eFirebase.response.pas"/>
         <DCCReference Include="..\..\source\eFirebase.pas"/>
+        <DCCReference Include="..\..\source\RestLib\eFirebase.rest.pas"/>
+        <DCCReference Include="..\..\source\eFirebase.Interfaces.pas"/>
+        <DCCReference Include="..\..\source\eFirebase.Types.pas"/>
+        <DCCReference Include="..\..\source\FirebaseLib\Response Classes\eFirebase.Responses.Auth.pas"/>
+        <DCCReference Include="..\..\source\FirebaseLib\eFirebase.Auth.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

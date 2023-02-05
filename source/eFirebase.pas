@@ -12,48 +12,53 @@ unit eFirebase;
 interface
 
 Uses
-  eFirebase.response.contract;
+  eFirebase.Interfaces;
 
 Type
- iResponse = eFirebase.response.contract.iResponse;
+ TeFirebase = Class(TInterfacedObject, ieFirebase)
+    Private
+    Public
+     Constructor Create;
+     Destructor Destroy; Override;
+     Class function New: ieFirebase;
+     function Auth(const API_Key: string): ieFirebaseAuth;
+     function Version: string;
+  End;
 
- tConteudo = record
-   Conteudo   : string;
-   StatusCode : integer;
-   Headers    : string;
-   StatusMsg  : string;
- end;
-
-  TeFirebase = class
-    private
-    public
-     class function RestTest: TConteudo;
-     class function GetVersion: string;
-  end;
+ const
+  eFirebase_version = '0.0.5-a';
 
 implementation
 
 uses
-  eFirebase.rest;
+  eFirebase.Auth;
 
 { TeFirebase }
 
-class function TeFirebase.GetVersion: string;
+function TeFirebase.Auth(const API_Key: string): ieFirebaseAuth;
 begin
-  Result := '0.0.4-a';
+  Result := TeFirebaseAuth.New(API_Key);
 end;
 
-class function TeFirebase.RestTest: TConteudo;
-var
- FResposta : iResponse;
+constructor TeFirebase.Create;
 begin
-  FResposta := TRest.New.BaseUrl('https://etasks-d6988.firebaseio.com/etasks/v1')
-                         .Resource('version.json')
-                         .Get;
-  Result.Conteudo := FResposta.Content;
-  Result.StatusCode := FResposta.StatusCode;
-  Result.Headers := FResposta.Headers.Text;
-  Result.StatusMsg := FResposta.StatusMsg;
+
+end;
+
+destructor TeFirebase.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TeFirebase.New: ieFirebase;
+begin
+  Result := Self.Create;
+end;
+
+function TeFirebase.Version: string;
+begin
+  Result := eFirebase_version;
 end;
 
 end.

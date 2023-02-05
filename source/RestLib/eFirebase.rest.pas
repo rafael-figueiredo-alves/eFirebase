@@ -25,7 +25,7 @@ uses
 class function TRest.New: iRequest;
 begin
   {$IF defined(FPC_FULLVERSION)}
-  Result := TRequestLazarus.Create;
+  Result := TRequestLazarus.Create
   {$Endif}
   Result := TRequest.create;
 end;

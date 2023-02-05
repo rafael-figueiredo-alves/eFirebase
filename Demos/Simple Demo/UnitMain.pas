@@ -29,15 +29,8 @@ uses
 {$R *.fmx}
 
 procedure TForm2.Button1Click(Sender: TObject);
-var
-  Teste : tConteudo;
 begin
-  Teste := teFirebase.RestTest;
-  memo1.Lines.Add(Teste.Conteudo);
-  ShowMessage(IntToStr(Teste.StatusCode));
-  Memo1.Lines.Add(Teste.Headers);
-  Memo1.Lines.Add(Teste.StatusMsg);
-  Memo1.Lines.Add('Versão da biblioteca: ' + TeFirebase.GetVersion);
+  Memo1.Lines.Add(TeFirebase.New.Version);
 end;
 
 end.
