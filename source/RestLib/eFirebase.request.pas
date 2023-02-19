@@ -118,13 +118,16 @@ begin
 end;
 
 function TRequest.Post: iResponse;
+var
+ teste: string;
 begin
-  Result := FResponse;
-
   FRestRequest.AddBody(FBody, TRESTContentType.ctAPPLICATION_JSON);
 
   FRestRequest.Method := trestrequestMethod.rmPOST;
+  teste := FRestRequest.GetFullRequestURL(true);
   FRestRequest.Execute;
+
+  Result := FResponse;
 end;
 
 function TRequest.Put: iResponse;
