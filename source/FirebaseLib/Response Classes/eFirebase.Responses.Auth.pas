@@ -22,6 +22,8 @@ Type
      femail         : string;
      fEmailVerified : Boolean;
      fphotoURL      : string;
+     flastLoginAt   : string;
+     fcreatedAt     : string;
     Public
      Constructor Create(const Response_content: string; StatusCode: integer);
      Destructor Destroy; Override;
@@ -37,6 +39,8 @@ Type
      function Email: string;
      function EmailVerified: Boolean;
      function photoUrl: string;
+     function lastLoginAt: string;
+     function createdAt: string;
   End;
 
 implementation
@@ -95,14 +99,18 @@ begin
 
  if Err_MSG = 'CREDENTIAL_TOO_OLD_LOGIN_AGAIN' then
   Result := CREDENTIAL_TOO_OLD_LOGIN_AGAIN;
+
+ if Err_MSG = 'INVALID_PASSWORD' then
+  Result := INVALID_PASSWORD;
 end;
 
 constructor TeFirebaseResponseAuth.Create(const Response_content: string; StatusCode: integer);
 var
+ ErrorMessage : string;
  vJSON        : TJSONValue;
  oJSON        : TJSONObject;
  ObjError     : TJSONObject;
- ErrorMessage : string;
+ aJSON        : TJSONArray; 
 begin
   fStatusCode := StatusCode;
 
@@ -116,6 +124,13 @@ begin
    end;
 
    oJSON := vJSON as TJSONObject;
+
+   if oJSON.TryGetValue('users', aJSON) then
+    begin
+      oJSON := (aJSON.Items[0] as TJSONObject).Clone as TJSONObject;
+      oJSON.TryGetValue('lastLoginAt', flastLoginAt);
+      oJSON.TryGetValue('createdAt', fcreatedAt);
+    end;
 
    oJSON.TryGetValue('idToken', fToken);
 
@@ -155,8 +170,16 @@ begin
        fError := GetError(ErrorMessage);
     end;
 
+  if Assigned(aJSON) then
+   aJSON.DisposeOf;
+       
   if Assigned(oJSON) then
-   oJSON.DisposeOf;
+    oJSON.DisposeOf;
+end;
+
+function TeFirebaseResponseAuth.createdAt: string;
+begin
+  Result := fcreatedAt;
 end;
 
 destructor TeFirebaseResponseAuth.Destroy;
@@ -188,6 +211,11 @@ end;
 function TeFirebaseResponseAuth.ExpiresIn: integer;
 begin
   Result := fExpiresIn;
+end;
+
+function TeFirebaseResponseAuth.lastLoginAt: string;
+begin
+  Result := flastLoginAt;
 end;
 
 class function TeFirebaseResponseAuth.New(const Response_content: string; StatusCode: integer): ieFirebaseResponseAuth;

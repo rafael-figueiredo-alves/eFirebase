@@ -20,6 +20,7 @@ type
                INVALID_OOB_CODE,
                INVALID_ID_TOKEN,
                CREDENTIAL_TOO_OLD_LOGIN_AGAIN,
+               INVALID_PASSWORD,
                UNKNOWN);
 
 implementation

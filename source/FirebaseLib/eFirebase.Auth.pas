@@ -23,6 +23,9 @@ type
      function SendEmailVerification(const token: string): ieFirebaseResponseAuth;
      function ConfirmEmailVerification(const oobCode: string): ieFirebaseResponseAuth;
      function DeleteAccount(const Token: string): ieFirebaseResponseAuth;
+     function ChangePassword(const Token, newPassword: string): ieFirebaseResponseAuth;
+     function ChangeProfile(const Token, DisplayName, PhotoURL: string): ieFirebaseResponseAuth;
+     function GetProfile(const Token: string): ieFirebaseResponseAuth;
   End;
 
   const
@@ -34,6 +37,9 @@ type
    PasswordReset     = 'https://identitytoolkit.googleapis.com/v1/accounts:resetPassword';
    ConfirmEmail      = 'https://identitytoolkit.googleapis.com/v1/accounts:update';
    DeleteAccountURL  = 'https://identitytoolkit.googleapis.com/v1/accounts:delete';
+   ChangePasswordURL = 'https://identitytoolkit.googleapis.com/v1/accounts:update';
+   UpdateProfileURL  = 'https://identitytoolkit.googleapis.com/v1/accounts:update';
+   GetProfileURL     = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup';
 
 implementation
 
@@ -41,6 +47,61 @@ uses
   eFirebase.Responses.Auth, System.JSON, eFirebase.rest;
 
 { TeFirebaseAuth }
+
+function TeFirebaseAuth.ChangePassword(const Token, newPassword: string): ieFirebaseResponseAuth;
+var
+ ResponseJSON: string;
+ RequestBody: TJSONObject;
+ RequestBodySTR: string;
+ Response: iResponse;
+begin
+  RequestBody := TJSONObject.Create;
+  try
+    RequestBody.AddPair('idToken', Token);
+    RequestBody.AddPair('password', newPassword);
+    RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
+    RequestBodySTR := RequestBody.ToString;
+  finally
+    RequestBody.DisposeOf;
+  end;
+
+  Response := TRest.New
+                      .BaseUrl(ChangePasswordURL)
+                        .AddParameter('key', fAPI_Key)
+                        .Body(RequestBodySTR)
+                        .Post;
+
+  ResponseJSON := Response.Content;
+  Result := TeFirebaseResponseAuth.New(ResponseJSON, Response.StatusCode);
+end;
+
+function TeFirebaseAuth.ChangeProfile(const Token, DisplayName,PhotoURL: string): ieFirebaseResponseAuth;
+var
+ ResponseJSON: string;
+ RequestBody: TJSONObject;
+ RequestBodySTR: string;
+ Response: iResponse;
+begin
+  RequestBody := TJSONObject.Create;
+  try
+    RequestBody.AddPair('idToken', Token);
+    RequestBody.AddPair('displayName', DisplayName);
+    RequestBody.AddPair('photoUrl', PhotoURL);
+    RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
+    RequestBodySTR := RequestBody.ToString;
+  finally
+    RequestBody.DisposeOf;
+  end;
+
+  Response := TRest.New
+                      .BaseUrl(UpdateProfileUrl)
+                        .AddParameter('key', fAPI_Key)
+                        .Body(RequestBodySTR)
+                        .Post;
+
+  ResponseJSON := Response.Content;
+  Result := TeFirebaseResponseAuth.New(ResponseJSON, Response.StatusCode);
+end;
 
 function TeFirebaseAuth.ConfirmEmailVerification(const oobCode: string): ieFirebaseResponseAuth;
 var
@@ -147,6 +208,31 @@ begin
 
   Response := TRest.New
                       .BaseUrl(SecureToken_URL)
+                        .AddParameter('key', fAPI_Key)
+                        .Body(RequestBodySTR)
+                        .Post;
+
+  ResponseJSON := Response.Content;
+  Result := TeFirebaseResponseAuth.New(ResponseJSON, Response.StatusCode);
+end;
+
+function TeFirebaseAuth.GetProfile(const Token: string): ieFirebaseResponseAuth;
+var
+ ResponseJSON: string;
+ RequestBody: TJSONObject;
+ RequestBodySTR: string;
+ Response: iResponse;
+begin
+  RequestBody := TJSONObject.Create;
+  try
+    RequestBody.AddPair('idToken', token);
+    RequestBodySTR := RequestBody.ToString;
+  finally
+    RequestBody.DisposeOf;
+  end;
+
+  Response := TRest.New
+                      .BaseUrl(GetProfileURL)
                         .AddParameter('key', fAPI_Key)
                         .Body(RequestBodySTR)
                         .Post;

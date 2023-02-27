@@ -21,6 +21,8 @@ type
    function Email: string;
    function EmailVerified: Boolean;
    function photoUrl: string;
+   function lastLoginAt: string;
+   function createdAt: string;
  end;
 {$Endregion}
 
@@ -36,6 +38,9 @@ type
    function SendEmailVerification(const token: string): ieFirebaseResponseAuth;
    function ConfirmEmailVerification(const oobCode: string): ieFirebaseResponseAuth;
    function DeleteAccount(const Token: string): ieFirebaseResponseAuth;
+   function ChangePassword(const Token, newPassword: string): ieFirebaseResponseAuth;
+   function ChangeProfile(const Token, DisplayName, PhotoURL: string): ieFirebaseResponseAuth;
+   function GetProfile(const Token: string): ieFirebaseResponseAuth;
  end;
 {$EndRegion}
 

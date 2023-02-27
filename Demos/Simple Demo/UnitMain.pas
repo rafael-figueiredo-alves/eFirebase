@@ -32,12 +32,9 @@ procedure TForm2.Button1Click(Sender: TObject);
 var
   auth: ieFirebaseResponseAuth;
 begin
-  //auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').SignInWithEmailPassword('familia.alves2013@outlook.com', 'BloxFruit2023');
-  //auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').ExchangeRefreshToken4idToken('APJWN8cmrRa-t47ZZn2Q39Uq_Wh-L8jp18d7nsb1XR127M3XWX0v1vMEi-_R5xBkAJJqv1OFUmvpqBJkOVu0VCwZ4V2o9q-vWKoG4h2xYaN2hN4cjuWLVeRO4bkRHLfeooXqlgO3Azq4l_EN4lWzn8EGv8EMS6QOKxIoqnxKIr_ibDphsi-rYBUPPXg9wXYJSEBJIZKG1w1f4YGxfeuSWW5DkGdf9WbIqQ');
-  //auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').SendPasswordResetEmail('familia.alves2013@outlook.com');
-  //auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').ConfirmPasswordReset('9qsTlKSOwL2jMcUATDfhjlpZ7ZGCjHM5TamDQvIs3gYAAAGGa4MZ8Q', 'BloxFruit2023');
-  auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').DeleteAccount('eyJhbGciOiJSUzI1NiIsImtpZCI6ImFlYjMxMjdiMjRjZTg2MDJjO' + 'DEyNDUxZThmZTczZDU4MjkyMDg4N2MiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmd' + 'vb2dsZS5jb20vZXRhc2tzLWQ2OTg4IiwiYXVkIjoiZXRhc2tzLWQ2OTg4IiwiYXV0aF90aW1lIjoxNjc2ODQ2NzM3LC' + 'J1c2VyX2lkIjoiaUxEWHdrdGlxVFZRYzVoNnN2Z3Fyb0tDeUJ3MiIsInN1YiI6ImlMRFh3a3RpcVRWUWM1aDZzdmdxcm9LQ3lCdzIiLCJpYXQiOjE2' + 'NzY4NDY3MzcsImV4cCI6MTY3Njg1MDMzNywiZW1haWwiOiJmYW1pbGlhLmFsdmVzMjA' + 'xM0BvdXRsb29rLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImZhbWlsaWEuYWx2ZXMyMDEzQG91dGxvb2suY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.' + 'jslNqiMS3zgnJg9KdVANvstHhvxbYiJoTMHg-iVKjYcUS-l4U46QCgY1ng39UeJM' + 'uWs4U4KCkKhM5VBQmv-ZIs1MEEvCiIl53-LPjA0L272TTWa5ylEwytMIkOTx6P3tvd4TUjNqdVXQ3L7PqdtyUsxwOP3pETuo5Rd8yg-mPHa89o08P4XlvwvzzzYLEOgTTYGXhklK75LGU3uJxdNvke_Sva_TAcXYPFQnx45VAHuQ3RCA_A5WD7N60gAANrqTdJ5Zw1ucChot1I-' + 'ti9YWMfZ76exPEHWfxIKu9hWvv5rFfydwKPZq-URHez9kggk0vCktlmlIVvH7wWH3-GYPkg');
-  //auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').ConfirmEmailVerification('LsHEEJCAoSs8NoLp3PcmvjW5LpYv_uWhPFAHIpS2-VIAAAGGa6KLyw');
+  //auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').SignInWithEmailPassword('familia.alves2013@outlook.com', 'Roblox2023');
+  //auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').ChangeProfile('eyJhbGciOiJSUzI1NiIsImtpZCI6ImY4NzZiNzIxNDAwYmZhZmEyOWQ0MTFmZTYwODE2YmRhZWMyM2Iz' + 'ODIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZXRhc2' + 'tzLWQ2OTg4IiwiYXVkIjoiZXRhc2tzLWQ2OTg4IiwiYXV0aF90aW1lIjoxNjc3NDU1NTEzLCJ1c2VyX2lkIjoiWDZ4bDJ' + 'iYzUwclRCVGpFZXZ4eVNoMVNRYU1iMiIsInN1YiI6Ilg2eGwyYmM1MHJUQlRqRWV2eHlTaDFTUWFNYjIiLCJ' + 'pYXQiOjE2Nzc0NTU1MTMsImV4cCI6MTY3NzQ1OTExMywiZW1haWwiOiJmYW1pbGlhLmFsdmVzMjAxM0BvdX' + 'Rsb29rLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJmYW1p' + 'bGlhLmFsdmVzMjAxM0BvdXRsb29rLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6InBhc3N3b3JkIn19.V-ERTuN' + 'WPquSwO-LqRSeF_sUsboLOaKdFm7esq1A_8eSmXHBZIp1YlDWHJuxcylcbgSwn2vrQP5xJEQ_AqPIZ' + 'ZGLOLU0khIoW2VM90VZRdYWNbpbnaTr2Du3RswyvXFpOhguEsgehD45Q0NEmwvSauo0YKZgbr-RGdYiF1TeGrAczAQwAXrdG' + 'ga-RCYjTCbW9uJMIKPOU5rhtkrghnhIIKGhxBupXhMyMos3TFXX1Y0EuL4OncI8xRRTLIY91CG-BD5VW9x6GOJf258BCQXSUgV6BJ0HcvOhTK2mi1EPT8YBiRvN-QPk-AOTITfSBnj7zli9JkbA-1UkQNb17-S37Q', 'Developers Account', '');
+  auth := TeFirebase.New.Auth('AIzaSyCeUiXhD5rL0QgHoV1C8WkCg17n9n5teew').GetProfile('eyJhbGciOiJSUzI1NiIsImtpZCI6' + 'ImY4NzZiNzIxNDAwYmZhZmEyOWQ0MTFmZTYwODE2YmRhZWMyM2IzODIiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiRGV2ZWxvcGVycyBBY2NvdW50IiwicGljdHVyZSI6IiIsImlzcyI6Imh' + '0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS9ldGFza3MtZDY5ODgiLCJhdWQiOiJldGFza3MtZDY5ODgiLCJhdXRoX3RpbWUiOjE2Nzc0NTk0OTgsInVzZXJfaWQiOiJYNnhsM' + 'mJjNTByVEJUakVldnh5U2gxU1FhTWIyIiwic3ViIjoiWDZ4bDJiYzUwclRCVGpFZXZ4eVNoMVNRYU1iMiIsImlhdCI6MTY3NzQ1OTQ5OCwiZX' + 'hwIjoxNjc3NDYzMDk4LCJlbWFpbCI6ImZhbWlsaWEuYWx2ZXMyMDEzQG91dGxvb2suY29tIiwiZW1haWxfdmVyaWZ' + 'pZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbImZhbWlsaWEuYWx2ZXMyMDEzQG91dGxvb2suY' + '29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.QoQE64_V9xymor8JthD7RdnnBVdV7R' + 'raMxCn-XV35sAMhR6hX8pOw0tLu__8_FHEHmBvHTSVoGwBqu1z65sb7yMynxXTyTUsDTJbQcJ4XNQOO2da7PVhyZXp-0aL1xhQBeIxRlwxxeu-IjJu' + '8dh04htZ0P7Z1ci0D8BHdNpc7fcFUcbYMnheJ6tp93JKyFYwnmBUeo0LVp3iZ2nJ_oA19whjrQHAuQREoI5wcCUaD8FAHo0wOhZDpAhlugb1RhhftgQnwK1SHchGdUuEHbkqUUj8jX_iaNU9IeWlKSX6qYX-fNXVlYBHpSZEQICXwFZWTGpSgkeFE0ZA2alaKBhopA');
 
   if auth.StatusCode = 200 then
    ShowMessage('Conta apagada com sucesso!');
@@ -54,10 +51,12 @@ begin
     Memo1.Lines.Add(auth.DisplayName);
     Memo1.Lines.Add(auth.Email);
     if auth.EmailVerified then
-     Memo1.Lines.add('Verifivcado')
+     Memo1.Lines.add('Verificado')
     else
      Memo1.Lines.Add('Não Verificado');
     memo1.Lines.Add(auth.photoUrl);
+    Memo1.Lines.Add(auth.lastLoginAt);
+    Memo1.Lines.Add(auth.createdAt);
    end
   else
    begin
@@ -75,6 +74,7 @@ begin
       INVALID_ID_TOKEN: ShowMessage('idToken inválido');
       USER_NOT_FOUND: ShowMessage('Usuário não encontrado');
       CREDENTIAL_TOO_OLD_LOGIN_AGAIN: ShowMessage('Credencial muito antiga. Faça login novamente');
+      INVALID_PASSWORD: ShowMessage('Senha inválida');
       UNKNOWN: ShowMessage('Erro desconhecido');
      end;
    end;
