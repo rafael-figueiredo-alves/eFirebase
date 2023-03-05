@@ -110,11 +110,12 @@ var
  vJSON        : TJSONValue;
  oJSON        : TJSONObject;
  ObjError     : TJSONObject;
- aJSON        : TJSONArray; 
+ aJSON        : TJSONArray;
+ item         : TJSONObject;
 begin
   fStatusCode := StatusCode;
 
-  vJSON := TJSONObject.ParseJSONValue(Response_content);
+   vJSON := TJSONObject.ParseJSONValue(Response_content);
 
   if (not Assigned(vJSON)) or (not (vJSON is TJSONObject)) then
    begin
@@ -127,10 +128,21 @@ begin
 
    if oJSON.TryGetValue('users', aJSON) then
     begin
-      oJSON := (aJSON.Items[0] as TJSONObject).Clone as TJSONObject;
+      //Clono o obj para um item para evitar AccessViolation
+      item := (aJSON.Items[0] as TJSONObject).Clone as TJSONObject;
+      //Limpo o objeto anterior
+      oJSON.DisposeOf;
+      //copio o item para dentro do objeto Json vazio
+      oJSON := item.Clone as TJSONObject;
+      //Libero o item da memória
+      //Esta foi a melhor solução para evitar os memoryleaks
+      item.DisposeOf;
       oJSON.TryGetValue('lastLoginAt', flastLoginAt);
       oJSON.TryGetValue('createdAt', fcreatedAt);
     end;
+
+   oJSON.TryGetValue('lastLoginAt', flastLoginAt);
+   oJSON.TryGetValue('createdAt', fcreatedAt);
 
    oJSON.TryGetValue('idToken', fToken);
 
@@ -170,10 +182,7 @@ begin
        fError := GetError(ErrorMessage);
     end;
 
-  if Assigned(aJSON) then
-   aJSON.DisposeOf;
-       
-  if Assigned(oJSON) then
+   if Assigned(oJSON) then
     oJSON.DisposeOf;
 end;
 
