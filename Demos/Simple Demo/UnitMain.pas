@@ -38,7 +38,7 @@ begin
 
   if auth.StatusCode = 200 then
    ShowMessage('Conta apagada com sucesso!');
-  if auth.Error = enumErrors.NONE then
+  if auth.Error = enumAuthErrors.NONE then
    begin
     memo1.Lines.Add(auth.uID);
     Memo1.Lines.Add(auth.token);

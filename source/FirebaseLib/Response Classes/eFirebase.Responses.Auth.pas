@@ -16,7 +16,7 @@ Type
      fRefreshToken  : string;
      fExpiresIn     : integer;
      fRegistered    : Boolean;
-     fError         : enumErrors;
+     fError         : enumAuthErrors;
      fStatusCode    : Integer;
      fDisplayName   : string;
      femail         : string;
@@ -33,7 +33,7 @@ Type
      function RefreshToken: string;
      function ExpiresIn: integer;
      function Registered: Boolean;
-     function Error: enumErrors;
+     function Error: enumAuthErrors;
      function StatusCode: integer;
      function DisplayName: string;
      function Email: string;
@@ -47,7 +47,7 @@ implementation
 
 { TeFirebaseResponseAuth }
 
-function GetError(const Err_MSG: string): enumErrors;
+function GetError(const Err_MSG: string): enumAuthErrors;
 //Função para verificar o tipo de erro e retornar o tipo corretamente
 begin
  Result := UNKNOWN;
@@ -212,7 +212,7 @@ begin
   Result := fEmailVerified;
 end;
 
-function TeFirebaseResponseAuth.Error: enumErrors;
+function TeFirebaseResponseAuth.Error: enumAuthErrors;
 begin
   Result := fError;
 end;

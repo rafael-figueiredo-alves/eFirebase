@@ -15,7 +15,7 @@ type
    function RefreshToken: string;
    function ExpiresIn: integer;
    function Registered: Boolean;
-   function Error: enumErrors;
+   function Error: enumAuthErrors;
    function StatusCode: integer;
    function DisplayName: string;
    function Email: string;
@@ -41,6 +41,22 @@ type
    function ChangePassword(const Token, newPassword: string): ieFirebaseResponseAuth;
    function ChangeProfile(const Token, DisplayName, PhotoURL: string): ieFirebaseResponseAuth;
    function GetProfile(const Token: string): ieFirebaseResponseAuth;
+ end;
+
+ ieFirebaseRealtime = interface
+   ['{8B841477-098C-48A7-80C3-4EE8F43CA10B}']
+ end;
+
+ ieFirebaseStorage = interface
+   ['{FFD23146-5A08-4EE0-B648-2FA971D3FB63}']
+ end;
+
+ ieFirebaseFirestore = interface
+   ['{37115E16-A873-4C71-B658-8AFA09B84BEA}']
+ end;
+
+ ieFirebaseRemoteConfig = interface
+   ['{E477698F-BC31-4B90-9531-A99B688E0ADC}']
  end;
 {$EndRegion}
 
