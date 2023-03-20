@@ -63,6 +63,10 @@ type
  ieFirebase = interface
    ['{A03D3BFF-4A46-41E2-A9F0-41CC2979FAF7}']
    function Auth(const API_Key: string): ieFirebaseAuth;
+   function RealTimeDB(const API_Key: string): ieFirebaseRealtime;
+   function Storage(const API_Key: string): ieFirebaseStorage;
+   function Firestore(const API_Key: string): ieFirebaseFirestore;
+   function RemoteConfig(const API_Key: string): ieFirebaseRemoteConfig;
    function Version: string;
  end;
 
