@@ -44,7 +44,9 @@ type
 implementation
 
 uses
-  eFirebase.Responses.Auth, System.JSON, eFirebase.rest;
+  eFirebase.Responses.Auth,
+  System.JSON,
+  eFirebase.rest;
 
 { TeFirebaseAuth }
 

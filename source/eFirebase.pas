@@ -23,19 +23,19 @@ Type
      Class function New: ieFirebase;
      function Auth(const API_Key: string): ieFirebaseAuth;
      function RealTimeDB(const API_Key: string): ieFirebaseRealtime;
-     function Storage(const API_Key: string): ieFirebaseStorage;
+     function Storage(const ProjectCode: string): ieFirebaseStorage;
      function Firestore(const API_Key: string): ieFirebaseFirestore;
-     function RemoteConfig(const API_Key: string): ieFirebaseRemoteConfig;
      function Version: string;
   End;
 
  const
-  eFirebase_VERSION = '0.0.8-a';
+  eFirebase_VERSION = '0.0.10-a';
 
 implementation
 
 uses
-  eFirebase.Auth;
+  eFirebase.Auth,
+  eFirebase.Storage;
 
 { TeFirebase }
 
@@ -70,14 +70,9 @@ begin
   //Result := TeFirebaseRealTimeDB.New(API_Key);
 end;
 
-function TeFirebase.RemoteConfig(const API_Key: string): ieFirebaseRemoteConfig;
+function TeFirebase.Storage(const ProjectCode: string): ieFirebaseStorage;
 begin
-  //Result := TeFirebaseRemoteConfig.New(API_Key);
-end;
-
-function TeFirebase.Storage(const API_Key: string): ieFirebaseStorage;
-begin
-  //Result := TeFirebaseStorage.New(API_Key);
+  Result := TeFirebaseStorage.New(ProjectCode);
 end;
 
 function TeFirebase.Version: string;

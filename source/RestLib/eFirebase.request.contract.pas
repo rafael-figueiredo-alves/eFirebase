@@ -3,14 +3,18 @@ unit eFirebase.request.contract;
 interface
 
 uses
-  eFirebase.response.contract;
+  eFirebase.response.contract,
+  System.Classes,
+  eFirebase.Types;
 
 type
   iRequest = interface
     ['{E6F4955A-E71A-4734-9D45-809D9F89FE86}']
     function BaseUrl(Const BaseUrl: string): iRequest;
     function Resource(Const Resource : string): iRequest;
-    function Body(const body: string): iRequest;
+    function Body(const body: string): iRequest; overload;
+    function Body(const body: TStream; const AOwns: Boolean): iRequest; overload;
+    function SendFile(const FileName, ContentType: string):iRequest;
     function Token(Const pToken: string): iRequest;
     function AddParameter(const Key, Value: string):iRequest;
     function AddHeaders(const key, value: string):iRequest;

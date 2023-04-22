@@ -3,7 +3,7 @@ unit eFirebase.Interfaces;
 interface
 
 uses
-  eFirebase.Types;
+  eFirebase.Types, System.Classes;
 
 type
 
@@ -23,6 +23,12 @@ type
    function photoUrl: string;
    function lastLoginAt: string;
    function createdAt: string;
+ end;
+
+ ieFirebaseStorageResponse = interface
+   ['{0E922EFE-715B-4848-8A43-B9F4C41E3AD4}']
+   function Link           : string;
+   function StatusCode     : Integer;
  end;
 {$Endregion}
 
@@ -49,14 +55,13 @@ type
 
  ieFirebaseStorage = interface
    ['{FFD23146-5A08-4EE0-B648-2FA971D3FB63}']
+   function Folder(const name: string) : ieFirebaseStorage;
+   function FileName(const name: string) : ieFirebaseStorage;
+   function Send(const AuthToken: string) : ieFirebaseStorageResponse;
  end;
 
  ieFirebaseFirestore = interface
    ['{37115E16-A873-4C71-B658-8AFA09B84BEA}']
- end;
-
- ieFirebaseRemoteConfig = interface
-   ['{E477698F-BC31-4B90-9531-A99B688E0ADC}']
  end;
 {$EndRegion}
 
@@ -64,9 +69,8 @@ type
    ['{A03D3BFF-4A46-41E2-A9F0-41CC2979FAF7}']
    function Auth(const API_Key: string): ieFirebaseAuth;
    function RealTimeDB(const API_Key: string): ieFirebaseRealtime;
-   function Storage(const API_Key: string): ieFirebaseStorage;
+   function Storage(const ProjectCode: string): ieFirebaseStorage;
    function Firestore(const API_Key: string): ieFirebaseFirestore;
-   function RemoteConfig(const API_Key: string): ieFirebaseRemoteConfig;
    function Version: string;
  end;
 

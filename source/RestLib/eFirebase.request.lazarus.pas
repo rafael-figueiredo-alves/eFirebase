@@ -35,7 +35,9 @@ Type
     Class function New: iRequest;
     function BaseUrl(Const BaseUrl: string): iRequest;
     function Resource(Const Resource: string): iRequest;
-    function Body(const body: string): iRequest;
+    function Body(const body: string): iRequest; overload;
+    function Body(const body: TStream; const AOwns: Boolean): iRequest; overload;
+    function SendFile(const FileName, ContentType: string):iRequest;
     function Token(Const pToken: string): iRequest;
     function AddParameter(const Key, Value: string):iRequest;
     function AddHeaders(const key, value: string):iRequest;
@@ -69,6 +71,26 @@ function TRequestLazarus.BaseUrl(const BaseUrl: string): iRequest;
 begin
   Result := Self;
   FBaseURL := BaseUrl;
+end;
+
+function TRequestLazarus.Body(const body: TStream; const AOwns: Boolean): iRequest;
+begin
+  Result := Self;
+  try
+    if not Assigned(FBody) then
+      FBody := TStringStream.Create;
+    TStringStream(FBody).CopyFrom(body, body.Size);
+    FBody.Position := 0;
+  finally
+    if AOwns then
+    begin
+      {$IF DEFINED(MSWINDOWS) OR DEFINED(FPC)}
+        body.Free;
+      {$ELSE}
+        body.DisposeOf;
+      {$ENDIF}
+    end;
+  end;
 end;
 
 function TRequestLazarus.Body(const body: string): iRequest;
@@ -193,6 +215,13 @@ function TRequestLazarus.Resource(const Resource: string): iRequest;
 begin
   Result := Self;
   FResource := Resource;
+end;
+
+function TRequestLazarus.SendFile(const FileName, ContentType: string): iRequest;
+begin
+  Result := Self;
+
+  //implementar futuramente
 end;
 
 function TRequestLazarus.Token(const pToken: string): iRequest;

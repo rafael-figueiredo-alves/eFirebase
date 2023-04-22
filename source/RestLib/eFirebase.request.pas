@@ -5,7 +5,10 @@ interface
 uses
   eFirebase.request.contract,
   eFirebase.response.contract,
-  REST.Client;
+  REST.Client,
+  System.Classes,
+  eFirebase.Types,
+  REST.Types;
 
 Type
   TRequest = Class(TInterfacedObject, iRequest)
@@ -16,13 +19,17 @@ Type
      FRestResponse  : tRESTResponse;
      FBody          : string;
      Procedure DoJoinComponents;
+    private
+     function GetContentType(const ContentType: string): TRESTContentType;
     Public
      Constructor Create;
      Destructor Destroy; Override;
      Class function New: iRequest;
      function BaseUrl(Const BaseUrl: string): iRequest;
      function Resource(Const Resource : string): iRequest;
-     function Body(const body: string): iRequest;
+     function Body(const body: string): iRequest; overload;
+     function Body(const body: TStream; const AOwns: Boolean): iRequest; overload;
+     function SendFile(const FileName, ContentType: string):iRequest;
      function Token(Const pToken: string): iRequest;
      function AddParameter(const Key, Value: string):iRequest;
      function AddHeaders(const key, value: string):iRequest;
@@ -37,12 +44,15 @@ implementation
 
 { TRequest }
 
-Uses eFirebase.response, REST.Types;
+Uses eFirebase.response;
 
 function TRequest.AddHeaders(const key, value: string): iRequest;
 begin
   Result := Self;
-  FRestRequest.AddParameter(key, value, TRESTRequestParameterKind.pkHTTPHEADER);
+//  FRestRequest.Params.AddHeader(key, value);
+   FRestRequest.Params.AddHeader(key, value);
+   FRestRequest.Params.ParameterByName(key).Options := [poDoNotEncode];
+  //FRestClient.AddParameter(key, value, TRESTRequestParameterKind.pkHTTPHEADER);
 end;
 
 function TRequest.AddParameter(const Key, Value: string): iRequest;
@@ -55,6 +65,26 @@ function TRequest.BaseUrl(const BaseUrl: string): iRequest;
 begin
   Result := self;
   FRestClient.BaseURL := BaseUrl;
+end;
+
+function TRequest.Body(const body: TStream; const AOwns: Boolean): iRequest;
+begin
+  Result := Self;
+  if not Assigned(body) then
+    Exit;
+  {$IF COMPILERVERSION <= 29}
+    FRESTRequest.AddBody(body, TRESTContentType.ctAPPLICATION_OCTET_STREAM);
+  {$ELSE}
+    FRESTRequest.Body.Add(body, TRESTContentType.ctAPPLICATION_OCTET_STREAM);
+  {$ENDIF}
+  if AOwns then
+  begin
+    {$IFDEF MSWINDOWS}
+      body.Free;
+    {$ELSE}
+      body.DisposeOf;
+    {$ENDIF}
+  end;
 end;
 
 function TRequest.Body(const body: string): iRequest;
@@ -102,6 +132,38 @@ begin
   FRestRequest.Execute;
 end;
 
+function TRequest.GetContentType(const ContentType: string): TRESTContentType;
+begin
+  if (ContentType = 'image/png') then
+   Result := TRESTContentType.ctIMAGE_PNG
+  else
+  if (ContentType = 'image/gif') then
+   Result := TRESTContentType.ctIMAGE_GIF
+  else
+  if (ContentType = 'image/jpg') or (ContentType = 'image/jpeg') then
+   Result := TRESTContentType.ctIMAGE_JPEG
+  else
+  if (ContentType = 'text/plain') then
+   Result := TRESTContentType.ctTEXT_PLAIN
+  else
+  if (ContentType = 'text/csv') then
+   Result := TRESTContentType.ctTEXT_CSV
+  else
+  if (ContentType = 'text/css') then
+   Result := TRESTContentType.ctTEXT_CSS
+  else
+  if (ContentType = 'application/pdf') then
+   Result := TRESTContentType.ctAPPLICATION_PDF
+  else
+  if (ContentType = 'audio/mp3') then
+   Result := TRESTContentType.ctAUDIO_MPEG
+  else
+  if (ContentType = 'audio/ogg') then
+   Result := TRESTContentType.ctAUDIO_OGG
+  else
+   Result := TRESTContentType.ctAPPLICATION_OCTET_STREAM;
+end;
+
 class function TRequest.New: iRequest;
 begin
   Result := Self.Create;
@@ -144,6 +206,12 @@ function TRequest.Resource(const Resource: string): iRequest;
 begin
   Result := self;
   FRestRequest.Resource := Resource;
+end;
+
+function TRequest.SendFile(const FileName, ContentType: string): iRequest;
+begin
+  Result := Self;
+  FRestRequest.AddFile(FileName, GetContentType(ContentType));
 end;
 
 function TRequest.Token(const pToken: string): iRequest;

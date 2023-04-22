@@ -27,4 +27,43 @@ object Form2: TForm2
     Viewport.Width = 389.000000000000000000
     Viewport.Height = 253.000000000000000000
   end
+  object Button2: TButton
+    Position.X = 424.000000000000000000
+    Position.Y = 96.000000000000000000
+    TabOrder = 2
+    Text = 'Button2'
+    OnClick = Button2Click
+  end
+  object Edit1: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    Position.X = 208.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 201.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Image1: TImage
+    MultiResBitmap = <
+      item
+      end>
+    Position.X = 104.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 73.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object Button3: TButton
+    Position.X = 248.000000000000000000
+    Position.Y = 8.000000000000000000
+    TabOrder = 6
+    Text = 'Button3'
+    OnClick = Button3Click
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '*.png'
+    Filter = '*.png|*.png'
+    Left = 496
+    Top = 8
+  end
 end

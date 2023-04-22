@@ -15,7 +15,9 @@ uses
   eFirebase.Interfaces in '..\..\source\eFirebase.Interfaces.pas',
   eFirebase.Types in '..\..\source\eFirebase.Types.pas',
   eFirebase.Responses.Auth in '..\..\source\FirebaseLib\Response Classes\eFirebase.Responses.Auth.pas',
-  eFirebase.Auth in '..\..\source\FirebaseLib\eFirebase.Auth.pas';
+  eFirebase.Auth in '..\..\source\FirebaseLib\eFirebase.Auth.pas',
+  eFirebase.Storage in '..\..\source\FirebaseLib\eFirebase.Storage.pas',
+  eFirebase.Responses.Storage in '..\..\source\FirebaseLib\Response Classes\eFirebase.Responses.Storage.pas';
 
 {$R *.res}
 

@@ -23,6 +23,8 @@ type
                    INVALID_PASSWORD,
                    UNKNOWN);
 
+ eContentType = (ctImagePNG, ctImageGIF, ctImageJPEG, ctImageJPG, ctTEXT);
+
 implementation
 
 end.
