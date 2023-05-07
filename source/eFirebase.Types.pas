@@ -25,6 +25,8 @@ type
 
  eContentType = (ctImagePNG, ctImageGIF, ctImageJPEG, ctImageJPG, ctTEXT);
 
+ eFirebaseOrderByKind = (obkKey, obkValue, obkPriority);
+
 implementation
 
 end.

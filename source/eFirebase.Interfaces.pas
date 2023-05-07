@@ -3,7 +3,10 @@ unit eFirebase.Interfaces;
 interface
 
 uses
-  eFirebase.Types, System.Classes;
+  eFirebase.Types,
+  System.Classes,
+  System.JSON,
+  Data.DB;
 
 type
 
@@ -30,6 +33,16 @@ type
    function Link           : string;
    function StatusCode     : Integer;
  end;
+
+ ieFirebaseRealtimeResponse = interface
+   ['{ACB9DD87-63DB-4F5C-AE93-E56096560FAB}']
+   function StatusCode: integer;
+   function ETag: string;
+   function AsJSONstr: string;
+   function AsJSONObj: tJSONObject;
+   function AsJSONArray: TJSONArray;
+   function AsDataSet: tDataSet;
+ end;
 {$Endregion}
 
 {$Region 'Firebase Services'}
@@ -49,8 +62,32 @@ type
    function GetProfile(const Token: string): ieFirebaseResponseAuth;
  end;
 
+ ieFirebaseRealtimeFilters = interface
+   ['{4457A621-512A-4AA0-A09D-258AA0AA5B59}']
+   function OrderBy(const kind: eFirebaseOrderByKind): ieFirebaseRealtimeFilters; overload;
+   function OrderBy(const fields: string): ieFirebaseRealtimeFilters; overload;
+   function startAt(const value: string): ieFirebaseRealtimeFilters; overload;
+   function starAt(const value: integer): ieFirebaseRealtimeFilters; overload;
+   function endAt(const value: string): ieFirebaseRealtimeFilters; overload;
+   function endAt(const value: integer): ieFirebaseRealtimeFilters; overload;
+   function equalTo(const value: string): ieFirebaseRealtimeFilters; overload;
+   function equalTo(const value: integer): ieFirebaseRealtimeFilters; overload;
+   function limitToFirst(const value: integer): ieFirebaseRealtimeFilters;
+   function limitToLast(const value: integer): ieFirebaseRealtimeFilters;
+   function Search: ieFirebaseRealtimeResponse;
+ end;
+
  ieFirebaseRealtime = interface
    ['{8B841477-098C-48A7-80C3-4EE8F43CA10B}']
+   function AccessToken(const Token: string): ieFirebaseRealtime;
+   function Endpoint(const url_path: string): ieFirebaseRealtime;
+   function Collection(const name: string): ieFirebaseRealtime;
+   function ReadWithoutFilters: ieFirebaseRealtimeResponse;
+   function Read: ieFirebaseRealtimeFilters;
+   function CreateRegister(const body: string): ieFirebaseRealtimeResponse;
+   function UpdateRegister(const body: string; id: string = ''): ieFirebaseRealtimeResponse;
+   function WriteRegister(const body: string; Etag: string = ''): ieFirebaseRealtimeResponse;
+   function DeleteRegister(const id: string = ''): ieFirebaseRealtimeResponse;
  end;
 
  ieFirebaseStorage = interface
@@ -68,7 +105,7 @@ type
  ieFirebase = interface
    ['{A03D3BFF-4A46-41E2-A9F0-41CC2979FAF7}']
    function Auth(const API_Key: string): ieFirebaseAuth;
-   function RealTimeDB(const API_Key: string): ieFirebaseRealtime;
+   function RealTimeDB(const ProjectCode: string): ieFirebaseRealtime;
    function Storage(const ProjectCode: string): ieFirebaseStorage;
    function Firestore(const API_Key: string): ieFirebaseFirestore;
    function Version: string;

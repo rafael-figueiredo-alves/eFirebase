@@ -210,6 +210,7 @@
         <DCCReference Include="..\..\source\FirebaseLib\eFirebase.Auth.pas"/>
         <DCCReference Include="..\..\source\FirebaseLib\eFirebase.Storage.pas"/>
         <DCCReference Include="..\..\source\FirebaseLib\Response Classes\eFirebase.Responses.Storage.pas"/>
+        <DCCReference Include="..\..\source\FirebaseLib\eFirebase.RealTimeDB.pas"/>
         <None Include="SimpleDemo.todo"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
@@ -254,6 +255,18 @@
                 </DeployFile>
                 <DeployFile LocalName="SimpleDemo.todo" Configuration="Debug" Class="ProjectFile"/>
                 <DeployFile LocalName="Win32\Debug\SimpleDemo.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="Win64\Debug\SimpleDemo.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win64">
+                        <RemoteName>SimpleDemo.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win64\Debug\SimpleDemo.rsm" Configuration="Debug" Class="DebugSymbols">
+                    <Platform Name="Win64">
+                        <RemoteName>SimpleDemo.rsm</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
