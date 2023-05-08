@@ -10,7 +10,7 @@ Type
 
   TeFirebaseRealtimeDB = Class(TInterfacedObject, ieFireBaseRealtime, ieFirebaseRealtimeFilters)
     Private
-
+     fUrl: string;
     Public
      Constructor Create(const ProjectID: string);
      Destructor Destroy; Override;
@@ -41,37 +41,18 @@ Type
      function DeleteRegister(const id: string = ''): ieFirebaseRealtimeResponse;
   End;
 
+  const
+   Url_base = '.firebaseio.com/';
+   auth_prefix = 'auth=';
+
 implementation
 
 { TeFirebaseRealtimeDB }
 
-function TeFirebaseRealtimeDB.AccessToken(
-  const Token: string): ieFirebaseRealtime;
-begin
-
-end;
-
-function TeFirebaseRealtimeDB.Collection(
-  const name: string): ieFirebaseRealtime;
-begin
-
-end;
-
+//-------Métodos básicos da classe---------------------------------------------------------------------------------
 constructor TeFirebaseRealtimeDB.Create(const ProjectID: string);
 begin
-
-end;
-
-function TeFirebaseRealtimeDB.CreateRegister(
-  const body: string): ieFirebaseRealtimeResponse;
-begin
-
-end;
-
-function TeFirebaseRealtimeDB.DeleteRegister(
-  const id: string): ieFirebaseRealtimeResponse;
-begin
-
+  fUrl := 'https://' + ProjectID + Url_base;
 end;
 
 destructor TeFirebaseRealtimeDB.Destroy;
@@ -80,68 +61,41 @@ begin
   inherited;
 end;
 
-function TeFirebaseRealtimeDB.endAt(
-  const value: string): ieFirebaseRealtimeFilters;
-begin
-
-end;
-
-function TeFirebaseRealtimeDB.endAt(
-  const value: integer): ieFirebaseRealtimeFilters;
-begin
-
-end;
-
-function TeFirebaseRealtimeDB.Endpoint(
-  const url_path: string): ieFirebaseRealtime;
-begin
-
-end;
-
-function TeFirebaseRealtimeDB.equalTo(
-  const value: integer): ieFirebaseRealtimeFilters;
-begin
-
-end;
-
-function TeFirebaseRealtimeDB.equalTo(
-  const value: string): ieFirebaseRealtimeFilters;
-begin
-
-end;
-
-function TeFirebaseRealtimeDB.limitToFirst(
-  const value: integer): ieFirebaseRealtimeFilters;
-begin
-
-end;
-
-function TeFirebaseRealtimeDB.limitToLast(
-  const value: integer): ieFirebaseRealtimeFilters;
-begin
-
-end;
-
 class function TeFirebaseRealtimeDB.New(const ProjectID: string): ieFireBaseRealtime;
 begin
   Result := Self.Create(ProjectID);
 end;
 
-function TeFirebaseRealtimeDB.OrderBy(
-  const fields: string): ieFirebaseRealtimeFilters;
+//-------Métodos para coletar dados específicos---------------------------------------------------------------------------------
+function TeFirebaseRealtimeDB.AccessToken(const Token: string): ieFirebaseRealtime;
 begin
 
 end;
 
-function TeFirebaseRealtimeDB.OrderBy(
-  const kind: eFirebaseOrderByKind): ieFirebaseRealtimeFilters;
+function TeFirebaseRealtimeDB.Endpoint(const url_path: string): ieFirebaseRealtime;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.Collection(const name: string): ieFirebaseRealtime;
+begin
+
+end;
+
+//-------Métodos para executar ações---------------------------------------------------------------------------------
+function TeFirebaseRealtimeDB.CreateRegister(const body: string): ieFirebaseRealtimeResponse;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.DeleteRegister(const id: string): ieFirebaseRealtimeResponse;
 begin
 
 end;
 
 function TeFirebaseRealtimeDB.Read: ieFirebaseRealtimeFilters;
 begin
-
+  Result := Self;
 end;
 
 function TeFirebaseRealtimeDB.ReadWithoutFilters: ieFirebaseRealtimeResponse;
@@ -154,26 +108,63 @@ begin
 
 end;
 
-function TeFirebaseRealtimeDB.starAt(
-  const value: integer): ieFirebaseRealtimeFilters;
+function TeFirebaseRealtimeDB.UpdateRegister(const body: string; id: string): ieFirebaseRealtimeResponse;
 begin
 
 end;
 
-function TeFirebaseRealtimeDB.startAt(
-  const value: string): ieFirebaseRealtimeFilters;
+function TeFirebaseRealtimeDB.WriteRegister(const body: string; Etag: string): ieFirebaseRealtimeResponse;
 begin
 
 end;
 
-function TeFirebaseRealtimeDB.UpdateRegister(const body: string;
-  id: string): ieFirebaseRealtimeResponse;
+//-------Métodos para implementar filtros---------------------------------------------------------------------------------
+function TeFirebaseRealtimeDB.endAt(const value: string): ieFirebaseRealtimeFilters;
 begin
 
 end;
 
-function TeFirebaseRealtimeDB.WriteRegister(const body: string;
-  Etag: string): ieFirebaseRealtimeResponse;
+function TeFirebaseRealtimeDB.endAt(const value: integer): ieFirebaseRealtimeFilters;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.equalTo(const value: integer): ieFirebaseRealtimeFilters;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.equalTo(const value: string): ieFirebaseRealtimeFilters;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.limitToFirst(const value: integer): ieFirebaseRealtimeFilters;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.limitToLast(const value: integer): ieFirebaseRealtimeFilters;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.OrderBy(const fields: string): ieFirebaseRealtimeFilters;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.OrderBy(const kind: eFirebaseOrderByKind): ieFirebaseRealtimeFilters;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.starAt(const value: integer): ieFirebaseRealtimeFilters;
+begin
+
+end;
+
+function TeFirebaseRealtimeDB.startAt(const value: string): ieFirebaseRealtimeFilters;
 begin
 
 end;
