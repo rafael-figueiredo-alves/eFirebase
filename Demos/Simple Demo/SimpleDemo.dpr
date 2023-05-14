@@ -18,7 +18,8 @@ uses
   eFirebase.Auth in '..\..\source\FirebaseLib\eFirebase.Auth.pas',
   eFirebase.Storage in '..\..\source\FirebaseLib\eFirebase.Storage.pas',
   eFirebase.Responses.Storage in '..\..\source\FirebaseLib\Response Classes\eFirebase.Responses.Storage.pas',
-  eFirebase.RealTimeDB in '..\..\source\FirebaseLib\eFirebase.RealTimeDB.pas';
+  eFirebase.RealTimeDB in '..\..\source\FirebaseLib\eFirebase.RealTimeDB.pas',
+  eFirebase.Responses.RealTimeDB in '..\..\source\FirebaseLib\Response Classes\eFirebase.Responses.RealTimeDB.pas';
 
 {$R *.res}
 

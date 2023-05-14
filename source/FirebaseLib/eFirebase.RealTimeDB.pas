@@ -57,7 +57,8 @@ Type
 
 implementation
 
-uses System.SysUtils;
+uses System.SysUtils,
+     eFirebase.rest, eFirebase.Responses.RealTimeDB;
 
 { TeFirebaseRealtimeDB }
 
@@ -236,6 +237,8 @@ end;
 function TeFirebaseRealtimeDB.CreateRegister(const body: string): ieFirebaseRealtimeResponse;
 var
   cUrl: string;
+  ResponseJSON : string;
+  Response     : iResponse;
 begin
   fCollection := fCollection + '.json';
 
@@ -245,6 +248,8 @@ end;
 function TeFirebaseRealtimeDB.DeleteRegister(const id: string): ieFirebaseRealtimeResponse;
 var
   cUrl: string;
+  ResponseJSON : string;
+  Response     : iResponse;
 begin
   if id <> EmptyStr then
    fCollection := fCollection + '/' + id + '.json'
@@ -263,6 +268,8 @@ end;
 function TeFirebaseRealtimeDB.ReadWithoutFilters: ieFirebaseRealtimeResponse;
 var
   cUrl: string;
+  ResponseJSON : string;
+  Response     : iResponse;
 begin
   fCollection := fCollection + '.json';
 
@@ -272,6 +279,8 @@ end;
 function TeFirebaseRealtimeDB.Search: ieFirebaseRealtimeResponse;
 var
   cUrl: string;
+  ResponseJSON : string;
+  Response     : iResponse;
 begin
   fCollection := fCollection + '.json';
 
@@ -281,6 +290,8 @@ end;
 function TeFirebaseRealtimeDB.UpdateRegister(const body: string; id: string): ieFirebaseRealtimeResponse;
 var
   cUrl: string;
+  ResponseJSON : string;
+  Response     : iResponse;
 begin
   if id <> EmptyStr then
    fCollection := fCollection + '/' + id + '.json'
@@ -293,10 +304,23 @@ end;
 function TeFirebaseRealtimeDB.WriteRegister(const body: string; Etag: string): ieFirebaseRealtimeResponse;
 var
   cUrl: string;
+  ResponseJSON : string;
+  Response     : iResponse;
+  feTag         : string;
 begin
   fCollection := fCollection + '.json';
 
   cUrl := MountUrl;
+
+  Response := TRest.New
+                     .BaseUrl(cUrl)
+                     .Body(body)
+                     .Put;
+
+  ResponseJSON := Response.Content;
+  feTag         := '';
+  feTag := Response.Headers.Values['ETag'];
+  Result := TeFirebaseRealtimeResponse.Create(ResponseJSON, Response.StatusCode, feTag);
 end;
 
 end.

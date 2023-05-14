@@ -211,6 +211,7 @@
         <DCCReference Include="..\..\source\FirebaseLib\eFirebase.Storage.pas"/>
         <DCCReference Include="..\..\source\FirebaseLib\Response Classes\eFirebase.Responses.Storage.pas"/>
         <DCCReference Include="..\..\source\FirebaseLib\eFirebase.RealTimeDB.pas"/>
+        <DCCReference Include="..\..\source\FirebaseLib\Response Classes\eFirebase.Responses.RealTimeDB.pas"/>
         <None Include="SimpleDemo.todo"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
