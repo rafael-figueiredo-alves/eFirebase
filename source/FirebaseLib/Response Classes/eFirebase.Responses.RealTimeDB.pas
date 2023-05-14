@@ -22,14 +22,18 @@ Type
      function AsJSONstr: string;
      function AsJSONObj: tJSONObject;
      function AsJSONArray: TJSONArray;
-     function AsDataSet: tDataSet;
+     function AsDataSet(out DataSet: tDataSet) : integer;
   End;
 
 implementation
 
+uses
+  System.SysUtils,
+  System.Generics.Collections;
+
 { TeFirebaseRealtimeResponse }
 
-constructor TeFirebaseRealtimeResponse.Create(const Response: string; StatusCode: integer; eTag: string = '');
+constructor TeFirebaseRealtimeResponse.Create(const Response: string; StatusCode: integer; eTag: string);
 begin
   fResponse   := Response;
   fStatusCode := StatusCode;
@@ -42,7 +46,7 @@ begin
   inherited;
 end;
 
-class function TeFirebaseRealtimeResponse.New(const Response: string; StatusCode: integer; eTag: string = ''): ieFirebaseRealtimeResponse;
+class function TeFirebaseRealtimeResponse.New(const Response: string; StatusCode: integer; eTag: string): ieFirebaseRealtimeResponse;
 begin
   Result := Self.Create(Response, StatusCode, eTag);
 end;
@@ -64,17 +68,37 @@ end;
 
 function TeFirebaseRealtimeResponse.AsJSONObj: tJSONObject;
 begin
-  Result := TJSONObject.ParseJSONValue(fResponse) As TJSONObject;
+  Result := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(fResponse), 0) As TJSONObject;
 end;
 
 function TeFirebaseRealtimeResponse.AsJSONArray: TJSONArray;
+var
+ Obj      : TJSONObject;
+ Registro : Integer;
+ NewObj   : TJSONObject;
+ Par      : integer;
+ Valor    : TJsonObject;
 begin
-  Result := TJSONArray.Create();
+  Obj := Self.AsJSONObj;
+
+  Result := TJSONArray.Create;
+
+  for Registro := 0 to Obj.Count-1 do
+   begin
+     NewObj := TJSONObject.Create;
+     NewObj.AddPair('id', Obj.Pairs[Registro].JsonString.ToString);
+     Valor := Obj.Pairs[Registro].JsonValue as TJSONObject;
+     for Par := 0 to Valor.Count-1 do
+      begin
+        NewObj.AddPair(Valor.Pairs[par].JsonString.ToString, Valor.Pairs[par].JsonValue.ToString);
+      end;
+     Result.Add(NewObj);
+   end;
 end;
 
-function TeFirebaseRealtimeResponse.AsDataSet: tDataSet;
+function TeFirebaseRealtimeResponse.AsDataSet(out DataSet: tDataSet) : integer;
 begin
-  Result := TDataSet.Create(nil);
+  Result := fStatusCode;
 end;
 
 end.

@@ -41,7 +41,7 @@ type
    function AsJSONstr: string;
    function AsJSONObj: tJSONObject;
    function AsJSONArray: TJSONArray;
-   function AsDataSet: tDataSet;
+   function AsDataSet(out DataSet: tDataSet) : integer;
  end;
 {$Endregion}
 
@@ -87,7 +87,7 @@ type
    function CreateRegister(const body: string): ieFirebaseRealtimeResponse;
    function UpdateRegister(const body: string; id: string = ''): ieFirebaseRealtimeResponse;
    function WriteRegister(const body: string; Etag: string = ''): ieFirebaseRealtimeResponse;
-   function DeleteRegister(const id: string = ''): ieFirebaseRealtimeResponse;
+   function DeleteRegister(const id: string = ''; Etag: string = ''): ieFirebaseRealtimeResponse;
  end;
 
  ieFirebaseStorage = interface

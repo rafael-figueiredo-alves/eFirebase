@@ -49,7 +49,7 @@ Type
      function CreateRegister(const body: string): ieFirebaseRealtimeResponse;
      function UpdateRegister(const body: string; id: string = ''): ieFirebaseRealtimeResponse;
      function WriteRegister(const body: string; Etag: string = ''): ieFirebaseRealtimeResponse;
-     function DeleteRegister(const id: string = ''): ieFirebaseRealtimeResponse;
+     function DeleteRegister(const id: string = ''; Etag: string = ''): ieFirebaseRealtimeResponse;
   End;
 
   const
@@ -243,9 +243,17 @@ begin
   fCollection := fCollection + '.json';
 
   cUrl := MountUrl;
+
+  Response := TRest.New
+                     .BaseUrl(cUrl)
+                     .AddHeaders('X-Firebase-ETag', 'true')
+                     .Post;
+
+  ResponseJSON := Response.Content;
+  Result := TeFirebaseRealtimeResponse.Create(ResponseJSON, Response.StatusCode, Response.Headers.Values['ETag']);
 end;
 
-function TeFirebaseRealtimeDB.DeleteRegister(const id: string): ieFirebaseRealtimeResponse;
+function TeFirebaseRealtimeDB.DeleteRegister(const id: string; Etag: string): ieFirebaseRealtimeResponse;
 var
   cUrl: string;
   ResponseJSON : string;
@@ -258,6 +266,18 @@ begin
 
   cUrl := MountUrl;
 
+  if Etag <> EmptyStr then
+   Response := TRest.New
+                      .BaseUrl(cUrl)
+                      .AddHeaders('if-match', Etag)
+                      .Delete
+  else
+      Response := TRest.New
+                      .BaseUrl(cUrl)
+                      .Delete;
+
+  ResponseJSON := Response.Content;
+  Result := TeFirebaseRealtimeResponse.Create(ResponseJSON, Response.StatusCode, Response.Headers.Values['ETag']);
 end;
 
 function TeFirebaseRealtimeDB.Read: ieFirebaseRealtimeFilters;
@@ -274,6 +294,14 @@ begin
   fCollection := fCollection + '.json';
 
   cUrl := MountUrl;
+
+  Response := TRest.New
+                     .BaseUrl(cUrl)
+                     .AddHeaders('X-Firebase-ETag', 'true')
+                     .Get;
+
+  ResponseJSON := Response.Content;
+  Result := TeFirebaseRealtimeResponse.Create(ResponseJSON, Response.StatusCode, Response.Headers.Values['ETag']);
 end;
 
 function TeFirebaseRealtimeDB.Search: ieFirebaseRealtimeResponse;
@@ -285,6 +313,14 @@ begin
   fCollection := fCollection + '.json';
 
   cUrl := MountUrl + MountUrlSearch;
+
+  Response := TRest.New
+                     .BaseUrl(cUrl)
+                     .AddHeaders('X-Firebase-ETag', 'true')
+                     .Get;
+
+  ResponseJSON := Response.Content;
+  Result := TeFirebaseRealtimeResponse.Create(ResponseJSON, Response.StatusCode, Response.Headers.Values['ETag']);
 end;
 
 function TeFirebaseRealtimeDB.UpdateRegister(const body: string; id: string): ieFirebaseRealtimeResponse;
@@ -299,6 +335,14 @@ begin
    fCollection := fCollection + '.json';
 
   cUrl := MountUrl;
+
+  Response := TRest.New
+                     .BaseUrl(cUrl)
+                     .Body(body)
+                     .Patch;
+
+  ResponseJSON := Response.Content;
+  Result := TeFirebaseRealtimeResponse.Create(ResponseJSON, Response.StatusCode);
 end;
 
 function TeFirebaseRealtimeDB.WriteRegister(const body: string; Etag: string): ieFirebaseRealtimeResponse;
@@ -312,10 +356,17 @@ begin
 
   cUrl := MountUrl;
 
-  Response := TRest.New
-                     .BaseUrl(cUrl)
-                     .Body(body)
-                     .Put;
+  if Etag <> EmptyStr then
+   Response := TRest.New
+                      .BaseUrl(cUrl)
+                      .AddHeaders('if-match', Etag)
+                      .Body(body)
+                      .Put
+  else
+      Response := TRest.New
+                      .BaseUrl(cUrl)
+                      .Body(body)
+                      .Put;
 
   ResponseJSON := Response.Content;
   feTag         := '';
