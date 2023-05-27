@@ -108,7 +108,6 @@ type
    function RealTimeDB(const ProjectCode: string): ieFirebaseRealtime;
    function Storage(const ProjectCode: string): ieFirebaseStorage;
    function Firestore(const API_Key: string): ieFirebaseFirestore;
-   function Version: string;
  end;
 
 implementation

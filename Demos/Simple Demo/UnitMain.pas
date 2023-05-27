@@ -17,9 +17,16 @@ type
     OpenDialog1: TOpenDialog;
     Image1: TImage;
     Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    Label1: TLabel;
+    Label2: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,7 +39,7 @@ var
 implementation
 
 uses
-  eFirebase, eFirebase.Interfaces, eFirebase.Types;
+  eFirebase, eFirebase.Interfaces, eFirebase.Types, System.JSON;
 
 {$R *.fmx}
 
@@ -110,6 +117,51 @@ begin
    begin
      Image1.Bitmap.LoadFromFile(OpenDialog1.FileName);
    end;
+end;
+
+procedure TForm2.Button4Click(Sender: TObject);
+var
+ RealTime: ieFirebaseRealtimeResponse;
+begin
+  RealTime := TeFirebase.New
+                          .RealTimeDB('etasks-d6988')
+                          .Endpoint('/etasks/v1')
+                          .Collection('version')
+                          .ReadWithoutFilters;
+  Memo1.Lines.Add(RealTime.StatusCode.ToString);
+  Memo1.Lines.Add(RealTime.ETag);
+  Memo1.Lines.Add(RealTime.AsJSONstr);
+end;
+
+procedure TForm2.Button5Click(Sender: TObject);
+var
+ RealTime: ieFirebaseRealtimeResponse;
+ arrJSON: tjsonarray;
+ teste: string;
+begin
+  RealTime := TeFirebase.New
+                          .RealTimeDB('etasks-d6988')
+                          .AccessToken(Edit1.Text)
+                          .Endpoint('etasks/v1/categories')
+                          .Collection('X6xl2bc50rTBTjEevxySh1SQaMb2')
+                          .ReadWithoutFilters;
+  Memo1.Lines.Add(RealTime.StatusCode.ToString);
+  Memo1.Lines.Add(RealTime.ETag);
+  Memo1.Lines.Add(RealTime.AsJSONstr);
+  arrJSON := RealTime.AsJSONArray;
+  Memo1.Lines.Add(arrJSON.ToString);
+  if arrJSON.Items[0].TryGetValue<string>('id', teste) then
+   Memo1.Lines.Add(teste);
+  if arrJSON.Items[0].TryGetValue<string>('cat_icon', teste) then
+   Memo1.Lines.Add(teste);
+  if arrJSON.Items[0].TryGetValue<string>('categoria', teste) then
+   Memo1.Lines.Add(teste);
+  arrJSON.DisposeOf;
+end;
+
+procedure TForm2.FormCreate(Sender: TObject);
+begin
+   Label2.Text := TeFirebase.Version;
 end;
 
 end.

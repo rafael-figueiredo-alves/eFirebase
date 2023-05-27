@@ -25,17 +25,18 @@ Type
      function RealTimeDB(const ProjectCode: string): ieFirebaseRealtime;
      function Storage(const ProjectCode: string): ieFirebaseStorage;
      function Firestore(const API_Key: string): ieFirebaseFirestore;
-     function Version: string;
+     class function Version: string;
   End;
 
  const
-  eFirebase_VERSION = '0.0.11-a';
+  eFirebase_VERSION = '0.0.12-a';
 
 implementation
 
 uses
   eFirebase.Auth,
-  eFirebase.Storage, eFirebase.RealTimeDB;
+  eFirebase.Storage,
+  eFirebase.RealTimeDB;
 
 { TeFirebase }
 
@@ -75,7 +76,7 @@ begin
   Result := TeFirebaseStorage.New(ProjectCode);
 end;
 
-function TeFirebase.Version: string;
+class function TeFirebase.Version: string;
 begin
   Result := eFirebase_VERSION;
 end;

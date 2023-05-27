@@ -78,22 +78,33 @@ var
  NewObj   : TJSONObject;
  Par      : integer;
  Valor    : TJsonObject;
+
+ function RemoveQuotes(const text: string) : string;
+ begin
+   Result := text.Replace('"', '');
+   Result := Result.TrimLeft;
+   Result := Result.TrimRight;
+ end;
 begin
   Obj := Self.AsJSONObj;
+  try
+    Result := TJSONArray.Create;
 
-  Result := TJSONArray.Create;
+    for Registro := 0 to Obj.Count-1 do
+     begin
+       NewObj := TJSONObject.Create;
+       NewObj.AddPair('id', RemoveQuotes(Obj.Pairs[Registro].JsonString.ToString));
+       Valor := Obj.Pairs[Registro].JsonValue as TJSONObject;
+       for Par := 0 to Valor.Count-1 do
+        begin
+          NewObj.AddPair(RemoveQuotes(Valor.Pairs[par].JsonString.ToString), RemoveQuotes(Valor.Pairs[par].JsonValue.ToString));
+        end;
+       Result.Add(NewObj);
+     end;
+  finally
+    Obj.DisposeOf;
+  end;
 
-  for Registro := 0 to Obj.Count-1 do
-   begin
-     NewObj := TJSONObject.Create;
-     NewObj.AddPair('id', Obj.Pairs[Registro].JsonString.ToString);
-     Valor := Obj.Pairs[Registro].JsonValue as TJSONObject;
-     for Par := 0 to Valor.Count-1 do
-      begin
-        NewObj.AddPair(Valor.Pairs[par].JsonString.ToString, Valor.Pairs[par].JsonValue.ToString);
-      end;
-     Result.Add(NewObj);
-   end;
 end;
 
 function TeFirebaseRealtimeResponse.AsDataSet(out DataSet: tDataSet) : integer;
