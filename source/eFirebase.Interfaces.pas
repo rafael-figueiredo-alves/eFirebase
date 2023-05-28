@@ -41,7 +41,8 @@ type
    function AsJSONstr: string;
    function AsJSONObj: tJSONObject;
    function AsJSONArray: TJSONArray;
-   function AsDataSet(out DataSet: tDataSet) : integer;
+   {TODO -oRafael -cImplementar : Implementar esta função no futuro, quando descobrir ponto que está dando Access Violation}
+   //function AsDataSet(out DataSet: tDataSet) : integer;
  end;
 {$Endregion}
 

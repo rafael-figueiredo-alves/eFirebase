@@ -29,7 +29,7 @@ Type
   End;
 
  const
-  eFirebase_VERSION = '0.0.12-a';
+  eFirebase_VERSION = '0.0.13-a';
 
 implementation
 

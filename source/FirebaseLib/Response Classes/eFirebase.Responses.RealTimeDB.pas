@@ -22,7 +22,8 @@ Type
      function AsJSONstr: string;
      function AsJSONObj: tJSONObject;
      function AsJSONArray: TJSONArray;
-     function AsDataSet(out DataSet: tDataSet) : integer;
+     {TODO -oRafael -cImplementar : Implementar esta função no futuro, quando descobrir ponto que está dando Access Violation}
+     //function AsDataSet(out DataSet: tDataSet) : integer;
   End;
 
 implementation
@@ -32,6 +33,13 @@ uses
   System.Generics.Collections;
 
 { TeFirebaseRealtimeResponse }
+
+function RemoveQuotes(const text: string) : string;
+begin
+ Result := text.Replace('"', '');
+ Result := Result.TrimLeft;
+ Result := Result.TrimRight;
+end;
 
 constructor TeFirebaseRealtimeResponse.Create(const Response: string; StatusCode: integer; eTag: string);
 begin
@@ -78,13 +86,6 @@ var
  NewObj   : TJSONObject;
  Par      : integer;
  Valor    : TJsonObject;
-
- function RemoveQuotes(const text: string) : string;
- begin
-   Result := text.Replace('"', '');
-   Result := Result.TrimLeft;
-   Result := Result.TrimRight;
- end;
 begin
   Obj := Self.AsJSONObj;
   try
@@ -107,9 +108,50 @@ begin
 
 end;
 
-function TeFirebaseRealtimeResponse.AsDataSet(out DataSet: tDataSet) : integer;
+{function TeFirebaseRealtimeResponse.AsDataSet(out DataSet: tDataSet) : integer;
+var
+ arrJSON : TJSONArray;
+ Reg     : TJSONObject;
+ I       : integer;
+ Field   : TField;
+ Item    : Integer;
+ Valor   : string;
+ teste   : string;
+ teste1  : Array of TVarRec;
 begin
   Result := fStatusCode;
-end;
+  arrJSON := AsJSONArray;
+  try
+    if (arrJSON.Count > 0) and Assigned(DataSet) then
+     begin
+       Reg :=  arrJSON.Items[0] as TJSONObject;
+
+       DataSet.Fields.Clear;
+
+       for I := 0 to Reg.Count - 1 do
+        begin
+          Field := TStringField.Create(nil);
+          Field.FieldKind := fkData;
+          Field.FieldName := RemoveQuotes(Reg.Pairs[i].JsonString.ToString);
+          DataSet.Fields.Add(Field);
+        end;
+
+       DataSet.Open;
+       for Item := 0 to arrJSON.Count - 1 do
+        begin
+         SetLength(teste1, Reg.Count);
+         for I := 0 to Reg.Count - 1 do
+          begin
+            Valor := EmptyStr;
+            arrJSON.Items[Item].TryGetValue<string>(RemoveQuotes(Reg.Pairs[i].JsonString.ToString), Valor);
+            teste1[i] := TVarRec(Valor);
+          end;
+         DataSet.AppendRecord(teste1);
+        end;
+     end;
+  finally
+    arrJSON.DisposeOf;
+  end;
+end;}
 
 end.
