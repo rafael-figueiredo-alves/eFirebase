@@ -316,7 +316,9 @@ begin
 
   Response := TRest.New
                      .BaseUrl(cUrl)
+                     { Removido pois o Firebase não aceita Etag com query params para pesquisa filtrada
                      .AddHeaders('X-Firebase-ETag', 'true')
+                     }
                      .Get;
 
   ResponseJSON := Response.Content;

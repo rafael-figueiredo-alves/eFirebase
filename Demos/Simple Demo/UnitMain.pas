@@ -148,7 +148,10 @@ begin
                           .AccessToken(Edit1.Text)
                           .Endpoint('etasks/v1/categories')
                           .Collection('X6xl2bc50rTBTjEevxySh1SQaMb2')
-                          .ReadWithoutFilters;
+                          .Read
+                          .OrderBy('categoria')
+                          .startAt('c')
+                          .Search;
   Memo1.Lines.Add(RealTime.StatusCode.ToString);
   Memo1.Lines.Add(RealTime.ETag);
   Memo1.Lines.Add(RealTime.AsJSONstr);
