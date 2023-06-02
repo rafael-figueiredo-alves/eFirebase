@@ -1,0 +1,9 @@
+{
+	"name": "eFirebase",
+	"description": "Biclioteca para controlar o Firebase em aplicações Delphi e Lazarus",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./source",
+	"projects": [],
+	"dependencies": {}
+}
