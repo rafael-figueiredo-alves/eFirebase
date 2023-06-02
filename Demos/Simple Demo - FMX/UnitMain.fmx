@@ -1,0 +1,405 @@
+object FormMain: TFormMain
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 600
+  ClientWidth = 764
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object TabServices: TTabControl
+    Align = Client
+    Margins.Left = 5.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Size.Width = 754.000000000000000000
+    Size.Height = 449.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 1
+    TabPosition = PlatformDefault
+    Sizes = (
+      754s
+      423s
+      754s
+      423s
+      754s
+      423s)
+    object TabFirebaseAuth: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 93.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Firebase Auth'
+      object TabControl1: TTabControl
+        Align = Client
+        Margins.Left = 30.000000000000000000
+        Margins.Top = 30.000000000000000000
+        Margins.Right = 30.000000000000000000
+        Margins.Bottom = 30.000000000000000000
+        Size.Width = 694.000000000000000000
+        Size.Height = 363.000000000000000000
+        Size.PlatformDefault = False
+        TabIndex = 0
+        TabOrder = 0
+        TabPosition = Bottom
+        Sizes = (
+          694s
+          337s
+          694s
+          337s
+          694s
+          337s
+          694s
+          337s
+          694s
+          337s
+          694s
+          337s)
+        object TabLogin: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = True
+          Size.Width = 50.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Login'
+          object GroupBox1: TGroupBox
+            Align = Top
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.X = 10.000000000000000000
+            Position.Y = 10.000000000000000000
+            Size.Width = 674.000000000000000000
+            Size.Height = 184.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Efetuar Login'
+            TabOrder = 1
+            object LayUser: TLayout
+              Align = Top
+              Margins.Left = 10.000000000000000000
+              Margins.Top = 25.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Position.X = 10.000000000000000000
+              Position.Y = 25.000000000000000000
+              Size.Width = 654.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 40
+              object LabelUser: TLabel
+                Align = Left
+                Size.Width = 98.000000000000000000
+                Size.Height = 50.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Center
+                Text = 'Usu'#225'rio'
+                TabOrder = 0
+              end
+              object eUserEmail: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                Margins.Left = 10.000000000000000000
+                Margins.Top = 10.000000000000000000
+                Margins.Right = 10.000000000000000000
+                Margins.Bottom = 10.000000000000000000
+                Size.Width = 536.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+              end
+            end
+            object LaySenha: TLayout
+              Align = Top
+              Margins.Left = 10.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Position.X = 10.000000000000000000
+              Position.Y = 75.000000000000000000
+              Size.Width = 654.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 39
+              object LabelPass: TLabel
+                Align = Left
+                Size.Width = 98.000000000000000000
+                Size.Height = 50.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Center
+                Text = 'Senha'
+                TabOrder = 0
+              end
+              object ePassword: TEdit
+                Touch.InteractiveGestures = [LongTap, DoubleTap]
+                Align = Client
+                TabOrder = 1
+                Password = True
+                Margins.Left = 10.000000000000000000
+                Margins.Top = 10.000000000000000000
+                Margins.Right = 10.000000000000000000
+                Margins.Bottom = 10.000000000000000000
+                Size.Width = 536.000000000000000000
+                Size.Height = 30.000000000000000000
+                Size.PlatformDefault = False
+                object bLimparSenha: TClearEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 26.000000000000000000
+                  Size.PlatformDefault = False
+                  TabOrder = 0
+                end
+                object bExibeSenha: TPasswordEditButton
+                  CanFocus = False
+                  Cursor = crArrow
+                  Position.X = 28.000000000000000000
+                  Size.Width = 28.000000000000000000
+                  Size.Height = 26.000000000000000000
+                  Size.PlatformDefault = False
+                  TabOrder = 1
+                end
+              end
+            end
+            object Layout2: TLayout
+              Align = Top
+              Margins.Left = 10.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Position.X = 10.000000000000000000
+              Position.Y = 125.000000000000000000
+              Size.Width = 654.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 38
+              object bEntrar: TButton
+                Align = Right
+                Margins.Left = 10.000000000000000000
+                Margins.Top = 5.000000000000000000
+                Margins.Right = 10.000000000000000000
+                Margins.Bottom = 5.000000000000000000
+                Position.X = 518.000000000000000000
+                Position.Y = 5.000000000000000000
+                Size.Width = 126.000000000000000000
+                Size.Height = 40.000000000000000000
+                Size.PlatformDefault = False
+                TabOrder = 0
+                Text = 'Entrar'
+                OnClick = bEntrarClick
+              end
+            end
+          end
+          object GroupBox2: TGroupBox
+            Align = Top
+            Margins.Left = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Position.X = 10.000000000000000000
+            Position.Y = 199.000000000000000000
+            Size.Width = 674.000000000000000000
+            Size.Height = 133.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Efetuar Login'
+            TabOrder = 0
+            object Layout1: TLayout
+              Align = Top
+              Margins.Left = 10.000000000000000000
+              Margins.Top = 25.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Position.X = 10.000000000000000000
+              Position.Y = 25.000000000000000000
+              Size.Width = 654.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 39
+              object Label1: TLabel
+                Align = Left
+                Size.Width = 98.000000000000000000
+                Size.Height = 50.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Center
+                Text = 'Token'
+                TabOrder = 1
+              end
+              object LToken: TLabel
+                Align = Client
+                StyledSettings = [Family, FontColor]
+                Size.Width = 556.000000000000000000
+                Size.Height = 50.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Size = 14.000000000000000000
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+                TextSettings.HorzAlign = Center
+                TabOrder = 0
+              end
+            end
+            object Layout3: TLayout
+              Align = Top
+              Margins.Left = 10.000000000000000000
+              Margins.Right = 10.000000000000000000
+              Position.X = 10.000000000000000000
+              Position.Y = 75.000000000000000000
+              Size.Width = 654.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 38
+              object Label2: TLabel
+                Align = Left
+                Size.Width = 98.000000000000000000
+                Size.Height = 50.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.HorzAlign = Center
+                Text = 'Refresh Token'
+                TabOrder = 1
+              end
+              object bRefreshToken: TButton
+                Align = Right
+                Position.X = 604.000000000000000000
+                Size.Width = 50.000000000000000000
+                Size.Height = 50.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'refreshtoolbutton'
+                TabOrder = 2
+                Text = 'bRefreshToken'
+                OnClick = bRefreshTokenClick
+              end
+              object LRefreshToken: TLabel
+                Align = Client
+                StyledSettings = [Family, FontColor]
+                Size.Width = 506.000000000000000000
+                Size.Height = 50.000000000000000000
+                Size.PlatformDefault = False
+                TextSettings.Font.Size = 14.000000000000000000
+                TextSettings.Font.StyleExt = {00070000000000000004000000}
+                TextSettings.HorzAlign = Center
+                TabOrder = 0
+              end
+            end
+          end
+        end
+        object TabRegistrar: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 67.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Registrar'
+        end
+        object TabPass: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 165.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Resetar senha/Trocar senha'
+        end
+        object TabProfile: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 46.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Perfil'
+        end
+        object TabVerEmail: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 99.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Verificar e-mail'
+        end
+        object TabDelAccount: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 91.000000000000000000
+          Size.Height = 26.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = ''
+          TabOrder = 0
+          Text = 'Apagar conta'
+        end
+      end
+    end
+    object TabFirebaseStorage: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 108.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Firebase Storage'
+    end
+    object TabFirebaseRealtime: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = False
+      Size.Width = 132.000000000000000000
+      Size.Height = 26.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'Firebase Realtime DB'
+    end
+  end
+  object grLog: TGroupBox
+    Align = Bottom
+    Margins.Left = 5.000000000000000000
+    Margins.Top = 5.000000000000000000
+    Margins.Right = 5.000000000000000000
+    Margins.Bottom = 5.000000000000000000
+    Position.X = 5.000000000000000000
+    Position.Y = 464.000000000000000000
+    Size.Width = 754.000000000000000000
+    Size.Height = 131.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Log de opera'#231#245'es / Erros'
+    TabOrder = 2
+    object MemoLog: TMemo
+      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+      DataDetectorTypes = []
+      Align = Client
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 25.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Size.Width = 734.000000000000000000
+      Size.Height = 96.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 38
+      Viewport.Width = 730.000000000000000000
+      Viewport.Height = 92.000000000000000000
+    end
+  end
+end
