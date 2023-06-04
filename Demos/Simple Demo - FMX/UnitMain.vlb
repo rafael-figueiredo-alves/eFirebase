@@ -7,9 +7,6 @@ Coordinates=278,306,98,36
 [LabelPass]
 Coordinates=421,10,75,58
 
-[GroupBox2]
-Coordinates=205,78,79,58
-
 [Label2]
 Coordinates=122,10,53,58
 
@@ -48,9 +45,6 @@ Coordinates=276,10,47,58
 
 [TabRegistrar]
 Coordinates=160,260,89,36
-
-[GroupBox1]
-Coordinates=77,146,79,58
 
 [TabLogin]
 Coordinates=82,260,68,36
@@ -103,4 +97,10 @@ Coordinates=0,233,91,36
 ModelLayerNames=
 ActiveLayerNames=
 EditingLayerName=
+
+[grEfetuarLogin]
+Coordinates=77,146,79,58
+
+[grToken]
+Coordinates=205,78,79,58
 

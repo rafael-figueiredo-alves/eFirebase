@@ -23,7 +23,7 @@ type
     TabProfile: TTabItem;
     TabVerEmail: TTabItem;
     TabDelAccount: TTabItem;
-    GroupBox1: TGroupBox;
+    grEfetuarLogin: TGroupBox;
     LayUser: TLayout;
     LabelUser: TLabel;
     eUserEmail: TEdit;
@@ -34,7 +34,7 @@ type
     bExibeSenha: TPasswordEditButton;
     Layout2: TLayout;
     bEntrar: TButton;
-    GroupBox2: TGroupBox;
+    grToken: TGroupBox;
     Layout1: TLayout;
     Label1: TLabel;
     Layout3: TLayout;
@@ -42,9 +42,91 @@ type
     bRefreshToken: TButton;
     LToken: TLabel;
     LRefreshToken: TLabel;
+    GrRegistrar: TGroupBox;
+    Layout4: TLayout;
+    lUserEmailReg: TLabel;
+    eEmailRegistro: TEdit;
+    Layout5: TLayout;
+    LSenhaReg: TLabel;
+    ESenhaRegistro: TEdit;
+    ClearEditButton1: TClearEditButton;
+    PasswordEditButton1: TPasswordEditButton;
+    Layout6: TLayout;
+    bRegistrar: TButton;
+    GroupBox1: TGroupBox;
+    Layout7: TLayout;
+    Label5: TLabel;
+    LTokenReg: TLabel;
+    Layout8: TLayout;
+    Label7: TLabel;
+    Button1: TButton;
+    LRefTokenReg: TLabel;
+    GrPerfil: TGroupBox;
+    Layout9: TLayout;
+    Layout10: TLayout;
+    Label4: TLabel;
+    Layout11: TLayout;
+    bLerProfile: TButton;
+    Button3: TButton;
+    Layout12: TLayout;
+    Label3: TLabel;
+    eDisplayName: TEdit;
+    Layout13: TLayout;
+    Label6: TLabel;
+    Label8: TLabel;
+    Layout14: TLayout;
+    Label9: TLabel;
+    LLastAccess: TLabel;
+    Label11: TLabel;
+    LCreatedAt: TLabel;
+    LuID: TLabel;
+    LEmail: TLabel;
+    eURLphoto: TEdit;
+    bApagarConta: TButton;
+    GroupBox2: TGroupBox;
+    Layout15: TLayout;
+    Label10: TLabel;
+    eEmailReset: TEdit;
+    Layout16: TLayout;
+    Label12: TLabel;
+    eSenhaReset: TEdit;
+    ClearEditButton2: TClearEditButton;
+    PasswordEditButton2: TPasswordEditButton;
+    bResetarSenha: TButton;
+    bConfNovaSenhaReset: TButton;
+    Layout17: TLayout;
+    Label13: TLabel;
+    eOOBCodeReset: TEdit;
+    bVerificarOOBCodeResetar: TButton;
+    GroupBox3: TGroupBox;
+    Layout19: TLayout;
+    Label15: TLabel;
+    eNovaSenhaTroca: TEdit;
+    ClearEditButton3: TClearEditButton;
+    PasswordEditButton3: TPasswordEditButton;
+    Layout20: TLayout;
+    bTrocaSenha: TButton;
+    GroupBox4: TGroupBox;
+    Layout18: TLayout;
+    Label14: TLabel;
+    eCodeEmailVerify: TEdit;
+    Layout22: TLayout;
+    bEnviarcodigo: TButton;
+    lEmailVerificado: TLabel;
+    bVerificarEmail: TButton;
     procedure FormCreate(Sender: TObject);
     procedure bEntrarClick(Sender: TObject);
     procedure bRefreshTokenClick(Sender: TObject);
+    procedure bRegistrarClick(Sender: TObject);
+    procedure bLerProfileClick(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure bApagarContaClick(Sender: TObject);
+    procedure bResetarSenhaClick(Sender: TObject);
+    procedure bVerificarOOBCodeResetarClick(Sender: TObject);
+    procedure bConfNovaSenhaResetClick(Sender: TObject);
+    procedure bTrocaSenhaClick(Sender: TObject);
+    procedure bEnviarcodigoClick(Sender: TObject);
+    procedure bVerificarEmailClick(Sender: TObject);
   private
     { Private declarations }
     API_Key       : string;
@@ -67,17 +149,62 @@ uses
   eFirebase,
   eFirebase.Interfaces,
   eFirebase.Types,
-  dotenv4delphi;
+  dotenv4delphi,
+  System.DateUtils;
+
+//Funções Auxiliares
+function ErrorMessage(const msg: enumAuthErrors): string;
+begin
+  case msg of
+    NONE:                            Result := EmptyStr;
+    EMAIL_EXISTS:                    Result := 'Já existe uma conta com este e-mail. Informe um outro e-mail para criar uma conta.';
+    OPERATION_NOT_ALLOWED:           Result := 'Operação não permitida! Sentimos muito, mas não é possível prosseguir.';
+    TOO_MANY_ATTEMPTS_TRY_LATER:     Result := 'Sentimos muito, mas você já efetuou muitas tentativas e não poderá prosseguir. Tente novamente mais tarde.';
+    INVALID_EMAIL:                   Result := 'O e-mail informado não é válido. Informe um e-mail válido patra prosseguir.';
+    WEAK_PASSWORD:                   Result := 'A senha informada é muito fraca. É necessário informar uma senha com pelo menos 6 digitos. Tente novamente!';
+    EMAIL_NOT_FOUND:                 Result := 'E-mail informado não encontrado, portanto não foi possível encontrar um usuário no sistema!';
+    USER_DISABLED:                   Result := 'Sentimos muito, mas o seu usuário encontra-se desabilitado. Converse com o administrador.';
+    TOKEN_EXPIRED:                   Result := 'O token de usuário informado encontra-se expirado. Utilize o RefreshToken para obter um novo Token ou faça o login novamente.';
+    USER_NOT_FOUND:                  Result := 'Usuário informado não encontrado. Tente novamente.';
+    INVALID_REFRESH_TOKEN:           Result := 'O RefreshToken informado é inválido. Impossível obter novo token com este RefreshToken.';
+    INVALID_GRANT_TYPE:              Result := 'Permissões inválidas.';
+    MISSING_REFRESH_TOKEN:           Result := 'Não foi possível encontrar o RefreshToken informado.';
+    EXPIRED_OOB_CODE:                Result := 'Código de resgate expirou.';
+    INVALID_OOB_CODE:                Result := 'Código de resgate inválido.';
+    INVALID_ID_TOKEN:                Result := 'Token informado é inválido.';
+    CREDENTIAL_TOO_OLD_LOGIN_AGAIN:  Result := 'Credenciais vencidas. Faça o login novamente.';
+    INVALID_PASSWORD:                Result := 'Senha inválida.';
+    UNKNOWN:                         Result := 'Ocorreu um erro desconhecido. Tente novamente.';
+  end;
+end;
 
 procedure TFormMain.Add2Log(const log: string);
 begin
   MemoLog.Lines.Add(log);
 end;
 
+//-----------------------------------------------------------------------------------------------------------
+
+//Operações relativas ao Firebase Auth
+//=================================================
+
+//Logar na conta
 procedure TFormMain.bEntrarClick(Sender: TObject);
 var
   Login : ieFirebaseResponseAuth;
 begin
+  if eUserEmail.Text = EmptyStr then
+   begin
+     ShowMessage('É necessário informar um e-mail para efetuar login.');
+     Exit;
+   end;
+
+  if ePassword.Text = EmptyStr then
+   begin
+     ShowMessage('É necessário informar uma senha para efetuar login.');
+     Exit;
+   end;
+
   try
     Login := TeFirebase.New
                          .Auth(API_Key)
@@ -94,13 +221,135 @@ begin
 
      LToken.Text        := fToken;
      LRefreshToken.Text := fRefreshToken;
+     LTokenReg.Text        := fToken;
+     LRefTokenReg.Text := fRefreshToken;
    end
   else
    begin
-     Add2Log('Firebase Auth -> Login falhou!');
+     Add2Log('Firebase Auth -> Login falhou: ' + ErrorMessage(Login.Error) + #13 + 'Status Code = ' + Login.StatusCode.ToString);
+     ShowMessage('Firebase Auth -> Login falhou: ' + ErrorMessage(Login.Error) + #13 + 'Status Code = ' + Login.StatusCode.ToString);
    end;
 end;
 
+//Confirmar nova senha após resetamento de senha
+procedure TFormMain.bConfNovaSenhaResetClick(Sender: TObject);
+var
+  ResetSenha : ieFirebaseResponseAuth;
+begin
+  ResetSenha := TeFirebase.New
+                             .Auth(API_Key)
+                               .ConfirmPasswordReset(eOOBCodeReset.Text, eSenhaReset.Text);
+
+  if ResetSenha.StatusCode = 200 then
+   begin
+     Add2Log('Firebase auth -> Senha resetada com sucesso! Realize o login novamente.');
+     ShowMessage('Firebase auth -> Senha resetada com sucesso! Realize o login novamente.');
+   end
+  else
+   Begin
+     Add2Log('Firebase auth -> Ocorreu um erro ao resetar senha. Erro: ' + ErrorMessage(ResetSenha.Error));
+   End;
+end;
+
+//Apagar Conta
+procedure TFormMain.bApagarContaClick(Sender: TObject);
+var
+  Profile: ieFirebaseResponseAuth;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Não é possível acessar o profile sem estar logado. Faça o Login ou crie uma conta.');
+     Exit;
+   end;
+
+   if MessageDlg('Deseja realmente apagar sua conta?', TMsgDlgType.mtConfirmation, mbYesNo, 0) = mrNo then
+    Exit;
+
+   try
+     Profile := TeFirebase.New
+                            .Auth(API_Key)
+                              .DeleteAccount(fToken);
+  except
+    Add2Log('Firebase Auth -> Apagar Conta falhou!');
+  end;
+
+  if Profile.StatusCode = 200 then
+   begin
+     Add2Log('Firebase Auth -> Apagar Conta efetuado com sucesso!');
+
+     ShowMessage('Conta excluída com sucesso.');
+   end
+  else
+   begin
+     Add2Log('Firebase Auth -> Apagar Conta falhou: ' + ErrorMessage(Profile.Error) + #13 + 'Status Code = ' + Profile.StatusCode.ToString);
+     ShowMessage('Firebase Auth -> Apagar Conta falhou: ' + ErrorMessage(Profile.Error) + #13 + 'Status Code = ' + Profile.StatusCode.ToString);
+   end;
+end;
+
+//Envio de código de verificação de e-mail
+procedure TFormMain.bEnviarcodigoClick(Sender: TObject);
+var
+  VerifyEmail : ieFirebaseResponseAuth;
+begin
+  VerifyEmail := TeFirebase.New
+                             .Auth(API_Key)
+                               .SendEmailVerification(fToken);
+
+  if VerifyEmail.StatusCode = 200 then
+   begin
+     Add2Log('Firebase auth -> Código de verificação de e-mail enviado com sucesso!');
+     ShowMessage('Firebase auth -> Código de verificação de e-mail enviado com sucesso!!');
+   end
+  else
+   Begin
+     Add2Log('Firebase auth -> Envio de código para verificar email falhou. Erro: ' + ErrorMessage(VerifyEmail.Error));
+   End;
+end;
+
+//Ler profile do usuário
+procedure TFormMain.bLerProfileClick(Sender: TObject);
+var
+  Profile : ieFirebaseResponseAuth;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Não é possível acessar o profile sem estar logado. Faça o Login ou crie uma conta.');
+     Exit;
+   end;
+
+   try
+     Profile := TeFirebase.New
+                            .Auth(API_Key)
+                              .GetProfile(fToken);
+  except
+    Add2Log('Firebase Auth -> Get Profile falhou!');
+  end;
+
+  if Profile.StatusCode = 200 then
+   begin
+     Add2Log('Firebase Auth -> Get Profile efetuado com sucesso!');
+
+     LuID.Text         := Profile.uID;
+     LEmail.Text       := Profile.Email;
+     eDisplayName.Text := Profile.DisplayName;
+     eURLphoto.Text    := Profile.photoUrl;
+     LCreatedAt.Text   := Profile.createdAt;
+     LLastAccess.Text  := Profile.lastLoginAt;
+     //LCreatedAt.Text   := DateTimeToStr(UnixToDateTime(Copy(Profile.createdAt, 1, length(Profile.createdAt) - 3).ToInt64, False));
+     //LLastAccess.Text  := DateTimeToStr(UnixToDateTime(Copy(Profile.lastLoginAt, 1, length(Profile.createdAt) - 3).ToInt64, False));
+     if Profile.EmailVerified then
+      lEmailVerificado.Text := 'E-mail verificado'
+     else
+      lEmailVerificado.Text := 'E-mail NÃO verificado!';
+   end
+  else
+   begin
+     Add2Log('Firebase Auth -> Get Profile falhou: ' + ErrorMessage(Profile.Error) + #13 + 'Status Code = ' + Profile.StatusCode.ToString);
+     ShowMessage('Firebase Auth -> Get Profile falhou: ' + ErrorMessage(Profile.Error) + #13 + 'Status Code = ' + Profile.StatusCode.ToString);
+   end;
+end;
+
+//Atualizar Token através do RefreshToken
 procedure TFormMain.bRefreshTokenClick(Sender: TObject);
 var
   RefreshUser : ieFirebaseResponseAuth;
@@ -119,9 +368,174 @@ begin
 
      LToken.Text        := fToken;
      LRefreshToken.Text := fRefreshToken;
+     LTokenReg.Text     := fToken;
+     LRefTokenReg.Text  := fRefreshToken;
    end;
 end;
 
+//Criar uma nova conta
+procedure TFormMain.bRegistrarClick(Sender: TObject);
+var
+  fRegister : ieFirebaseResponseAuth;
+begin
+  if eEmailRegistro.Text = EmptyStr then
+   begin
+     ShowMessage('É necessário informar um e-mail para criar uma conta.');
+     Exit;
+   end;
+
+  if ESenhaRegistro.Text = EmptyStr then
+   begin
+     ShowMessage('É necessário informar uma senha para criar uma conta.');
+     Exit;
+   end;
+
+  try
+    fRegister := TeFirebase.New
+                         .Auth(API_Key)
+                           .SignUpWithEmailPassword(eEmailRegistro.Text, ESenhaRegistro.Text);
+  except
+    Add2Log('Firebase Auth -> SignUp falhou!');
+  end;
+
+  if fRegister.StatusCode = 200 then
+   begin
+     Add2Log('Firebase Auth -> SignUp efetuado com sucesso!');
+     fToken        := fRegister.token;
+     fRefreshToken := fRegister.RefreshToken;
+
+     LToken.Text        := fToken;
+     LRefreshToken.Text := fRefreshToken;
+     LTokenReg.Text        := fToken;
+     LRefTokenReg.Text := fRefreshToken;
+   end
+  else
+   begin
+     Add2Log('Firebase Auth -> SignUp falhou: ' + ErrorMessage(fRegister.Error) + #13 + 'Status Code = ' + fRegister.StatusCode.ToString);
+     ShowMessage('Firebase Auth -> SignUp falhou: ' + ErrorMessage(fRegister.Error) + #13 + 'Status Code = ' + fRegister.StatusCode.ToString);
+   end;
+end;
+
+//Resetar senha (enviar e-mail com código)
+procedure TFormMain.bResetarSenhaClick(Sender: TObject);
+var
+  ResetSenha : ieFirebaseResponseAuth;
+begin
+  ResetSenha := TeFirebase.New
+                             .Auth(API_Key)
+                               .SendPasswordResetEmail(eEmailReset.Text);
+
+  if ResetSenha.StatusCode = 200 then
+   begin
+     Add2Log('Firebase auth -> E-mail de reset de senha enviado com sucesso!');
+     ShowMessage('Firebase auth -> E-mail de reset de senha enviado com sucesso!');
+   end
+  else
+   Begin
+     Add2Log('Firebase auth -> Email Reset falhou. Erro: ' + ErrorMessage(ResetSenha.Error));
+   End;
+end;
+
+//Efetuar troca de senha
+procedure TFormMain.bTrocaSenhaClick(Sender: TObject);
+var
+  TrocaSenha : ieFirebaseResponseAuth;
+begin
+  TrocaSenha := TeFirebase.New
+                             .Auth(API_Key)
+                               .ChangePassword(fToken, eNovaSenhaTroca.Text);
+
+  if TrocaSenha.StatusCode = 200 then
+   begin
+     Add2Log('Firebase auth -> Nova Senha salva com sucesso! Realize o login novamente.');
+     ShowMessage('Firebase auth -> Nova Senha salva com sucesso! Realize o login novamente.');
+   end
+  else
+   Begin
+     Add2Log('Firebase auth -> Ocorreu um erro ao trocar senha. Erro: ' + ErrorMessage(TrocaSenha.Error));
+   End;
+end;
+
+//Modificar informações do Profile (nome e URL da foto)
+procedure TFormMain.Button3Click(Sender: TObject);
+var
+  Profile: ieFirebaseResponseAuth;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Não é possível acessar o profile sem estar logado. Faça o Login ou crie uma conta.');
+     Exit;
+   end;
+
+   try
+     Profile := TeFirebase.New
+                            .Auth(API_Key)
+                              .ChangeProfile(fToken, eDisplayName.Text, eURLphoto.Text);
+  except
+    Add2Log('Firebase Auth -> Change Profile falhou!');
+  end;
+
+  if Profile.StatusCode = 200 then
+   begin
+     Add2Log('Firebase Auth -> Change Profile efetuado com sucesso!');
+
+     LuID.Text         := Profile.uID;
+     LEmail.Text       := Profile.Email;
+     eDisplayName.Text := Profile.DisplayName;
+     eURLphoto.Text    := Profile.photoUrl;
+     LCreatedAt.Text   := Profile.createdAt;
+     LLastAccess.Text  := Profile.lastLoginAt;
+   end
+  else
+   begin
+     Add2Log('Firebase Auth -> Change Profile falhou: ' + ErrorMessage(Profile.Error) + #13 + 'Status Code = ' + Profile.StatusCode.ToString);
+     ShowMessage('Firebase Auth -> Change Profile falhou: ' + ErrorMessage(Profile.Error) + #13 + 'Status Code = ' + Profile.StatusCode.ToString);
+   end;
+end;
+
+//Confirmar e-mail (verificação de e-mail)
+procedure TFormMain.bVerificarEmailClick(Sender: TObject);
+var
+  VerifyEmail : ieFirebaseResponseAuth;
+begin
+  VerifyEmail := TeFirebase.New
+                             .Auth(API_Key)
+                               .ConfirmEmailVerification(eCodeEmailVerify.Text);
+
+  if VerifyEmail.StatusCode = 200 then
+   begin
+     Add2Log('Firebase auth -> E-mail verificado com sucesso!');
+     ShowMessage('Firebase auth -> E-mail verificado com sucesso!');
+   end
+  else
+   Begin
+     Add2Log('Firebase auth -> Verificação de e-mail falhou. Erro: ' + ErrorMessage(VerifyEmail.Error));
+   End;
+end;
+
+//Verificar código oob para resetar senha
+procedure TFormMain.bVerificarOOBCodeResetarClick(Sender: TObject);
+var
+  ResetSenha : ieFirebaseResponseAuth;
+begin
+  ResetSenha := TeFirebase.New
+                             .Auth(API_Key)
+                               .VerifyPasswordResetCode(eOOBCodeReset.Text);
+
+  if ResetSenha.StatusCode = 200 then
+   begin
+     Add2Log('Firebase auth -> Código verificado com sucesso!');
+     ShowMessage('Firebase auth -> Código verificado com sucesso!');
+   end
+  else
+   Begin
+     Add2Log('Firebase auth -> Código inválido. Erro: ' + ErrorMessage(ResetSenha.Error));
+   End;
+end;
+
+//-----------------------------------------------------------------------------------------------------------
+
+//Configutrações de inicialização do sistema
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
   //Setando o título da aplicação concateando com a versão do eFirebase obtida através do comando teFirebase.Version

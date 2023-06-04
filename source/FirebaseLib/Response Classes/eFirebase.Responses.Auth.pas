@@ -47,6 +47,8 @@ implementation
 
 { TeFirebaseResponseAuth }
 
+Uses System.DateUtils;
+
 function GetError(const Err_MSG: string): enumAuthErrors;
 //Função para verificar o tipo de erro e retornar o tipo corretamente
 begin
@@ -188,7 +190,10 @@ end;
 
 function TeFirebaseResponseAuth.createdAt: string;
 begin
-  Result := fcreatedAt;
+  if fcreatedAt <> '' then
+   Result := DateTimeToStr(UnixToDateTime(Copy(fcreatedAt, 1, length(fcreatedAt) - 3).ToInt64, False))
+  else
+   Result := '';
 end;
 
 destructor TeFirebaseResponseAuth.Destroy;
@@ -224,7 +229,10 @@ end;
 
 function TeFirebaseResponseAuth.lastLoginAt: string;
 begin
-  Result := flastLoginAt;
+  if flastLoginAt <> '' then
+   Result := DateTimeToStr(UnixToDateTime(Copy(flastLoginAt, 1, length(flastLoginAt) - 3).ToInt64, False))
+  else
+   Result := '';
 end;
 
 class function TeFirebaseResponseAuth.New(const Response_content: string; StatusCode: integer): ieFirebaseResponseAuth;
