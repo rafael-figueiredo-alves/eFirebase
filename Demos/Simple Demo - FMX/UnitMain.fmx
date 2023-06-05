@@ -18,7 +18,7 @@ object FormMain: TFormMain
     Size.Width = 754.000000000000000000
     Size.Height = 493.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 1
     TabPosition = PlatformDefault
     Sizes = (
@@ -32,7 +32,7 @@ object FormMain: TFormMain
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 93.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -1201,12 +1201,189 @@ object FormMain: TFormMain
       Text = 'Firebase Storage'
       ExplicitSize.cx = 108.000000000000000000
       ExplicitSize.cy = 26.000000000000000000
+      object GroupBox5: TGroupBox
+        Align = Top
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 734.000000000000000000
+        Size.Height = 184.000000000000000000
+        Size.PlatformDefault = False
+        Text = ' Enviar arquivo para o Storage '
+        TabOrder = 2
+        object Layout21: TLayout
+          Align = Top
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 25.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 25.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 40
+          object Label16: TLabel
+            Align = Left
+            Size.Width = 98.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Center
+            Text = 'Pasta'
+            TabOrder = 0
+          end
+          object ePastaStorage: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 1
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 596.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object Layout23: TLayout
+          Align = Top
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 75.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 39
+          object Label17: TLabel
+            Align = Left
+            Size.Width = 98.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Center
+            Text = 'Arquivo'
+            TabOrder = 0
+          end
+          object eArquivoStorage: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 1
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 596.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            object BSearchFile: TSearchEditButton
+              CanFocus = False
+              Cursor = crArrow
+              Size.Width = 28.000000000000000000
+              Size.Height = 26.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              OnClick = BSearchFileClick
+            end
+          end
+        end
+        object Layout24: TLayout
+          Align = Top
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 125.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 38
+          object bEnviarArquivo: TButton
+            Align = Right
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.X = 578.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 126.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = '&Enviar arquivo'
+            OnClick = bEnviarArquivoClick
+          end
+        end
+      end
+      object GroupBox6: TGroupBox
+        Align = Client
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 734.000000000000000000
+        Size.Height = 253.000000000000000000
+        Size.PlatformDefault = False
+        Text = ' Enviar arquivo para o Storage '
+        TabOrder = 1
+        object Layout25: TLayout
+          Align = Client
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 25.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 218.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 38
+          object ListBox1: TListBox
+            Align = Left
+            Size.Width = 200.000000000000000000
+            Size.Height = 218.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            DisableFocusEffect = True
+            DefaultItemStyles.ItemStyle = ''
+            DefaultItemStyles.GroupHeaderStyle = ''
+            DefaultItemStyles.GroupFooterStyle = ''
+            Viewport.Width = 196.000000000000000000
+            Viewport.Height = 174.000000000000000000
+            object ListBoxHeader1: TListBoxHeader
+              Size.Width = 196.000000000000000000
+              Size.Height = 40.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              object bNavegar: TButton
+                Align = Right
+                Hint = 'Clique e visualize o arquivo'
+                Position.X = 136.000000000000000000
+                Size.Width = 60.000000000000000000
+                Size.Height = 40.000000000000000000
+                Size.PlatformDefault = False
+                StyleLookup = 'playtoolbutton'
+                TabOrder = 0
+                Text = 'bNavegar'
+                ParentShowHint = False
+                ShowHint = True
+                OnClick = bNavegarClick
+              end
+            end
+          end
+          object WebBrowser1: TWebBrowser
+            Align = Client
+            Size.Width = 514.000000000000000000
+            Size.Height = 218.000000000000000000
+            Size.PlatformDefault = False
+            WindowsEngine = IEOnly
+          end
+        end
+      end
     end
     object TabFirebaseRealtime: TTabItem
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 132.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -1215,6 +1392,242 @@ object FormMain: TFormMain
       Text = 'Firebase Realtime DB'
       ExplicitSize.cx = 132.000000000000000000
       ExplicitSize.cy = 26.000000000000000000
+      object GroupBox7: TGroupBox
+        Align = Top
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Position.X = 10.000000000000000000
+        Position.Y = 10.000000000000000000
+        Size.Width = 734.000000000000000000
+        Size.Height = 231.000000000000000000
+        Size.PlatformDefault = False
+        Text = ' Enviar arquivo para o Storage '
+        TabOrder = 3
+        object Layout26: TLayout
+          Align = Top
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 25.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 25.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 41
+          object Label18: TLabel
+            Align = Left
+            Size.Width = 98.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Center
+            Text = 'Endpoint'
+            TabOrder = 0
+          end
+          object eEndPoint: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 1
+            Text = 'etasks/v1'
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 596.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object Layout27: TLayout
+          Align = Top
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 75.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 40
+          object Label19: TLabel
+            Align = Left
+            Size.Width = 98.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Center
+            Text = 'Cole'#231#227'o'
+            TabOrder = 0
+          end
+          object eCollection: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Client
+            TabOrder = 1
+            Text = 'task-test'
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 596.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+          end
+        end
+        object Layout28: TLayout
+          Align = Top
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 175.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 38
+          object Button2: TButton
+            Align = Right
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.X = 305.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 96.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 3
+            Text = 'Read Collection'
+            OnClick = Button2Click
+          end
+          object Button4: TButton
+            Align = Right
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.X = 608.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 96.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Text = '&Delete Record'
+          end
+          object Button5: TButton
+            Align = Right
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.X = 507.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 96.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            Text = '&Update Record'
+          end
+          object Button6: TButton
+            Align = Right
+            Margins.Left = 5.000000000000000000
+            Margins.Top = 5.000000000000000000
+            Margins.Bottom = 5.000000000000000000
+            Position.X = 406.000000000000000000
+            Position.Y = 5.000000000000000000
+            Size.Width = 96.000000000000000000
+            Size.Height = 40.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Text = '&Add Record'
+            OnClick = Button6Click
+          end
+        end
+        object Layout29: TLayout
+          Align = Top
+          Margins.Left = 10.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Position.Y = 125.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 39
+          object Label20: TLabel
+            Align = Left
+            Size.Width = 57.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Center
+            Text = 'Task'
+            TabOrder = 1
+          end
+          object eTask: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Left
+            TabOrder = 3
+            Position.X = 67.000000000000000000
+            Position.Y = 10.000000000000000000
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 206.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object Label21: TLabel
+            Align = Left
+            Position.X = 283.000000000000000000
+            Size.Width = 70.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Center
+            Text = 'Category'
+            TabOrder = 0
+          end
+          object eCategory: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Left
+            TabOrder = 2
+            Position.X = 363.000000000000000000
+            Position.Y = 10.000000000000000000
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 206.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object chDone: TCheckBox
+            Align = Client
+            Size.Width = 135.000000000000000000
+            Size.Height = 50.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 4
+            Text = 'Done'
+          end
+        end
+      end
+      object GroupBox8: TGroupBox
+        Align = Client
+        Margins.Left = 10.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 10.000000000000000000
+        Margins.Bottom = 5.000000000000000000
+        Size.Width = 734.000000000000000000
+        Size.Height = 206.000000000000000000
+        Size.PlatformDefault = False
+        Text = ' Enviar arquivo para o Storage '
+        TabOrder = 2
+        object Layout30: TLayout
+          Align = Client
+          Margins.Left = 10.000000000000000000
+          Margins.Top = 25.000000000000000000
+          Margins.Right = 10.000000000000000000
+          Margins.Bottom = 10.000000000000000000
+          Size.Width = 714.000000000000000000
+          Size.Height = 171.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 38
+        end
+      end
     end
   end
   object grLog: TGroupBox
@@ -1247,5 +1660,11 @@ object FormMain: TFormMain
       Viewport.Width = 730.000000000000000000
       Viewport.Height = 92.000000000000000000
     end
+  end
+  object SelectFile: TOpenDialog
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Title = 'Selecione arquivo a enviar'
+    Left = 665
+    Top = 550
   end
 end

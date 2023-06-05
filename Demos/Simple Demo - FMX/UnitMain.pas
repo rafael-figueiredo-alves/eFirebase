@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.TabControl, FMX.Memo.Types,
-  FMX.ScrollBox, FMX.Memo, FMX.Layouts, FMX.Edit;
+  FMX.ScrollBox, FMX.Memo, FMX.Layouts, FMX.Edit, FMX.WebBrowser, FMX.ListBox;
 
 type
   TFormMain = class(TForm)
@@ -114,6 +114,43 @@ type
     bEnviarcodigo: TButton;
     lEmailVerificado: TLabel;
     bVerificarEmail: TButton;
+    GroupBox5: TGroupBox;
+    Layout21: TLayout;
+    Label16: TLabel;
+    ePastaStorage: TEdit;
+    Layout23: TLayout;
+    Label17: TLabel;
+    eArquivoStorage: TEdit;
+    Layout24: TLayout;
+    bEnviarArquivo: TButton;
+    BSearchFile: TSearchEditButton;
+    GroupBox6: TGroupBox;
+    Layout25: TLayout;
+    SelectFile: TOpenDialog;
+    ListBox1: TListBox;
+    WebBrowser1: TWebBrowser;
+    ListBoxHeader1: TListBoxHeader;
+    bNavegar: TButton;
+    GroupBox7: TGroupBox;
+    Layout26: TLayout;
+    Label18: TLabel;
+    eEndPoint: TEdit;
+    Layout27: TLayout;
+    Label19: TLabel;
+    eCollection: TEdit;
+    Layout28: TLayout;
+    Button2: TButton;
+    Button4: TButton;
+    Button5: TButton;
+    Layout29: TLayout;
+    Label20: TLabel;
+    eTask: TEdit;
+    Label21: TLabel;
+    eCategory: TEdit;
+    chDone: TCheckBox;
+    Button6: TButton;
+    GroupBox8: TGroupBox;
+    Layout30: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure bEntrarClick(Sender: TObject);
     procedure bRefreshTokenClick(Sender: TObject);
@@ -127,6 +164,11 @@ type
     procedure bTrocaSenhaClick(Sender: TObject);
     procedure bEnviarcodigoClick(Sender: TObject);
     procedure bVerificarEmailClick(Sender: TObject);
+    procedure BSearchFileClick(Sender: TObject);
+    procedure bEnviarArquivoClick(Sender: TObject);
+    procedure bNavegarClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
   private
     { Private declarations }
     API_Key       : string;
@@ -150,9 +192,9 @@ uses
   eFirebase.Interfaces,
   eFirebase.Types,
   dotenv4delphi,
-  System.DateUtils;
+  System.DateUtils, System.JSON;
 
-//Funções Auxiliares
+{$Region 'Funções Auxiliares'}
 function ErrorMessage(const msg: enumAuthErrors): string;
 begin
   case msg of
@@ -182,12 +224,14 @@ procedure TFormMain.Add2Log(const log: string);
 begin
   MemoLog.Lines.Add(log);
 end;
+{$EndRegion}
 
 //-----------------------------------------------------------------------------------------------------------
 
 //Operações relativas ao Firebase Auth
 //=================================================
 
+{$Region 'Firebase Auth Functionalities'}
 //Logar na conta
 procedure TFormMain.bEntrarClick(Sender: TObject);
 var
@@ -287,6 +331,8 @@ begin
 end;
 
 //Envio de código de verificação de e-mail
+
+
 procedure TFormMain.bEnviarcodigoClick(Sender: TObject);
 var
   VerifyEmail : ieFirebaseResponseAuth;
@@ -533,7 +579,94 @@ begin
    End;
 end;
 
+{$EndRegion}
 //-----------------------------------------------------------------------------------------------------------
+
+{$Region 'Firebase Storage functionalities'}
+procedure TFormMain.bNavegarClick(Sender: TObject);
+begin
+  WebBrowser1.Navigate(ListBox1.Selected.Text);
+end;
+
+procedure TFormMain.bEnviarArquivoClick(Sender: TObject);
+var
+  Storage : ieFirebaseStorageResponse;
+begin
+  if fToken = EmptyStr then
+   ShowMessage('Não é possível enviar arquivo sem estar logado. Realize o login e tente novamente.');
+
+  if eArquivoStorage.Text = EmptyStr then
+   Exit;
+
+  Storage := TeFirebase.New
+                         .Storage(Project_ID)
+                           .Folder(ePastaStorage.Text)
+                           .FileName(eArquivoStorage.Text)
+                             .Send(fToken);
+
+  if Storage.StatusCode = 200 then
+   begin
+     Add2Log('Firebase Storage -> Arquivo enviado com sucesso!');
+     ShowMessage('Firebase Storage -> Arquivo enviado com sucesso!');
+     ListBox1.Items.Add(Storage.Link);
+   end
+  else
+   begin
+     Add2Log('Firebase Storage -> Falha ao tentar enviar arquivo.');
+   end;
+end;
+
+procedure TFormMain.BSearchFileClick(Sender: TObject);
+begin
+  if SelectFile.Execute then
+   begin
+     eArquivoStorage.Text := SelectFile.FileName;
+   end;
+end;
+{$EndRegion}
+
+procedure TFormMain.Button6Click(Sender: TObject);
+var
+ Registro : TJsonObject;
+ Bd       : ieFirebaseRealtimeResponse;
+begin
+  Registro := TJSONObject.Create;
+  try
+    Registro.AddPair('task', eTask.Text);
+    Registro.AddPair('category', eCategory.Text);
+
+    Bd := TeFirebase.New
+                      .RealTimeDB(Project_ID)
+                        //.AccessToken(fToken)
+                        .Endpoint(eEndPoint.Text)
+                        .Collection(eCollection.Text)
+                          .CreateRegister(Registro.ToString);
+  finally
+    Registro.DisposeOf;
+  end;
+
+  ShowMessage(Bd.StatusCode.ToString);
+end;
+
+procedure TFormMain.Button2Click(Sender: TObject);
+var
+ DataTable : ieFirebaseRealtimeResponse;
+ JArray    : TJSONArray;
+begin
+  DataTable := TeFirebase.New
+                           .RealTimeDB(Project_ID)
+                             .AccessToken(fToken)
+                             .Endpoint(eEndPoint.Text)
+                             .Collection(eCollection.Text)
+                             .ReadWithoutFilters;
+
+  if DataTable.StatusCode = 200 then
+   begin
+     JArray := DataTable.AsJSONArray;
+     ShowMessage(JArray.ToString);
+     JArray.DisposeOf;
+   end;
+end;
 
 //Configutrações de inicialização do sistema
 procedure TFormMain.FormCreate(Sender: TObject);

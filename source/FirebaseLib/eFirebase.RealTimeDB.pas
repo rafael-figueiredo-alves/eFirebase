@@ -247,6 +247,7 @@ begin
   Response := TRest.New
                      .BaseUrl(cUrl)
                      .AddHeaders('X-Firebase-ETag', 'true')
+                     .body(body)
                      .Post;
 
   ResponseJSON := Response.Content;
