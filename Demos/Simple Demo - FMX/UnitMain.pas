@@ -6,7 +6,13 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.StdCtrls, FMX.TabControl, FMX.Memo.Types,
-  FMX.ScrollBox, FMX.Memo, FMX.Layouts, FMX.Edit, FMX.WebBrowser, FMX.ListBox;
+  FMX.ScrollBox, FMX.Memo, FMX.Layouts, FMX.Edit, FMX.WebBrowser, FMX.ListBox,
+  System.Rtti, FMX.Grid.Style, FMX.Grid, System.JSON, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.Bind.EngExt, Fmx.Bind.DBEngExt,
+  Fmx.Bind.Grid, System.Bindings.Outputs, Fmx.Bind.Editors,
+  Data.Bind.Components, Data.Bind.Grid, Data.Bind.DBScope, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFormMain = class(TForm)
@@ -151,6 +157,11 @@ type
     Button6: TButton;
     GroupBox8: TGroupBox;
     Layout30: TLayout;
+    DataGrid: TStringGrid;
+    CheckColumn1: TCheckColumn;
+    StringColumn1: TStringColumn;
+    StringColumn2: TStringColumn;
+    StringColumn3: TStringColumn;
     procedure FormCreate(Sender: TObject);
     procedure bEntrarClick(Sender: TObject);
     procedure bRefreshTokenClick(Sender: TObject);
@@ -169,13 +180,19 @@ type
     procedure bNavegarClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure DataGridSelectCell(Sender: TObject; const ACol, ARow: Integer;
+      var CanSelect: Boolean);
+    procedure DataGridCellClick(const Column: TColumn; const Row: Integer);
+    procedure Button5Click(Sender: TObject);
   private
     { Private declarations }
     API_Key       : string;
     Project_ID    : string;
     fToken        : string;
     fRefreshToken : string;
+    fID           : string;
     procedure Add2Log(const log: string);
+    procedure PreencheGrid(const Dados: TJSONArray);
   public
     { Public declarations }
   end;
@@ -192,7 +209,7 @@ uses
   eFirebase.Interfaces,
   eFirebase.Types,
   dotenv4delphi,
-  System.DateUtils, System.JSON;
+  System.DateUtils;
 
 {$Region 'Funções Auxiliares'}
 function ErrorMessage(const msg: enumAuthErrors): string;
@@ -223,6 +240,35 @@ end;
 procedure TFormMain.Add2Log(const log: string);
 begin
   MemoLog.Lines.Add(log);
+end;
+
+function RemoveQuotes(const value: string): string;
+begin
+  Result := StringReplace(value, '"', '', [rfReplaceAll]);
+end;
+
+procedure TFormMain.PreencheGrid(const Dados: TJSONArray);
+var
+ Registro : TJSONObject;
+ i        : Integer;
+begin
+  DataGrid.RowCount := 0;
+
+  if Dados.Count > 0 then
+   begin
+
+    DataGrid.RowCount := Dados.Count;
+
+    for i := 0 to Dados.Count-1 do
+     begin
+       Registro := Dados.Items[i] as TJSONObject;
+       DataGrid.Cells[0, i] := RemoveQuotes(Registro.GetValue('done').ToString);
+       DataGrid.Cells[1, i] := RemoveQuotes(Registro.GetValue('id').ToString);
+       DataGrid.Cells[2, i] := RemoveQuotes(Registro.GetValue('task').ToString);
+       DataGrid.Cells[3, i] := RemoveQuotes(Registro.GetValue('category').ToString);
+     end;
+
+   end;
 end;
 {$EndRegion}
 
@@ -539,6 +585,29 @@ begin
    end;
 end;
 
+procedure TFormMain.Button5Click(Sender: TObject);
+var
+  Body    : TJSONObject;
+  fUpdate : ieFirebaseRealtimeResponse;
+begin
+  if fID = EmptyStr then
+   exit;
+
+  Body := TJSONObject.Create;
+  Body.AddPair('id', fID);
+  Body.AddPair('task', eTask.Text);
+  Body.AddPair('category', eCategory.Text);
+  Body.AddPair('done', chDone.IsChecked);
+
+  fUpdate := TeFirebase.New
+                         .RealTimeDB(Project_ID)
+                          .Endpoint(eEndPoint.Text)
+                          .Collection(eCollection.Text)
+                            .UpdateRegister(Body.ToString, fID);
+
+  Body.DisposeOf;
+end;
+
 //Confirmar e-mail (verificação de e-mail)
 procedure TFormMain.bVerificarEmailClick(Sender: TObject);
 var
@@ -577,6 +646,24 @@ begin
    Begin
      Add2Log('Firebase auth -> Código inválido. Erro: ' + ErrorMessage(ResetSenha.Error));
    End;
+end;
+
+procedure TFormMain.DataGridCellClick(const Column: TColumn;
+  const Row: Integer);
+begin
+  if DataGrid.RowCount = 0 then
+   Exit;
+
+  eTask.Text := DataGrid.Cells[2, Row];
+  eCategory.Text := DataGrid.Cells[3, Row];
+  fID := DataGrid.Cells[1, Row];
+  chDone.IsChecked := DataGrid.Cells[0, Row].ToBoolean;
+end;
+
+procedure TFormMain.DataGridSelectCell(Sender: TObject; const ACol,
+  ARow: Integer; var CanSelect: Boolean);
+begin
+
 end;
 
 {$EndRegion}
@@ -634,6 +721,7 @@ begin
   try
     Registro.AddPair('task', eTask.Text);
     Registro.AddPair('category', eCategory.Text);
+    Registro.AddPair('done', false);
 
     Bd := TeFirebase.New
                       .RealTimeDB(Project_ID)
@@ -663,6 +751,7 @@ begin
   if DataTable.StatusCode = 200 then
    begin
      JArray := DataTable.AsJSONArray;
+     PreencheGrid(JArray);
      ShowMessage(JArray.ToString);
      JArray.DisposeOf;
    end;
@@ -684,6 +773,8 @@ begin
   //lendo variáveis de ambiente necessárias contidas no arquivo .env usando a lib DotEnv4Delphi
   API_Key    := DotEnv.Env('APIKey');
   Project_ID := DotEnv.Env('ProjectId');
+
+  fID := EmptyStr;
 end;
 
 end.

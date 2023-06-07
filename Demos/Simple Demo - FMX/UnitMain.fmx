@@ -1522,6 +1522,7 @@ object FormMain: TFormMain
             Size.PlatformDefault = False
             TabOrder = 1
             Text = '&Update Record'
+            OnClick = Button5Click
           end
           object Button6: TButton
             Align = Right
@@ -1626,6 +1627,34 @@ object FormMain: TFormMain
           Size.Height = 171.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 38
+          object DataGrid: TStringGrid
+            Align = Client
+            CanFocus = True
+            ClipChildren = True
+            Size.Width = 714.000000000000000000
+            Size.Height = 171.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            RowCount = 0
+            Options = [ColumnResize, ColumnMove, ColLines, RowLines, RowSelect, Tabs, Header, HeaderClick, AutoDisplacement]
+            OnSelectCell = DataGridSelectCell
+            OnCellClick = DataGridCellClick
+            Viewport.Width = 710.000000000000000000
+            Viewport.Height = 146.000000000000000000
+            object CheckColumn1: TCheckColumn
+            end
+            object StringColumn1: TStringColumn
+              Header = 'ID'
+            end
+            object StringColumn2: TStringColumn
+              Header = 'Task'
+              Size.Width = 370.000000000000000000
+            end
+            object StringColumn3: TStringColumn
+              Header = 'Category'
+              Size.Width = 168.000000000000000000
+            end
+          end
         end
       end
     end
