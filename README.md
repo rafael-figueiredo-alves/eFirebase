@@ -2,22 +2,54 @@
 <img src="https://github.com/rafael-figueiredo-alves/eFirebase/blob/main/Imagens/Logo_eFirebase.png" width=75% height=75%>  
 </p>
 
-Framework para manipulação do Firebase no Delphi (em fase inicial de desenvolvimento)
-Versão atual: 0.0.10-a
+<p>
+  <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=rad%20studio&message=xe2%2B&color=silver&style=for-the-badge&logo=delphi&logoColor=white" alt="Delphi XE2+ support" /></a>
+  <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=platforms&message=cross-platform&color=silver&style=for-the-badge&logo=delphi&logoColor=white" alt="Cross-platform support" /></a>
+  <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=applications&message=console%2C%20fmx%2C%20vcl&color=silver&style=for-the-badge&logo=delphi&logoColor=white" alt="Console, FMX, VCL support" /></a>
+</p>
 
-**Objetivos**
-- ser simples;
-- muito útil;
-- possibilitar funções que outras frameworks ainda não disponibilizam;
-- seguir padrões de projeto.
+#
 
-# Conteúdo da biblioteca
-- [X] classes para conexão Rest dentro do Delphi (usando os componentes TRestRequest, TRestClient)
-- [X] classes para conexão Rest dentro do Lazarus/Delphi versões antigas (com uso da lib Indy)
-- [X] classes para uso dos serviços de autenticação do Firebase
-- [X] classes para uso do serviço de Storage do Firebase (possibilita salvar arquivo no armazenamento do Firebase)
-- [ ] classes para uso dos serviços de banco de dados Firebase Realtime e Firestore (**Em Andamento**)
-- [ ] classes para outros serviços do Firebase
+## Sobre
 
-# Previsão de lançamento de versão Release Candidate
-01/12/2023
+eFirebase é uma biblioteca simples construída em Delphi para servir como um SDK para o consumo do [Firebase](https://console.firebase.google.com/) tanto pelo Delphi como pelo Lazarus. Seu maior objetivo é ser simples, prático e oferecer o que outras bibliotecas já oferecem e um pouco a mais de forma muito simplificada.
+
+## Recursos
+
+- Funções relacionadas ao controle de contas de usuário usando o Firebase Auth:
+   - Poderá logar;
+   - Poderá criar conta;
+   - Poderá enviar e-mail de recuperação de senha;
+   - Poderá acessar informações da conta;
+   - Poderá apagar a conta;
+   - Poderá verificar código de verificação de e-mail;
+   - Poderá confirmar resetamento de senha com código enviado;
+   - Poderá confirmar código de verificação de e-mail;
+   - Poderá trocar senha;
+   - Poderá alterar informações de conta.
+
+- Funções relacionadas ao controle de arquivos usando o Firebase Storage:
+    - Poderá enviar arquivos;
+    - Poderá obter links para acessar documentos/arquivos enviados.
+
+- Funções relacionadas ao banco de dados NoSQL do Firebase (Realtime Database):
+    - Criação de coleções;
+    - Leitura de dados de uma coleção;
+    - Filtragem dos dados;
+    - CRUD completo.
+
+- A biblioteca oferece suporte as funcionalidades usando chamadas a API Rest do Firebase usando as units nativas do Delphi e/ou Lazarus (NetHTTP e Indy), usando como base o projeto [RestRequest4Delphi](https://github.com/viniciussanchez/RESTRequest4Delphi)
+
+- Mais recursos serão implementados no futuro (e com ajuda de quem quiser colaborar com este projeto)
+
+## Documentação e Demos
+
+Estou disponibilizando um Demo que demonstra a maioria (na verdade praticamente todos) dos recursos implementados. Em breve vou atualizar este Readme com mais informações de como usar esta biblioteca. 
+
+## Instalação
+
+Basta baixar os arquivos e adicionar ao seu projeto ou se desejar utilize o [Boss](https://github.com/HashLoad/boss) para adicionar ao seu projeto.
+
+# Versão
+
+**[eFirebase versão 1.0.0](/../../releases/latest)**
