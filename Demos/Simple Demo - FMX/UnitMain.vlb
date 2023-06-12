@@ -120,9 +120,6 @@ Coordinates=1231,1,137,36
 [eCodeEmailVerify]
 Coordinates=27,347,118,58
 
-[Button4]
-Coordinates=839,635,59,58
-
 [Layout21]
 Coordinates=681,635,67,36
 
@@ -336,9 +333,6 @@ Coordinates=749,232,53,58
 [Label16]
 Coordinates=597,155,60,58
 
-[Button2]
-Coordinates=444,539,59,58
-
 [Layout13]
 Coordinates=1020,573,67,36
 
@@ -414,14 +408,8 @@ Coordinates=1231,496,67,36
 [Layout15]
 Coordinates=1231,551,67,36
 
-[Button6]
-Coordinates=908,232,59,58
-
 [ClearEditButton3]
 Coordinates=1231,606,112,36
-
-[Button5]
-Coordinates=15,77,59,58
 
 [Layout6]
 Coordinates=1231,661,60,36
@@ -431,4 +419,16 @@ Coordinates=513,539,87,58
 
 [GroupBox3]
 Coordinates=505,318,79,58
+
+[bReadCollection]
+Coordinates=444,539,59,58
+
+[bAddRecord]
+Coordinates=908,232,59,58
+
+[bUpdateRecord]
+Coordinates=15,77,59,58
+
+[bDeleteRecord]
+Coordinates=839,635,59,58
 

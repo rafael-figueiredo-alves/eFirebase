@@ -4,6 +4,7 @@ object FormMain: TFormMain
   Caption = 'Form1'
   ClientHeight = 644
   ClientWidth = 764
+  Position = DesktopCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -1482,7 +1483,7 @@ object FormMain: TFormMain
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 38
-          object Button2: TButton
+          object bReadCollection: TButton
             Align = Right
             Margins.Left = 5.000000000000000000
             Margins.Top = 5.000000000000000000
@@ -1494,9 +1495,9 @@ object FormMain: TFormMain
             Size.PlatformDefault = False
             TabOrder = 3
             Text = 'Read Collection'
-            OnClick = Button2Click
+            OnClick = bReadCollectionClick
           end
-          object Button4: TButton
+          object bDeleteRecord: TButton
             Align = Right
             Margins.Left = 5.000000000000000000
             Margins.Top = 5.000000000000000000
@@ -1509,8 +1510,9 @@ object FormMain: TFormMain
             Size.PlatformDefault = False
             TabOrder = 0
             Text = '&Delete Record'
+            OnClick = bDeleteRecordClick
           end
-          object Button5: TButton
+          object bUpdateRecord: TButton
             Align = Right
             Margins.Left = 5.000000000000000000
             Margins.Top = 5.000000000000000000
@@ -1522,9 +1524,9 @@ object FormMain: TFormMain
             Size.PlatformDefault = False
             TabOrder = 1
             Text = '&Update Record'
-            OnClick = Button5Click
+            OnClick = bUpdateRecordClick
           end
-          object Button6: TButton
+          object bAddRecord: TButton
             Align = Right
             Margins.Left = 5.000000000000000000
             Margins.Top = 5.000000000000000000
@@ -1536,7 +1538,30 @@ object FormMain: TFormMain
             Size.PlatformDefault = False
             TabOrder = 2
             Text = '&Add Record'
-            OnClick = Button6Click
+            OnClick = bAddRecordClick
+          end
+          object ePesquisa: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            Align = Left
+            TabOrder = 4
+            Position.X = 10.000000000000000000
+            Position.Y = 10.000000000000000000
+            Margins.Left = 10.000000000000000000
+            Margins.Top = 10.000000000000000000
+            Margins.Right = 10.000000000000000000
+            Margins.Bottom = 10.000000000000000000
+            Size.Width = 191.000000000000000000
+            Size.Height = 30.000000000000000000
+            Size.PlatformDefault = False
+            object bReadWithFilter: TSearchEditButton
+              CanFocus = False
+              Cursor = crArrow
+              Size.Width = 28.000000000000000000
+              Size.Height = 26.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 0
+              OnClick = bReadWithFilterClick
+            end
           end
         end
         object Layout29: TLayout

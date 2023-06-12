@@ -145,16 +145,16 @@ type
     Label19: TLabel;
     eCollection: TEdit;
     Layout28: TLayout;
-    Button2: TButton;
-    Button4: TButton;
-    Button5: TButton;
+    bReadCollection: TButton;
+    bDeleteRecord: TButton;
+    bUpdateRecord: TButton;
     Layout29: TLayout;
     Label20: TLabel;
     eTask: TEdit;
     Label21: TLabel;
     eCategory: TEdit;
     chDone: TCheckBox;
-    Button6: TButton;
+    bAddRecord: TButton;
     GroupBox8: TGroupBox;
     Layout30: TLayout;
     DataGrid: TStringGrid;
@@ -162,6 +162,8 @@ type
     StringColumn1: TStringColumn;
     StringColumn2: TStringColumn;
     StringColumn3: TStringColumn;
+    ePesquisa: TEdit;
+    bReadWithFilter: TSearchEditButton;
     procedure FormCreate(Sender: TObject);
     procedure bEntrarClick(Sender: TObject);
     procedure bRefreshTokenClick(Sender: TObject);
@@ -178,12 +180,14 @@ type
     procedure BSearchFileClick(Sender: TObject);
     procedure bEnviarArquivoClick(Sender: TObject);
     procedure bNavegarClick(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button6Click(Sender: TObject);
+    procedure bReadCollectionClick(Sender: TObject);
+    procedure bAddRecordClick(Sender: TObject);
     procedure DataGridSelectCell(Sender: TObject; const ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure DataGridCellClick(const Column: TColumn; const Row: Integer);
-    procedure Button5Click(Sender: TObject);
+    procedure bUpdateRecordClick(Sender: TObject);
+    procedure bDeleteRecordClick(Sender: TObject);
+    procedure bReadWithFilterClick(Sender: TObject);
   private
     { Private declarations }
     API_Key       : string;
@@ -339,6 +343,36 @@ begin
    Begin
      Add2Log('Firebase auth -> Ocorreu um erro ao resetar senha. Erro: ' + ErrorMessage(ResetSenha.Error));
    End;
+end;
+
+procedure TFormMain.bDeleteRecordClick(Sender: TObject);
+var
+  fDelete : ieFirebaseRealtimeResponse;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
+   if MessageDlg('Deseja realmente apagar o registro selecionado?', TMsgDlgType.mtConfirmation, mbYesNo, 0) = mrNo then
+    Exit;
+
+  fDelete := TeFirebase.New
+                         .RealTimeDB(Project_ID)
+                          .AccessToken(fToken)
+                          .Endpoint(eEndPoint.Text)
+                          .Collection(eCollection.Text)
+                            .DeleteRegister(fID);
+
+  if fDelete.StatusCode <> 200 then
+   begin
+     ShowMessage('Ocorreu um erro ao tentar excluir o registro!');
+     Exit;
+   end;
+
+  ShowMessage('Registro apagado com sucesso!');
+  bReadCollectionClick(nil);
 end;
 
 //Apagar Conta
@@ -585,11 +619,17 @@ begin
    end;
 end;
 
-procedure TFormMain.Button5Click(Sender: TObject);
+procedure TFormMain.bUpdateRecordClick(Sender: TObject);
 var
   Body    : TJSONObject;
   fUpdate : ieFirebaseRealtimeResponse;
 begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
   if fID = EmptyStr then
    exit;
 
@@ -601,11 +641,14 @@ begin
 
   fUpdate := TeFirebase.New
                          .RealTimeDB(Project_ID)
+                          .AccessToken(fToken)
                           .Endpoint(eEndPoint.Text)
                           .Collection(eCollection.Text)
                             .UpdateRegister(Body.ToString, fID);
 
   Body.DisposeOf;
+
+  bReadCollectionClick(nil);
 end;
 
 //Confirmar e-mail (verificação de e-mail)
@@ -712,11 +755,17 @@ begin
 end;
 {$EndRegion}
 
-procedure TFormMain.Button6Click(Sender: TObject);
+procedure TFormMain.bAddRecordClick(Sender: TObject);
 var
  Registro : TJsonObject;
  Bd       : ieFirebaseRealtimeResponse;
 begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
   Registro := TJSONObject.Create;
   try
     Registro.AddPair('task', eTask.Text);
@@ -725,22 +774,29 @@ begin
 
     Bd := TeFirebase.New
                       .RealTimeDB(Project_ID)
-                        //.AccessToken(fToken)
+                        .AccessToken(fToken)
                         .Endpoint(eEndPoint.Text)
                         .Collection(eCollection.Text)
                           .CreateRegister(Registro.ToString);
+
   finally
     Registro.DisposeOf;
   end;
 
-  ShowMessage(Bd.StatusCode.ToString);
+  bReadCollectionClick(nil);
 end;
 
-procedure TFormMain.Button2Click(Sender: TObject);
+procedure TFormMain.bReadCollectionClick(Sender: TObject);
 var
  DataTable : ieFirebaseRealtimeResponse;
  JArray    : TJSONArray;
 begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
   DataTable := TeFirebase.New
                            .RealTimeDB(Project_ID)
                              .AccessToken(fToken)
@@ -752,7 +808,35 @@ begin
    begin
      JArray := DataTable.AsJSONArray;
      PreencheGrid(JArray);
-     ShowMessage(JArray.ToString);
+     JArray.DisposeOf;
+   end;
+end;
+
+procedure TFormMain.bReadWithFilterClick(Sender: TObject);
+var
+ DataTable : ieFirebaseRealtimeResponse;
+ JArray    : TJSONArray;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
+  DataTable := TeFirebase.New
+                           .RealTimeDB(Project_ID)
+                             .AccessToken(fToken)
+                             .Endpoint(eEndPoint.Text)
+                             .Collection(eCollection.Text)
+                             .Read
+                               .OrderBy('task')
+                                 .startAt(ePesquisa.Text)
+                                   .Search;
+
+  if DataTable.StatusCode = 200 then
+   begin
+     JArray := DataTable.AsJSONArray;
+     PreencheGrid(JArray);
      JArray.DisposeOf;
    end;
 end;
