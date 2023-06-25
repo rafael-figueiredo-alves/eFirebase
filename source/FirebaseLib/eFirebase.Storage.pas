@@ -4,7 +4,11 @@ interface
 
 uses
   eFirebase.Interfaces,
-  System.Classes;
+  {$IFDEF FPC}
+    Classes;
+  {$ELSE}
+    System.Classes;
+  {$ENDIF}
 
 Type
   TeFirebaseStorage = Class(TInterfacedObject, ieFirebaseStorage)
@@ -34,7 +38,11 @@ implementation
 uses
   eFirebase.rest,
   eFirebase.Responses.Storage,
-  System.SysUtils;
+  {$IFDEF FPC}
+    SysUtils;
+  {$ELSE}
+    System.SysUtils;
+  {$ENDIF}
 
 { TeFirebaseStorage }
 

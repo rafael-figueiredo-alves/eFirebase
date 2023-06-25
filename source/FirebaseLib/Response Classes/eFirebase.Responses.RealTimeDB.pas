@@ -4,8 +4,11 @@ interface
 
 uses
   eFirebase.Interfaces,
-  System.JSON,
-  Data.DB;
+  {$IFDEF FPC}
+    fpjson, DB;
+  {$ELSE}
+    System.JSON, Data.DB;
+  {$ENDIF}
 
 Type
   TeFirebaseRealtimeResponse = Class(TInterfacedObject, ieFirebaseRealtimeResponse)
@@ -29,8 +32,11 @@ Type
 implementation
 
 uses
-  System.SysUtils,
-  System.Generics.Collections;
+  {$IFDEF FPC}
+    SysUtils, Generics.Collections;
+  {$ELSE}
+    System.SysUtils, System.Generics.Collections;
+  {$ENDIF}
 
 { TeFirebaseRealtimeResponse }
 

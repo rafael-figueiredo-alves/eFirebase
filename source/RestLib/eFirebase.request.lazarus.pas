@@ -10,7 +10,7 @@ uses
   eFirebase.request.contract,
   eFirebase.response.contract,
   idHTTP,
-  System.Classes,
+  Classes,
   IdSSLOpenSSL,
   IdSSLOpenSSLHeaders;
 
@@ -51,7 +51,7 @@ Type
 implementation
 
 uses
-  eFirebase.response.lazarus, System.SysUtils, idURI;
+  eFirebase.response.lazarus, SysUtils, idURI;
 
 { TRequestLazarus }
 

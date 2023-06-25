@@ -4,9 +4,15 @@ interface
 
 uses
   eFirebase.Types,
-  System.Classes,
-  System.JSON,
-  Data.DB;
+  {$IFDEF FPC}
+    fpjson,
+    Classes,
+    DB;
+  {$ELSE}
+    System.Classes,
+    System.JSON,
+    Data.DB;
+  {$ENDIF}
 
 type
 

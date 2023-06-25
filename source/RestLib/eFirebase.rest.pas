@@ -20,14 +20,15 @@ implementation
 uses
   eFirebase.request, eFirebase.request.lazarus;
 
-{ TMinhaClasse }
+{ TRest }
 
 class function TRest.New: iRequest;
 begin
-  {$IF defined(FPC_FULLVERSION)}
+  {$IFDEF FPC}
   Result := TRequestLazarus.Create
-  {$Endif}
+  {$Else}
   Result := TRequest.create;
+  {$Endif}
 end;
 
 end.

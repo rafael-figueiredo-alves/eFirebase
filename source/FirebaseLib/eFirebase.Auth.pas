@@ -45,7 +45,11 @@ implementation
 
 uses
   eFirebase.Responses.Auth,
-  System.JSON,
+  {$IFDEF FPC}
+    fpjson,
+  {$ELSE}
+    System.JSON,
+  {$ENDIF}
   eFirebase.rest;
 
 { TeFirebaseAuth }

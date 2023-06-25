@@ -22,7 +22,11 @@ Type
 implementation
 
 uses
-  System.JSON;
+  {$IFDEF FPC}
+    fpjson;
+  {$ELSE}
+    System.JSON;
+  {$ENDIF}
 
 { TeFirebaseStorageResponse }
 

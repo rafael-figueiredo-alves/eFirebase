@@ -57,8 +57,14 @@ Type
 
 implementation
 
-uses System.SysUtils,
-     eFirebase.rest, eFirebase.Responses.RealTimeDB;
+uses
+  {$IFDEF FPC}
+    SysUtils,
+  {$ELSE}
+    System.SysUtils,
+  {$ENDIF}
+  eFirebase.rest,
+  eFirebase.Responses.RealTimeDB;
 
 { TeFirebaseRealtimeDB }
 

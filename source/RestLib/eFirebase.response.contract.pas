@@ -3,7 +3,11 @@ unit eFirebase.response.contract;
 interface
 
 uses
-  System.Classes;
+  {$IFDEF FPC}
+    Classes;
+  {$ELSE}
+    System.Classes;
+  {$ENDIF}
 
 type
   iResponse = interface

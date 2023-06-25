@@ -4,7 +4,11 @@ interface
 
 uses
   eFirebase.response.contract,
-  System.Classes,
+  {$IFDEF FPC}
+    Classes,
+  {$ELSE}
+    System.Classes,
+  {$ENDIF}
   eFirebase.Types;
 
 type

@@ -4,7 +4,11 @@ interface
 
 uses
   eFirebase.Interfaces,
-  System.json,
+  {$IFDEF FPC}
+    fpjson,
+  {$ELSE}
+    System.JSON,
+  {$ENDIF}
   eFirebase.Types;
 
 Type
@@ -47,7 +51,12 @@ implementation
 
 { TeFirebaseResponseAuth }
 
-Uses System.DateUtils;
+Uses
+  {$IFDEF FPC}
+    DateUtils;
+  {$ELSE}
+    System.DateUtils;
+  {$ENDIF}
 
 function GetError(const Err_MSG: string): enumAuthErrors;
 //Função para verificar o tipo de erro e retornar o tipo corretamente

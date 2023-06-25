@@ -5,7 +5,7 @@ interface
 uses
   eFirebase.response.contract,
   IdHTTP,
-  System.Classes;
+  Classes;
 
 Type
   TResponseLazarus = Class(TInterfacedObject, iResponse)
