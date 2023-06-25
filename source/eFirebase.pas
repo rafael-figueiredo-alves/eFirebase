@@ -1,7 +1,7 @@
 unit eFirebase;
 
 //--------------------------------------------------------------------------------
-//  eFirebase - versão 1.0.1
+//  eFirebase - versão 1.0.2
 //  --------------------------
 //  Biblioteca para consumo de recursos do Firebase
 //  Desenvolvido por Rafael de Figueiredo Alves (DevPegasus)
@@ -31,7 +31,7 @@ Type
   End;
 
  const
-  eFirebase_VERSION = '1.0.1';
+  eFirebase_VERSION = '1.0.2';
 
 implementation
 
