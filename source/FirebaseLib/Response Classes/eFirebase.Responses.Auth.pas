@@ -53,9 +53,9 @@ implementation
 
 Uses
   {$IFDEF FPC}
-    DateUtils;
+    DateUtils, SysUtils;
   {$ELSE}
-    System.DateUtils;
+    System.DateUtils, System.SysUtils;
   {$ENDIF}
 
 function GetError(const Err_MSG: string): enumAuthErrors;
