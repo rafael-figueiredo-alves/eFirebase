@@ -33,12 +33,27 @@ implementation
 
 uses
   {$IFDEF FPC}
-    SysUtils, Generics.Collections;
+    SysUtils, Generics.Collections, jsonparser;
   {$ELSE}
     System.SysUtils, System.Generics.Collections;
   {$ENDIF}
 
 { TeFirebaseRealtimeResponse }
+
+{$IFDEF FPC}
+function GetJSONData(const aJSON: UTF8String): TJSONData;
+var
+  jParser: TJSONParser;
+begin
+  Result := nil;
+  jParser := TJSONParser.Create(aJSON, True);
+  try
+    Result := jParser.Parse;
+  finally
+    jParser.Free;
+  end;
+end;
+{$ENDIF}
 
 function RemoveQuotes(const text: string) : string;
 begin
@@ -85,7 +100,11 @@ begin
   if (fResponse = EmptyStr) or (fResponse = 'null') then
    Result := tJSONObject.create
   else
-   Result := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(fResponse), 0) As TJSONObject;
+  {$IFDEF FPC}
+    Result := GetJSONData(fResponse) As TJSONObject;
+  {$ELSE}
+    Result := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(fResponse), 0) As TJSONObject;
+  {$ENDIF}
 end;
 
 function TeFirebaseRealtimeResponse.AsJSONArray: TJSONArray;
@@ -100,24 +119,43 @@ begin
   try
     Result := TJSONArray.Create;
 
-    if (fResponse <> EmptyStr) and (fResponse <> 'null') then
-     begin
-      for Registro := 0 to Obj.Count-1 do
+    {$IFDEF FPC}
+      if (fResponse <> EmptyStr) and (fResponse <> 'null') then
        begin
-         NewObj := TJSONObject.Create;
-         NewObj.AddPair('id', RemoveQuotes(Obj.Pairs[Registro].JsonString.ToString));
-         Valor := Obj.Pairs[Registro].JsonValue as TJSONObject;
-         for Par := 0 to Valor.Count-1 do
-          begin
-            NewObj.AddPair(RemoveQuotes(Valor.Pairs[par].JsonString.ToString), RemoveQuotes(Valor.Pairs[par].JsonValue.ToString));
-          end;
-         Result.Add(NewObj);
+        for Registro := 0 to Obj.Count-1 do
+         begin
+           NewObj := TJSONObject.Create;
+           NewObj.Add('id', RemoveQuotes(Obj.Names[Registro]));
+           Valor := GetJSONData(Obj.Find(Obj.Names[Registro]).AsJSON) as TJsonObject;
+           for Par := 0 to Valor.Count-1 do
+            begin
+              NewObj.Add(RemoveQuotes(Valor.Names[par]), RemoveQuotes(Valor.Find(Valor.Names[par]).AsJSON));
+            end;
+           Result.Add(NewObj);
+         end;
        end;
-     end;
-  finally
-    Obj.DisposeOf;
-  end;
-
+    finally
+      Obj.Free;
+    end;
+    {$ELSE}
+      if (fResponse <> EmptyStr) and (fResponse <> 'null') then
+       begin
+        for Registro := 0 to Obj.Count-1 do
+         begin
+           NewObj := TJSONObject.Create;
+           NewObj.AddPair('id', RemoveQuotes(Obj.Pairs[Registro].JsonString.ToString));
+           Valor := Obj.Pairs[Registro].JsonValue as TJSONObject;
+           for Par := 0 to Valor.Count-1 do
+            begin
+              NewObj.AddPair(RemoveQuotes(Valor.Pairs[par].JsonString.ToString), RemoveQuotes(Valor.Pairs[par].JsonValue.ToString));
+            end;
+           Result.Add(NewObj);
+         end;
+       end;
+    finally
+      Obj.DisposeOf;
+    end;
+    {$ENDIF}
 end;
 
 {function TeFirebaseRealtimeResponse.AsDataSet(out DataSet: tDataSet) : integer;

@@ -53,10 +53,25 @@ implementation
 
 Uses
   {$IFDEF FPC}
-    DateUtils, SysUtils;
+    DateUtils, SysUtils, jsonparser;
   {$ELSE}
     System.DateUtils, System.SysUtils;
   {$ENDIF}
+
+{$IFDEF FPC}
+function GetJSONData(const aJSON: UTF8String): TJSONData;
+var
+  jParser: TJSONParser;
+begin
+  Result := nil;
+  jParser := TJSONParser.Create(aJSON, True);
+  try
+    Result := jParser.Parse;
+  finally
+    jParser.Free;
+  end;
+end;
+{$ENDIF}
 
 function GetError(const Err_MSG: string): enumAuthErrors;
 //Função para verificar o tipo de erro e retornar o tipo corretamente
@@ -118,14 +133,120 @@ end;
 constructor TeFirebaseResponseAuth.Create(const Response_content: string; StatusCode: integer);
 var
  ErrorMessage : string;
- vJSON        : TJSONValue;
+ {$IFDEF FPC}
+  vJSON        : TJSONData;
+  vLastLog     : TJSONString;
+  vCreated     : TJSONString;
+  vIDToken     : TJSONString;
+  vUID         : TJSONString;
+  vRefreToken  : TJSONString;
+  vErrMsg      : TJSONString;
+  vExpIn       : TJSONString;
+  vRegistered  : TJSONString;
+  vDisplay     : TJSONString;
+  vEmail       : TJSONString;
+  vPhoto       : TJSONString;
+  vVerEmail    : TJSONString;
+ {$ELSE}
+  vJSON        : TJSONValue;
+ {$ENDIF}
  oJSON        : TJSONObject;
  ObjError     : TJSONObject;
  aJSON        : TJSONArray;
  item         : TJSONObject;
 begin
-  fStatusCode := StatusCode;
+   ErrorMessage := '';
+   fStatusCode := StatusCode;
 
+  {$IFDEF FPC}
+   vJSON := GetJSONData(Response_content);
+
+  if (not Assigned(vJSON)) or (not (vJSON is TJSONObject)) then
+   begin
+     if Assigned(vJSON) then
+      vJSON.Free;
+     exit
+   end;
+
+   oJSON := vJSON as TJSONObject;
+
+   if oJSON.Find('users', aJSON) then
+    begin
+      //Clono o obj para um item para evitar AccessViolation
+      item := (aJSON.Items[0] as TJSONObject).Clone as TJSONObject;
+      //Limpo o objeto anterior
+      oJSON.Free;
+      //copio o item para dentro do objeto Json vazio
+      oJSON := item.Clone as TJSONObject;
+      //Libero o item da memória
+      //Esta foi a melhor solução para evitar os memoryleaks
+      item.Free;
+      if oJSON.Find('lastLoginAt', vLastLog) then
+       flastLoginAt := vLastLog.AsString;
+      if oJSON.Find('createdAt', vCreated) then
+       fcreatedAt := vCreated.AsString;
+    end;
+
+   if oJSON.Find('lastLoginAt', vLastLog) then
+    flastLoginAt := vLastLog.AsString;
+   if oJSON.Find('createdAt', vCreated) then
+    fcreatedAt := vCreated.AsString;
+
+   if oJSON.Find('idToken', vIDToken) then
+    fToken := vIDToken.AsString;
+
+   if fToken = '' then
+    if oJSON.Find('id_token', vIDToken) then
+     fToken := vIDToken.AsString;
+
+   if oJSON.Find('refreshToken', vRefreToken) then
+    fRefreshToken := vRefreToken.AsString;
+
+   if fRefreshToken = '' then
+    if oJSON.Find('refresh_token', vRefreToken) then
+     fRefreshToken := vRefreToken.AsString;
+
+   if oJSON.Find('localId', vUID) then
+    fuID := vUID.AsString;
+
+   if fuID = '' then
+    if oJSON.Find('user_id', vUID) then
+     fuID := vUID.AsString;
+
+   if not oJSON.Find('expiresIn', vExpIn) then
+    oJSON.Find('expires_in', vExpIn);
+
+  fExpiresIn := vExpIn.AsInteger;
+
+   if oJSON.Find('registered', vRegistered) then
+    fRegistered := vRegistered.AsBoolean;
+
+   if oJSON.Find('displayName', vDisplay) then
+    fDisplayName := vDisplay.AsString;
+
+   if oJSON.Find('email', vEmail) then
+    femail := vEmail.AsString;
+
+   if oJSON.Find('photoUrl', vPhoto) then
+    fphotoURL := vPhoto.AsString;
+
+   if oJSON.Find('emailVerified', vVerEmail) then
+    fEmailVerified := vVerEmail.AsBoolean;
+
+   fError := NONE;
+
+   if oJSON.Find('error', ObjError) then
+    begin
+      if ObjError.Find('message', vErrMsg) then
+       ErrorMessage := vErrMsg.AsString;
+
+      if ErrorMessage <> '' then
+       fError := GetError(ErrorMessage);
+    end;
+
+   if Assigned(oJSON) then
+    oJSON.Free;
+  {$ELSE}
    vJSON := TJSONObject.ParseJSONValue(Response_content);
 
   if (not Assigned(vJSON)) or (not (vJSON is TJSONObject)) then
@@ -195,6 +316,7 @@ begin
 
    if Assigned(oJSON) then
     oJSON.DisposeOf;
+  {$ENDIF}
 end;
 
 function TeFirebaseResponseAuth.createdAt: string;

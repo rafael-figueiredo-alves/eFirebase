@@ -63,12 +63,23 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('idToken', Token);
-    RequestBody.AddPair('password', newPassword);
-    RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('idToken', Token);
+      RequestBody.Add('password', newPassword);
+      RequestBody.Add('returnSecureToken', True);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('idToken', Token);
+      RequestBody.AddPair('password', newPassword);
+      RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -90,13 +101,25 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('idToken', Token);
-    RequestBody.AddPair('displayName', DisplayName);
-    RequestBody.AddPair('photoUrl', PhotoURL);
-    RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('idToken', Token);
+      RequestBody.Add('displayName', DisplayName);
+      RequestBody.Add('photoUrl', PhotoURL);
+      RequestBody.Add('returnSecureToken', True);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('idToken', Token);
+      RequestBody.AddPair('displayName', DisplayName);
+      RequestBody.AddPair('photoUrl', PhotoURL);
+      RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -118,10 +141,19 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('oobCode', oobCode);
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('oobCode', oobCode);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('oobCode', oobCode);
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -143,11 +175,21 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('oobCode', oobCode);
-    RequestBody.AddPair('newPassword', newPassword);
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('oobCode', oobCode);
+      RequestBody.Add('newPassword', newPassword);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('oobCode', oobCode);
+      RequestBody.AddPair('newPassword', newPassword);
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -174,10 +216,19 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('idToken', token);
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('idToken', token);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('idToken', token);
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -205,11 +256,21 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('grant_type', 'refresh_token');
-    RequestBody.AddPair('refresh_token', RefreshToken);
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('grant_type', 'refresh_token');
+      RequestBody.Add('refresh_token', RefreshToken);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('grant_type', 'refresh_token');
+      RequestBody.AddPair('refresh_token', RefreshToken);
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -231,10 +292,19 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('idToken', token);
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('idToken', token);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('idToken', token);
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -261,11 +331,21 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('requestType', 'VERIFY_EMAIL');
-    RequestBody.AddPair('idToken', token);
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('requestType', 'VERIFY_EMAIL');
+      RequestBody.Add('idToken', token);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('requestType', 'VERIFY_EMAIL');
+      RequestBody.AddPair('idToken', token);
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -287,11 +367,21 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('requestType', 'PASSWORD_RESET');
-    RequestBody.AddPair('email', email);
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('requestType', 'PASSWORD_RESET');
+      RequestBody.Add('email', email);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('requestType', 'PASSWORD_RESET');
+      RequestBody.AddPair('email', email);
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -313,12 +403,23 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('email', email);
-    RequestBody.AddPair('password', password);
-    RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('email', email);
+      RequestBody.Add('password', password);
+      RequestBody.Add('returnSecureToken', True);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('email', email);
+      RequestBody.AddPair('password', password);
+      RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -340,12 +441,23 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('email', email);
-    RequestBody.AddPair('password', password);
-    RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('email', email);
+      RequestBody.Add('password', password);
+      RequestBody.Add('returnSecureToken', True);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('email', email);
+      RequestBody.AddPair('password', password);
+      RequestBody.AddPair('returnSecureToken', TJSONBool.Create(True));
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New
@@ -367,10 +479,19 @@ var
 begin
   RequestBody := TJSONObject.Create;
   try
-    RequestBody.AddPair('oobCode', oobCode);
-    RequestBodySTR := RequestBody.ToString;
+    {$IFDEF FPC}
+      RequestBody.Add('oobCode', oobCode);
+      RequestBodySTR := RequestBody.AsJSON;
+    {$ELSE}
+      RequestBody.AddPair('oobCode', oobCode);
+      RequestBodySTR := RequestBody.ToString;
+    {$ENDIF}
   finally
-    RequestBody.DisposeOf;
+    {$IFDEF FPC}
+      RequestBody.Free;
+    {$ELSE}
+      RequestBody.DisposeOf;
+    {$ENDIF}
   end;
 
   Response := TRest.New

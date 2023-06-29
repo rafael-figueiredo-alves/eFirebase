@@ -27,8 +27,8 @@ Type
      Class function New: iRequest;
      function BaseUrl(Const BaseUrl: string): iRequest;
      function Resource(Const Resource : string): iRequest;
-     function Body(const body: string): iRequest; overload;
-     function Body(const body: TStream; const AOwns: Boolean): iRequest; overload;
+     function Body(const pbody: string): iRequest; overload;
+     function Body(const pbody: TStream; const AOwns: Boolean): iRequest; overload;
      function SendFile(const FileName, ContentType: string):iRequest;
      function Token(Const pToken: string): iRequest;
      function AddParameter(const Key, Value: string):iRequest;
@@ -67,15 +67,15 @@ begin
   FRestClient.BaseURL := BaseUrl;
 end;
 
-function TRequest.Body(const body: TStream; const AOwns: Boolean): iRequest;
+function TRequest.Body(const pbody: TStream; const AOwns: Boolean): iRequest;
 begin
   Result := Self;
   if not Assigned(body) then
     Exit;
   {$IF COMPILERVERSION <= 29}
-    FRESTRequest.AddBody(body, TRESTContentType.ctAPPLICATION_OCTET_STREAM);
+    FRESTRequest.AddBody(pbody, TRESTContentType.ctAPPLICATION_OCTET_STREAM);
   {$ELSE}
-    FRESTRequest.Body.Add(body, TRESTContentType.ctAPPLICATION_OCTET_STREAM);
+    FRESTRequest.Body.Add(pbody, TRESTContentType.ctAPPLICATION_OCTET_STREAM);
   {$ENDIF}
   if AOwns then
   begin
@@ -87,10 +87,10 @@ begin
   end;
 end;
 
-function TRequest.Body(const body: string): iRequest;
+function TRequest.Body(const pbody: string): iRequest;
 begin
   Result := Self;
-  FBody := body;
+  FBody := pbody;
 end;
 
 constructor TRequest.Create;

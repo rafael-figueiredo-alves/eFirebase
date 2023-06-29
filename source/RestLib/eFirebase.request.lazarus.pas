@@ -35,8 +35,8 @@ Type
     Class function New: iRequest;
     function BaseUrl(Const BaseUrl: string): iRequest;
     function Resource(Const Resource: string): iRequest;
-    function Body(const body: string): iRequest; overload;
-    function Body(const body: TStream; const AOwns: Boolean): iRequest; overload;
+    function Body(const pbody: string): iRequest; overload;
+    function Body(const pbody: TStream; const AOwns: Boolean): iRequest; overload;
     function SendFile(const FileName, ContentType: string):iRequest;
     function Token(Const pToken: string): iRequest;
     function AddParameter(const Key, Value: string):iRequest;
@@ -73,33 +73,33 @@ begin
   FBaseURL := BaseUrl;
 end;
 
-function TRequestLazarus.Body(const body: TStream; const AOwns: Boolean): iRequest;
+function TRequestLazarus.Body(const pbody: TStream; const AOwns: Boolean): iRequest;
 begin
   Result := Self;
   try
     if not Assigned(FBody) then
       FBody := TStringStream.Create;
-    TStringStream(FBody).CopyFrom(body, body.Size);
+    TStringStream(FBody).CopyFrom(pbody, pbody.Size);
     FBody.Position := 0;
   finally
     if AOwns then
     begin
       {$IF DEFINED(MSWINDOWS) OR DEFINED(FPC)}
-        body.Free;
+        pbody.Free;
       {$ELSE}
-        body.DisposeOf;
+        pbody.DisposeOf;
       {$ENDIF}
     end;
   end;
 end;
 
-function TRequestLazarus.Body(const body: string): iRequest;
+function TRequestLazarus.Body(const pbody: string): iRequest;
 begin
   Result := Self;
   if not Assigned(FBody) then
-   FBody := TStringStream.Create(body, TEncoding.UTF8)
+   FBody := TStringStream.Create(pbody, TEncoding.UTF8)
   else
-   TStringStream(FBody).WriteString(body);
+   TStringStream(FBody).WriteString(pbody);
   FBody.Position := 0;
 end;
 

@@ -24,14 +24,11 @@ Type
      function Auth(const API_Key: string): ieFirebaseAuth;
      function RealTimeDB(const ProjectCode: string): ieFirebaseRealtime;
      function Storage(const ProjectCode: string): ieFirebaseStorage;
-     { Firestore será estudado e implementado numa versão futura (v2.0.0)
-     function Firestore(const API_Key: string): ieFirebaseFirestore;
-     }
      class function Version: string;
   End;
 
  const
-  eFirebase_VERSION = '1.0.2';
+  eFirebase_VERSION = '1.0.3';
 
 implementation
 
@@ -57,13 +54,6 @@ begin
 
   inherited;
 end;
-
-{ Firestore será estudado e implementado numa versão futura (v2.0.0)
-function TeFirebase.Firestore(const API_Key: string): ieFirebaseFirestore;
-begin
-  //Result := TeFirebaseFirestore.New(API_Key);
-end;
-}
 
 class function TeFirebase.New: ieFirebase;
 begin

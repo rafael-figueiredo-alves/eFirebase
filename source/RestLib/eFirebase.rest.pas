@@ -18,7 +18,11 @@ Type
 implementation
 
 uses
-  eFirebase.request, eFirebase.request.lazarus;
+  {$IFDEF FPC}
+   eFirebase.request.lazarus;
+  {$Else}
+   eFirebase.request;
+  {$Endif}
 
 { TRest }
 

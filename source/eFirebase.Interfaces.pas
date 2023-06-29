@@ -6,12 +6,10 @@ uses
   eFirebase.Types,
   {$IFDEF FPC}
     fpjson,
-    Classes,
-    DB;
+    Classes;
   {$ELSE}
     System.Classes,
-    System.JSON,
-    Data.DB;
+    System.JSON;
   {$ENDIF}
 
 type
@@ -47,8 +45,6 @@ type
    function AsJSONstr: string;
    function AsJSONObj: tJSONObject;
    function AsJSONArray: TJSONArray;
-   {TODO -oRafael -cImplementar : Implementar esta função no futuro, quando descobrir ponto que está dando Access Violation}
-   //function AsDataSet(out DataSet: tDataSet) : integer;
  end;
 {$Endregion}
 
@@ -103,12 +99,6 @@ type
    function FileName(const name: string) : ieFirebaseStorage;
    function Send(const AuthToken: string) : ieFirebaseStorageResponse;
  end;
-
- { Firestore será estudado e implementado numa versão futura (v2.0.0)
- ieFirebaseFirestore = interface
-   ['{37115E16-A873-4C71-B658-8AFA09B84BEA}{']
- end;
- }
 {$EndRegion}
 
  ieFirebase = interface
@@ -116,9 +106,6 @@ type
    function Auth(const API_Key: string): ieFirebaseAuth;
    function RealTimeDB(const ProjectCode: string): ieFirebaseRealtime;
    function Storage(const ProjectCode: string): ieFirebaseStorage;
-   { Firestore será estudado e implementado numa versão futura (v2.0.0)
-   function Firestore(const API_Key: string): ieFirebaseFirestore;
-   }
  end;
 
 implementation
