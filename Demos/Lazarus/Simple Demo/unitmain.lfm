@@ -1,0 +1,680 @@
+object FormMain: TFormMain
+  Left = 335
+  Height = 786
+  Top = 172
+  Width = 1231
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
+  Caption = 'Simple Demo'
+  ClientHeight = 786
+  ClientWidth = 1231
+  DesignTimePPI = 120
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poDesktopCenter
+  LCLVersion = '2.2.6.0'
+  object TabServices: TPageControl
+    Left = 15
+    Height = 595
+    Top = 15
+    Width = 1201
+    ActivePage = TabFirebaseAuth
+    Align = alClient
+    BorderSpacing.Around = 15
+    TabIndex = 0
+    TabOrder = 0
+    object TabFirebaseAuth: TTabSheet
+      Caption = 'Firebase Auth'
+      ClientHeight = 562
+      ClientWidth = 1193
+      object TabAuth: TPageControl
+        Left = 30
+        Height = 502
+        Top = 30
+        Width = 1133
+        ActivePage = TabReset
+        Align = alClient
+        BorderSpacing.Around = 30
+        TabIndex = 2
+        TabOrder = 0
+        TabPosition = tpBottom
+        object TabLogin: TTabSheet
+          Caption = 'Login'
+          ClientHeight = 469
+          ClientWidth = 1125
+          object GroupLogin: TGroupBox
+            Left = 10
+            Height = 252
+            Top = 10
+            Width = 1105
+            Align = alClient
+            BorderSpacing.Around = 10
+            Caption = ' Efetuar Login '
+            ClientHeight = 227
+            ClientWidth = 1101
+            TabOrder = 0
+            object layoutUserName: TPanel
+              Left = 10
+              Height = 63
+              Top = 10
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 0
+              object lblLoginUsername: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Usuário'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object eLoginUsername: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 931
+                Align = alClient
+                BorderSpacing.Around = 15
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                TabOrder = 0
+                TextHint = 'Digite aqui o seu usuário'
+              end
+            end
+            object layoutUserName1: TPanel
+              Left = 10
+              Height = 63
+              Top = 83
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 1
+              object lblLoginSenha: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Senha'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object eLoginSenha: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 931
+                Align = alClient
+                BorderSpacing.Around = 15
+                EchoMode = emPassword
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                PasswordChar = '*'
+                TabOrder = 0
+                TextHint = 'Digite aqui sua senha'
+              end
+            end
+            object layoutUserName2: TPanel
+              Left = 10
+              Height = 63
+              Top = 156
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 2
+              object btLoginEntrar: TButton
+                Left = 896
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Entrar'
+                OnClick = btLoginEntrarClick
+                TabOrder = 0
+              end
+            end
+          end
+          object GroupTokens: TGroupBox
+            Left = 10
+            Height = 187
+            Top = 272
+            Width = 1105
+            Align = alBottom
+            BorderSpacing.Around = 10
+            Caption = ' Tokens '
+            ClientHeight = 162
+            ClientWidth = 1101
+            TabOrder = 1
+            object layoutUserName3: TPanel
+              Left = 10
+              Height = 63
+              Top = 10
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 0
+              object lblLoginSenha1: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Token'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object lblToken: TLabel
+                Left = 120
+                Height = 63
+                Top = 0
+                Width = 961
+                Align = alClient
+                Alignment = taCenter
+                AutoSize = False
+                Font.CharSet = ANSI_CHARSET
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                Layout = tlCenter
+                ParentColor = False
+                ParentFont = False
+                WordWrap = True
+              end
+            end
+            object layoutUserName4: TPanel
+              Left = 10
+              Height = 63
+              Top = 83
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 1
+              object btAtualizarToken: TButton
+                Left = 896
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = 'Atualizar Token'
+                OnClick = btAtualizarTokenClick
+                TabOrder = 0
+              end
+              object lblLoginSenha2: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Refresh Token'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object lblRefreshToken: TLabel
+                Left = 120
+                Height = 63
+                Top = 0
+                Width = 771
+                Align = alClient
+                Alignment = taCenter
+                AutoSize = False
+                Font.CharSet = ANSI_CHARSET
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                Layout = tlCenter
+                ParentColor = False
+                ParentFont = False
+                WordWrap = True
+              end
+            end
+          end
+        end
+        object TabRegister: TTabSheet
+          Caption = 'Registrar'
+          ClientHeight = 469
+          ClientWidth = 1125
+          object GroupRegistro: TGroupBox
+            Left = 10
+            Height = 262
+            Top = 10
+            Width = 1105
+            Align = alTop
+            BorderSpacing.Around = 10
+            Caption = ' Registrar Conta / Novo usuário '
+            ClientHeight = 237
+            ClientWidth = 1101
+            TabOrder = 0
+            object layoutUserName5: TPanel
+              Left = 10
+              Height = 63
+              Top = 10
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 0
+              object lblLoginUsername1: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Usuário'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object eRegistroUsername: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 931
+                Align = alClient
+                BorderSpacing.Around = 15
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                TabOrder = 0
+                TextHint = 'Digite aqui o seu usuário'
+              end
+            end
+            object layoutUserName6: TPanel
+              Left = 10
+              Height = 63
+              Top = 83
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 1
+              object lblLoginSenha3: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Senha'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object eRegistroSenha: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 931
+                Align = alClient
+                BorderSpacing.Around = 15
+                EchoMode = emPassword
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                PasswordChar = '*'
+                TabOrder = 0
+                TextHint = 'Digite aqui sua senha'
+              end
+            end
+            object layoutUserName7: TPanel
+              Left = 10
+              Height = 63
+              Top = 156
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 2
+              object btRegistroRegistrar: TButton
+                Left = 896
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Registrar'
+                OnClick = btRegistroRegistrarClick
+                TabOrder = 0
+              end
+            end
+          end
+        end
+        object TabReset: TTabSheet
+          Caption = 'Resetar / Trocar senha'
+          ClientHeight = 469
+          ClientWidth = 1125
+          object GroupLogin1: TGroupBox
+            Left = 10
+            Height = 252
+            Top = 10
+            Width = 1105
+            Align = alClient
+            BorderSpacing.Around = 10
+            Caption = ' Resetar senha, enviar código; verificar e confirmar código e trocar senha '
+            ClientHeight = 227
+            ClientWidth = 1101
+            TabOrder = 0
+            object layoutUserName8: TPanel
+              Left = 10
+              Height = 63
+              Top = 10
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 0
+              object lblLoginUsername2: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'E-mail'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object eLoginUsername1: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 746
+                Align = alClient
+                BorderSpacing.Around = 15
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                TabOrder = 0
+                TextHint = 'Digite aqui o seu usuário'
+              end
+              object btLoginEntrar2: TButton
+                Left = 896
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Resetar'
+                OnClick = btLoginEntrarClick
+                TabOrder = 1
+              end
+            end
+            object layoutUserName9: TPanel
+              Left = 10
+              Height = 63
+              Top = 83
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 1
+              object lblLoginSenha4: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Código de Resetamento'
+                Layout = tlCenter
+                ParentColor = False
+                WordWrap = True
+              end
+              object eLoginSenha1: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 746
+                Align = alClient
+                BorderSpacing.Around = 15
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                TabOrder = 0
+                TextHint = 'Digite aqui sua senha'
+              end
+              object btLoginEntrar3: TButton
+                Left = 896
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Verificar'
+                OnClick = btLoginEntrarClick
+                TabOrder = 1
+              end
+            end
+            object layoutUserName10: TPanel
+              Left = 10
+              Height = 63
+              Top = 156
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 2
+              object btLoginEntrar1: TButton
+                Left = 896
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Confirmar'
+                OnClick = btLoginEntrarClick
+                TabOrder = 0
+              end
+              object lblLoginSenha7: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Nova Senha'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object eLoginSenha2: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 746
+                Align = alClient
+                BorderSpacing.Around = 15
+                EchoMode = emPassword
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                PasswordChar = '*'
+                TabOrder = 1
+                TextHint = 'Digite aqui sua senha'
+              end
+            end
+          end
+          object GroupTokens1: TGroupBox
+            Left = 10
+            Height = 187
+            Top = 272
+            Width = 1105
+            Align = alBottom
+            BorderSpacing.Around = 10
+            Caption = ' Tokens '
+            ClientHeight = 162
+            ClientWidth = 1101
+            TabOrder = 1
+            object layoutUserName11: TPanel
+              Left = 10
+              Height = 63
+              Top = 10
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 0
+              object lblLoginSenha5: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Senha'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object eLoginSenha3: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 931
+                Align = alClient
+                BorderSpacing.Around = 15
+                EchoMode = emPassword
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                PasswordChar = '*'
+                TabOrder = 0
+                TextHint = 'Digite aqui sua senha'
+              end
+            end
+            object layoutUserName12: TPanel
+              Left = 10
+              Height = 63
+              Top = 83
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 1
+              object btAtualizarToken1: TButton
+                Left = 896
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Trocar Senha'
+                OnClick = btAtualizarTokenClick
+                TabOrder = 0
+              end
+            end
+          end
+        end
+        object TabPerfil: TTabSheet
+          Caption = 'Perfil'
+        end
+        object TabVerificarEmail: TTabSheet
+          Caption = 'Verificar e-mail'
+        end
+        object TabApagarConta: TTabSheet
+          Caption = 'Apagar Conta'
+        end
+      end
+    end
+    object TabFirebaseStorage: TTabSheet
+      Caption = 'Firebase Storage'
+    end
+    object TabFirebaseRealtimeDB: TTabSheet
+      Caption = 'Firebase Realtime DB'
+    end
+  end
+  object GroupBox1: TGroupBox
+    Left = 15
+    Height = 146
+    Top = 625
+    Width = 1201
+    Align = alBottom
+    BorderSpacing.Around = 15
+    Caption = ' Log de Operações / Erros '
+    ClientHeight = 121
+    ClientWidth = 1197
+    TabOrder = 1
+    object MemoLog: TMemo
+      Left = 5
+      Height = 111
+      Top = 5
+      Width = 1187
+      Align = alClient
+      BorderSpacing.Around = 5
+      ReadOnly = True
+      ScrollBars = ssVertical
+      TabOrder = 0
+    end
+  end
+end

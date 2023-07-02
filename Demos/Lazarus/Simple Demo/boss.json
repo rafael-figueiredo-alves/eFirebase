@@ -1,0 +1,12 @@
+{
+	"name": "Simple Demo",
+	"description": "",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./src",
+	"projects": [],
+	"dependencies": {
+		"https://github.com/rafael-figueiredo-alves/dotenv4delphi": "^v1.4.0",
+		"https://github.com/rafael-figueiredo-alves/efirebase": "^v1.0.2"
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2023-07-01T21:37:02.3126838-03:00",
+	"installedModules": {
+		"https://github.com/rafael-figueiredo-alves/dotenv4delphi": {
+			"name": "dotenv4delphi",
+			"version": "v1.4.0",
+			"hash": "80c43793b38ed1ad4a659cfb068a6a15",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"https://github.com/rafael-figueiredo-alves/efirebase": {
+			"name": "efirebase",
+			"version": "v1.0.2",
+			"hash": "d1a4f1f2b13f20d086e8b5b0849a9037",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}

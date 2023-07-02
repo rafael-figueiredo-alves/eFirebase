@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="SimpleDemo.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="24"/>
+      </Unit>
+      <Unit>
+        <Filename Value="unitmain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormMain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="unitMain"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="188"/>
+        <CursorPos X="27" Y="199"/>
+        <FoldState Value=" TJjH1T~"/>
+        <UsageCount Value="24"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="modules\efirebase\source\RestLib\eFirebase.request.lazarus.pas"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="145"/>
+        <CursorPos Y="151"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="modules\efirebase\source\eFirebase.Interfaces.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="48"/>
+        <CursorPos X="13" Y="55"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="modules\efirebase\source\eFirebase.pas"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="34"/>
+        <CursorPos X="2" Y="18"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="263"/>
+        <CursorPos Y="276"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\Indy-master\Lib\Protocols\IdHTTP.pas"/>
+        <EditorIndex Value="5"/>
+        <TopLine Value="2784"/>
+        <CursorPos Y="2843"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="modules\efirebase\source\RestLib\eFirebase.rest.pas"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="16"/>
+        <CursorPos Y="32"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\Indy-master\Lib\System\IdBaseComponent.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="264"/>
+        <CursorPos Y="274"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\Indy-master\Lib\Core\IdTCPClient.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="252"/>
+        <CursorPos Y="264"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\Indy-master\Lib\Core\IdTCPConnection.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="904"/>
+        <CursorPos Y="916"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\Indy-master\Lib\System\IdComponent.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="216"/>
+        <CursorPos Y="228"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\Indy-master\Lib\System\IdStack.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="932"/>
+        <CursorPos Y="942"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="275" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="274" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="274" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="276" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="275" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="274" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="275" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="276" TopLine="262"/>
+      </Position>
+      <Position>
+        <Filename Value="unitmain.pas"/>
+        <Caret Line="274" TopLine="259"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\eFirebase.pas"/>
+        <Caret Line="18" Column="2" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="10" Column="3" TopLine="13"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="262" TopLine="252"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="260" TopLine="252"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="261" TopLine="252"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="262" TopLine="252"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="258" TopLine="252"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="270" TopLine="252"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="274" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="276" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="280" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="279" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="278" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="277" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="276" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="277" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\RestLib\eFirebase.rest.pas"/>
+        <Caret Line="30" TopLine="16"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\RestLib\eFirebase.rest.pas"/>
+        <Caret Line="32" TopLine="16"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\RestLib\eFirebase.request.lazarus.pas"/>
+        <Caret Line="151" TopLine="145"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Caret Line="276" TopLine="263"/>
+      </Position>
+      <Position>
+        <Filename Value="modules\efirebase\source\RestLib\eFirebase.request.lazarus.pas"/>
+        <Caret Line="151" TopLine="145"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode=""/>
+    </RunParams>
+  </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Line Value="282"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
+</CONFIG>
