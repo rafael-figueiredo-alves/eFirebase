@@ -70,7 +70,7 @@ end;
 function TRequest.Body(const pbody: TStream; const AOwns: Boolean): iRequest;
 begin
   Result := Self;
-  if not Assigned(body) then
+  if not Assigned(pbody) then
     Exit;
   {$IF COMPILERVERSION <= 29}
     FRESTRequest.AddBody(pbody, TRESTContentType.ctAPPLICATION_OCTET_STREAM);
@@ -80,9 +80,9 @@ begin
   if AOwns then
   begin
     {$IFDEF MSWINDOWS}
-      body.Free;
+      pbody.Free;
     {$ELSE}
-      body.DisposeOf;
+      pbody.DisposeOf;
     {$ENDIF}
   end;
 end;

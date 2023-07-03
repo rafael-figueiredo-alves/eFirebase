@@ -26,6 +26,9 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="TurboPowerIPro"/>
+      </Item>
+      <Item>
         <PackageName Value="indylaz"/>
       </Item>
       <Item>

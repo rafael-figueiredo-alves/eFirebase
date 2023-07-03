@@ -12,7 +12,8 @@ uses
   idHTTP,
   Classes,
   IdSSLOpenSSL,
-  IdSSLOpenSSLHeaders;
+  IdSSLOpenSSLHeaders,
+  IdMultipartFormData;
 
 Type
   TMethodRequest = (mrGET, mrPOST, mrPUT, mrPATCH, mrDELETE);
@@ -20,6 +21,7 @@ Type
   TRequestLazarus = Class(TInterfacedObject, iRequest)
   Private
     FidHTTP       : tidHTTP;
+    FIdMultiPartFormDataStream: TIdMultiPartFormDataStream;
     FBaseURL      : string;
     FResource     : string;
     FResponse     : iResponse;
@@ -118,6 +120,10 @@ begin
 
   FStreamResult := TStringStream.Create;
 
+  Self.AddHeaders('Content-Type', 'application/json');
+
+  FIdMultiPartFormDataStream := TIdMultiPartFormDataStream.Create;
+
   FParams := TStringList.Create;
 end;
 
@@ -135,6 +141,8 @@ begin
   FreeAndNil(FStreamResult);
   if Assigned(FBody) then
    FreeAndNil(FBody);
+  if Assigned(FIdMultiPartFormDataStream) then
+   FreeAndNil(FIdMultiPartFormDataStream);
   inherited;
 end;
 
@@ -148,6 +156,9 @@ begin
           end;
     mrPOST:
           begin
+          if (Assigned(FIdMultiPartFormDataStream) and (FIdMultiPartFormDataStream.Size > 0)) then
+            FIdHTTP.Post(TIdURI.URLEncode(MakeURL), FIdMultiPartFormDataStream, FStreamResult)
+          else
             FidHTTP.Post(tidURI.URLEncode(MakeURL), FBody, FStreamResult);
           end;
     mrPUT:
@@ -220,8 +231,9 @@ end;
 function TRequestLazarus.SendFile(const FileName, ContentType: string): iRequest;
 begin
   Result := Self;
-
-  //implementar futuramente
+  if not FileExists(FileName) then
+   Exit;
+  FIdMultiPartFormDataStream.AddFile('data', FileName, ContentType);
 end;
 
 function TRequestLazarus.Token(const pToken: string): iRequest;

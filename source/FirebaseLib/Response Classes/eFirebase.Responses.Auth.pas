@@ -214,9 +214,8 @@ begin
      fuID := vUID.AsString;
 
    if not oJSON.Find('expiresIn', vExpIn) then
-    oJSON.Find('expires_in', vExpIn);
-
-  fExpiresIn := vExpIn.AsInteger;
+    if oJSON.Find('expires_in', vExpIn) then
+     fExpiresIn := vExpIn.AsInteger;
 
    if oJSON.Find('registered', vRegistered) then
     fRegistered := vRegistered.AsBoolean;

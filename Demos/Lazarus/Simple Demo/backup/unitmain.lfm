@@ -18,10 +18,10 @@ object FormMain: TFormMain
     Height = 595
     Top = 15
     Width = 1201
-    ActivePage = TabFirebaseAuth
+    ActivePage = TabFirebaseStorage
     Align = alClient
     BorderSpacing.Around = 15
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabFirebaseAuth: TTabSheet
       Caption = 'Firebase Auth'
@@ -32,10 +32,10 @@ object FormMain: TFormMain
         Height = 502
         Top = 30
         Width = 1133
-        ActivePage = TabReset
+        ActivePage = TabLogin
         Align = alClient
         BorderSpacing.Around = 30
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 0
         TabPosition = tpBottom
         object TabLogin: TTabSheet
@@ -424,7 +424,7 @@ object FormMain: TFormMain
                 Layout = tlCenter
                 ParentColor = False
               end
-              object eLoginUsername1: TEdit
+              object eResetEmail: TEdit
                 Left = 135
                 Height = 33
                 Top = 15
@@ -437,9 +437,9 @@ object FormMain: TFormMain
                 Font.Quality = fqDraft
                 ParentFont = False
                 TabOrder = 0
-                TextHint = 'Digite aqui o seu usuário'
+                TextHint = 'Digite aqui o seu e-mail'
               end
-              object btLoginEntrar2: TButton
+              object btResetResetar: TButton
                 Left = 896
                 Height = 53
                 Top = 5
@@ -448,7 +448,7 @@ object FormMain: TFormMain
                 BorderSpacing.Right = 10
                 BorderSpacing.Around = 5
                 Caption = '&Resetar'
-                OnClick = btLoginEntrarClick
+                OnClick = btResetResetarClick
                 TabOrder = 1
               end
             end
@@ -476,7 +476,7 @@ object FormMain: TFormMain
                 ParentColor = False
                 WordWrap = True
               end
-              object eLoginSenha1: TEdit
+              object eResetCode: TEdit
                 Left = 135
                 Height = 33
                 Top = 15
@@ -489,9 +489,9 @@ object FormMain: TFormMain
                 Font.Quality = fqDraft
                 ParentFont = False
                 TabOrder = 0
-                TextHint = 'Digite aqui sua senha'
+                TextHint = 'Digite aqui o código enviado para seu e-mail'
               end
-              object btLoginEntrar3: TButton
+              object btResetVerificar: TButton
                 Left = 896
                 Height = 53
                 Top = 5
@@ -500,7 +500,7 @@ object FormMain: TFormMain
                 BorderSpacing.Right = 10
                 BorderSpacing.Around = 5
                 Caption = '&Verificar'
-                OnClick = btLoginEntrarClick
+                OnClick = btResetVerificarClick
                 TabOrder = 1
               end
             end
@@ -515,7 +515,7 @@ object FormMain: TFormMain
               ClientHeight = 63
               ClientWidth = 1081
               TabOrder = 2
-              object btLoginEntrar1: TButton
+              object btResetConfirmar: TButton
                 Left = 896
                 Height = 53
                 Top = 5
@@ -524,7 +524,7 @@ object FormMain: TFormMain
                 BorderSpacing.Right = 10
                 BorderSpacing.Around = 5
                 Caption = '&Confirmar'
-                OnClick = btLoginEntrarClick
+                OnClick = btResetConfirmarClick
                 TabOrder = 0
               end
               object lblLoginSenha7: TLabel
@@ -539,7 +539,7 @@ object FormMain: TFormMain
                 Layout = tlCenter
                 ParentColor = False
               end
-              object eLoginSenha2: TEdit
+              object eResetNovaSenha: TEdit
                 Left = 135
                 Height = 33
                 Top = 15
@@ -554,7 +554,7 @@ object FormMain: TFormMain
                 ParentFont = False
                 PasswordChar = '*'
                 TabOrder = 1
-                TextHint = 'Digite aqui sua senha'
+                TextHint = 'Digite aqui sua nova senha'
               end
             end
           end
@@ -565,7 +565,7 @@ object FormMain: TFormMain
             Width = 1105
             Align = alBottom
             BorderSpacing.Around = 10
-            Caption = ' Tokens '
+            Caption = ' Trocar senha '
             ClientHeight = 162
             ClientWidth = 1101
             TabOrder = 1
@@ -592,7 +592,7 @@ object FormMain: TFormMain
                 Layout = tlCenter
                 ParentColor = False
               end
-              object eLoginSenha3: TEdit
+              object eTrocarSenha: TEdit
                 Left = 135
                 Height = 33
                 Top = 15
@@ -607,7 +607,7 @@ object FormMain: TFormMain
                 ParentFont = False
                 PasswordChar = '*'
                 TabOrder = 0
-                TextHint = 'Digite aqui sua senha'
+                TextHint = 'Digite aqui sua nova senha'
               end
             end
             object layoutUserName12: TPanel
@@ -621,7 +621,7 @@ object FormMain: TFormMain
               ClientHeight = 63
               ClientWidth = 1081
               TabOrder = 1
-              object btAtualizarToken1: TButton
+              object btTrocarSenha: TButton
                 Left = 896
                 Height = 53
                 Top = 5
@@ -630,7 +630,7 @@ object FormMain: TFormMain
                 BorderSpacing.Right = 10
                 BorderSpacing.Around = 5
                 Caption = '&Trocar Senha'
-                OnClick = btAtualizarTokenClick
+                OnClick = btTrocarSenhaClick
                 TabOrder = 0
               end
             end
@@ -638,17 +638,578 @@ object FormMain: TFormMain
         end
         object TabPerfil: TTabSheet
           Caption = 'Perfil'
+          ClientHeight = 469
+          ClientWidth = 1125
+          object GroupLogin2: TGroupBox
+            Left = 15
+            Height = 439
+            Top = 15
+            Width = 1095
+            Align = alClient
+            BorderSpacing.Around = 15
+            Caption = ' Exibindo informações do Perfil '
+            ClientHeight = 414
+            ClientWidth = 1091
+            TabOrder = 0
+            object layoutUserName13: TPanel
+              Left = 10
+              Height = 63
+              Top = 10
+              Width = 1071
+              Align = alTop
+              BorderSpacing.Left = 10
+              BorderSpacing.Top = 10
+              BorderSpacing.Right = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1071
+              TabOrder = 0
+              object lblLoginUsername3: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'ID'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object lblPerfiluID: TLabel
+                Left = 120
+                Height = 63
+                Top = 0
+                Width = 951
+                Align = alClient
+                Font.CharSet = ANSI_CHARSET
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                Layout = tlCenter
+                ParentColor = False
+                ParentFont = False
+              end
+            end
+            object layoutUserName14: TPanel
+              Left = 10
+              Height = 63
+              Top = 78
+              Width = 1071
+              Align = alTop
+              BorderSpacing.Left = 10
+              BorderSpacing.Top = 5
+              BorderSpacing.Right = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1071
+              TabOrder = 1
+              object lblLoginSenha6: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'E-mail'
+                Layout = tlCenter
+                ParentColor = False
+                WordWrap = True
+              end
+              object lblPerfilEmail: TLabel
+                Left = 120
+                Height = 63
+                Top = 0
+                Width = 951
+                Align = alClient
+                Font.CharSet = ANSI_CHARSET
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                Layout = tlCenter
+                ParentColor = False
+                ParentFont = False
+              end
+            end
+            object layoutUserName15: TPanel
+              Left = 10
+              Height = 63
+              Top = 146
+              Width = 1071
+              Align = alTop
+              BorderSpacing.Left = 10
+              BorderSpacing.Top = 5
+              BorderSpacing.Right = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1071
+              TabOrder = 2
+              object lblLoginSenha8: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Nome'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object ePerfilNome: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 921
+                Align = alClient
+                BorderSpacing.Around = 15
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                TabOrder = 0
+                TextHint = 'Digite aqui o nome de exibição da conta'
+              end
+            end
+            object layoutUserName16: TPanel
+              Left = 10
+              Height = 63
+              Top = 214
+              Width = 1071
+              Align = alTop
+              BorderSpacing.Left = 10
+              BorderSpacing.Top = 5
+              BorderSpacing.Right = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1071
+              TabOrder = 3
+              object lblLoginSenha9: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'URL Foto'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object ePerfilURLFoto: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 921
+                Align = alClient
+                BorderSpacing.Around = 15
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                TabOrder = 0
+                TextHint = 'Informe a URL da foto de perfil (URL do Firebase Storage, por exemplo)'
+              end
+            end
+            object layoutUserName17: TPanel
+              Left = 10
+              Height = 63
+              Top = 282
+              Width = 1071
+              Align = alTop
+              BorderSpacing.Left = 10
+              BorderSpacing.Top = 5
+              BorderSpacing.Right = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1071
+              TabOrder = 4
+              object lblLoginSenha10: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Criado em'
+                Layout = tlCenter
+                ParentColor = False
+                WordWrap = True
+              end
+              object lblPerfilCriado: TLabel
+                Left = 120
+                Height = 63
+                Top = 0
+                Width = 235
+                Align = alLeft
+                AutoSize = False
+                Font.CharSet = ANSI_CHARSET
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                Layout = tlCenter
+                ParentColor = False
+                ParentFont = False
+              end
+              object lblLoginSenha11: TLabel
+                Left = 702
+                Height = 63
+                Top = 0
+                Width = 117
+                Align = alRight
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Último acesso'
+                Layout = tlCenter
+                ParentColor = False
+                WordWrap = True
+              end
+              object lblPerfilUltimoAcesso: TLabel
+                Left = 819
+                Height = 63
+                Top = 0
+                Width = 252
+                Align = alRight
+                AutoSize = False
+                Font.CharSet = ANSI_CHARSET
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                Layout = tlCenter
+                ParentColor = False
+                ParentFont = False
+              end
+            end
+            object layoutUserName18: TPanel
+              Left = 10
+              Height = 63
+              Top = 350
+              Width = 1071
+              Align = alTop
+              BorderSpacing.Left = 10
+              BorderSpacing.Top = 5
+              BorderSpacing.Right = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1071
+              TabOrder = 5
+              object btExibirPerfil: TButton
+                Left = 701
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Exibir Perfil'
+                OnClick = btExibirPerfilClick
+                TabOrder = 0
+              end
+              object btSalvarPerfil: TButton
+                Left = 886
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Salvar Alterações'
+                OnClick = btSalvarPerfilClick
+                TabOrder = 1
+              end
+              object lblPerfilEmailVerificado: TLabel
+                Left = 10
+                Height = 43
+                Top = 10
+                Width = 188
+                Align = alLeft
+                BorderSpacing.Around = 10
+                Caption = 'lblPerfilEmailVerificado'
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -17
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                Font.Style = [fsBold]
+                Layout = tlCenter
+                ParentColor = False
+                ParentFont = False
+              end
+            end
+          end
         end
         object TabVerificarEmail: TTabSheet
           Caption = 'Verificar e-mail'
+          ClientHeight = 469
+          ClientWidth = 1125
+          object GroupTokens2: TGroupBox
+            Left = 10
+            Height = 187
+            Top = 10
+            Width = 1105
+            Align = alTop
+            BorderSpacing.Around = 10
+            Caption = ' Verificar e-mail da conta '
+            ClientHeight = 162
+            ClientWidth = 1101
+            TabOrder = 0
+            object layoutUserName19: TPanel
+              Left = 10
+              Height = 63
+              Top = 10
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 0
+              object lblLoginSenha12: TLabel
+                Left = 0
+                Height = 63
+                Top = 0
+                Width = 120
+                Align = alLeft
+                Alignment = taCenter
+                AutoSize = False
+                Caption = 'Código'
+                Layout = tlCenter
+                ParentColor = False
+              end
+              object eVerificarEmail: TEdit
+                Left = 135
+                Height = 33
+                Top = 15
+                Width = 931
+                Align = alClient
+                BorderSpacing.Around = 15
+                Font.CharSet = ANSI_CHARSET
+                Font.Height = -18
+                Font.Pitch = fpVariable
+                Font.Quality = fqDraft
+                ParentFont = False
+                TabOrder = 0
+                TextHint = 'Digite aqui o código de verificação'
+              end
+            end
+            object layoutUserName20: TPanel
+              Left = 10
+              Height = 63
+              Top = 83
+              Width = 1081
+              Align = alTop
+              BorderSpacing.Around = 10
+              BevelOuter = bvNone
+              ClientHeight = 63
+              ClientWidth = 1081
+              TabOrder = 1
+              object btVerificarEmailEnviaCode: TButton
+                Left = 721
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Around = 5
+                Caption = '&Enviar Código'
+                OnClick = btVerificarEmailEnviaCodeClick
+                TabOrder = 0
+              end
+              object btVerificarEmailVerificaCode: TButton
+                Left = 896
+                Height = 53
+                Top = 5
+                Width = 170
+                Align = alRight
+                BorderSpacing.Right = 10
+                BorderSpacing.Around = 5
+                Caption = '&Verificar E-mail'
+                OnClick = btVerificarEmailVerificaCodeClick
+                TabOrder = 1
+              end
+            end
+          end
         end
         object TabApagarConta: TTabSheet
           Caption = 'Apagar Conta'
+          ClientHeight = 469
+          ClientWidth = 1125
+          object btApagarConta: TButton
+            Left = 328
+            Height = 144
+            Top = 120
+            Width = 374
+            Caption = 'Apagar Conta'
+            OnClick = btApagarContaClick
+            TabOrder = 0
+          end
         end
       end
     end
     object TabFirebaseStorage: TTabSheet
       Caption = 'Firebase Storage'
+      ClientHeight = 562
+      ClientWidth = 1193
+      object GroupBox2: TGroupBox
+        Left = 20
+        Height = 251
+        Top = 20
+        Width = 1153
+        Align = alTop
+        BorderSpacing.Around = 20
+        Caption = 'Enviar arquivo para Firebase Storage '
+        ClientHeight = 226
+        ClientWidth = 1149
+        TabOrder = 0
+        object layoutUserName21: TPanel
+          Left = 10
+          Height = 63
+          Top = 10
+          Width = 1129
+          Align = alTop
+          BorderSpacing.Around = 10
+          BevelOuter = bvNone
+          ClientHeight = 63
+          ClientWidth = 1129
+          TabOrder = 0
+          object lblLoginUsername4: TLabel
+            Left = 0
+            Height = 63
+            Top = 0
+            Width = 120
+            Align = alLeft
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Pasta'
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object eStoragePasta: TEdit
+            Left = 135
+            Height = 33
+            Top = 15
+            Width = 979
+            Align = alClient
+            BorderSpacing.Around = 15
+            Font.CharSet = ANSI_CHARSET
+            Font.Height = -18
+            Font.Pitch = fpVariable
+            Font.Quality = fqDraft
+            ParentFont = False
+            TabOrder = 0
+            TextHint = 'informe a pasta a enviar o arquivo'
+          end
+        end
+        object layoutUserName22: TPanel
+          Left = 10
+          Height = 63
+          Top = 83
+          Width = 1129
+          Align = alTop
+          BorderSpacing.Around = 10
+          BevelOuter = bvNone
+          ClientHeight = 63
+          ClientWidth = 1129
+          TabOrder = 1
+          object lblLoginSenha13: TLabel
+            Left = 0
+            Height = 63
+            Top = 0
+            Width = 120
+            Align = alLeft
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Arquivo'
+            Layout = tlCenter
+            ParentColor = False
+          end
+          object eStorageArquivo: TEdit
+            Left = 135
+            Height = 33
+            Top = 15
+            Width = 794
+            Align = alClient
+            BorderSpacing.Around = 15
+            Font.CharSet = ANSI_CHARSET
+            Font.Height = -18
+            Font.Pitch = fpVariable
+            Font.Quality = fqDraft
+            ParentFont = False
+            TabOrder = 0
+            TextHint = 'Informe local e nome do arquivo a enviar'
+          end
+          object btProcurarArquivo: TButton
+            Left = 944
+            Height = 53
+            Top = 5
+            Width = 170
+            Align = alRight
+            BorderSpacing.Right = 10
+            BorderSpacing.Around = 5
+            Caption = '&Escolher arquivo'
+            OnClick = btProcurarArquivoClick
+            TabOrder = 1
+          end
+        end
+        object layoutUserName23: TPanel
+          Left = 10
+          Height = 63
+          Top = 156
+          Width = 1129
+          Align = alTop
+          BorderSpacing.Around = 10
+          BevelOuter = bvNone
+          ClientHeight = 63
+          ClientWidth = 1129
+          TabOrder = 2
+          object btEnviarArquivo: TButton
+            Left = 944
+            Height = 53
+            Top = 5
+            Width = 170
+            Align = alRight
+            BorderSpacing.Right = 10
+            BorderSpacing.Around = 5
+            Caption = '&Enviar Arquivo'
+            OnClick = btEnviarArquivoClick
+            TabOrder = 0
+          end
+        end
+      end
+      object GroupBox3: TGroupBox
+        Left = 20
+        Height = 251
+        Top = 291
+        Width = 1153
+        Align = alClient
+        BorderSpacing.Around = 20
+        Caption = ' Exibição '
+        ClientHeight = 226
+        ClientWidth = 1149
+        TabOrder = 1
+        object Panel1: TPanel
+          Left = 0
+          Height = 226
+          Top = 0
+          Width = 341
+          Align = alLeft
+          BevelOuter = bvNone
+          ClientHeight = 226
+          ClientWidth = 341
+          TabOrder = 0
+          object ListBox1: TListBox
+            Left = 0
+            Height = 226
+            Top = 0
+            Width = 341
+            Align = alClient
+            ItemHeight = 0
+            TabOrder = 0
+          end
+        end
+      end
     end
     object TabFirebaseRealtimeDB: TTabSheet
       Caption = 'Firebase Realtime DB'
@@ -676,5 +1237,10 @@ object FormMain: TFormMain
       ScrollBars = ssVertical
       TabOrder = 0
     end
+  end
+  object selectfile: TOpenDialog
+    Title = 'Selecione arquivo a enviar'
+    Left = 854
+    Top = 249
   end
 end
