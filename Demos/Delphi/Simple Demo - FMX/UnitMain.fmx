@@ -19,7 +19,7 @@ object FormMain: TFormMain
     Size.Width = 754.000000000000000000
     Size.Height = 493.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 1
     TabPosition = PlatformDefault
     Sizes = (
@@ -33,7 +33,7 @@ object FormMain: TFormMain
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 93.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -1384,7 +1384,7 @@ object FormMain: TFormMain
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 132.000000000000000000
       Size.Height = 26.000000000000000000
       Size.PlatformDefault = False
@@ -1404,7 +1404,7 @@ object FormMain: TFormMain
         Size.Width = 734.000000000000000000
         Size.Height = 231.000000000000000000
         Size.PlatformDefault = False
-        Text = ' Enviar arquivo para o Storage '
+        Text = ' Acessar RealitimeDB / Opera'#231#245'es  '
         TabOrder = 3
         object Layout26: TLayout
           Align = Top
@@ -1640,7 +1640,7 @@ object FormMain: TFormMain
         Size.Width = 734.000000000000000000
         Size.Height = 206.000000000000000000
         Size.PlatformDefault = False
-        Text = ' Enviar arquivo para o Storage '
+        Text = ' Dados do Realtime  '
         TabOrder = 2
         object Layout30: TLayout
           Align = Client

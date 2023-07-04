@@ -142,11 +142,11 @@ var
   vRefreToken  : TJSONString;
   vErrMsg      : TJSONString;
   vExpIn       : TJSONString;
-  vRegistered  : TJSONString;
+  vRegistered  : TJSONBoolean;
   vDisplay     : TJSONString;
   vEmail       : TJSONString;
   vPhoto       : TJSONString;
-  vVerEmail    : TJSONString;
+  vVerEmail    : TJSONBoolean;
  {$ELSE}
   vJSON        : TJSONValue;
  {$ENDIF}

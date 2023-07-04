@@ -12,7 +12,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="30"/>
+        <UsageCount Value="34"/>
       </Unit>
       <Unit>
         <Filename Value="unitmain.pas"/>
@@ -22,10 +22,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="unitMain"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="589"/>
-        <CursorPos X="3" Y="595"/>
-        <FoldState Value=" TJkU1Tw"/>
-        <UsageCount Value="30"/>
+        <TopLine Value="243"/>
+        <CursorPos X="3" Y="757"/>
+        <UsageCount Value="34"/>
       </Unit>
       <Unit>
         <Filename Value="modules\efirebase\source\RestLib\eFirebase.request.lazarus.pas"/>
@@ -44,21 +43,22 @@
       <Unit>
         <Filename Value="modules\efirebase\source\eFirebase.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="52"/>
+        <TopLine Value="38"/>
         <CursorPos X="2" Y="18"/>
-        <UsageCount Value="13"/>
+        <UsageCount Value="14"/>
       </Unit>
       <Unit>
         <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="263"/>
-        <CursorPos Y="276"/>
+        <TopLine Value="267"/>
+        <CursorPos Y="278"/>
         <UsageCount Value="13"/>
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\Indy-master\Lib\Protocols\IdHTTP.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="2821"/>
+        <TopLine Value="3068"/>
         <CursorPos Y="2843"/>
         <UsageCount Value="13"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -114,7 +114,7 @@
         <Filename Value="modules\efirebase\source\FirebaseLib\Response Classes\eFirebase.Responses.Auth.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="217"/>
-        <CursorPos Y="221"/>
+        <CursorPos X="41" Y="221"/>
         <UsageCount Value="12"/>
       </Unit>
       <Unit>
@@ -143,8 +143,8 @@
       </Unit>
       <Unit>
         <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Storage.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
         <TopLine Value="113"/>
         <CursorPos Y="131"/>
         <UsageCount Value="11"/>
@@ -153,6 +153,20 @@
         <Filename Value="modules\efirebase\source\RestLib\eFirebase.request.contract.pas"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="14" Y="20"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\include\control.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3580"/>
+        <CursorPos Y="3591"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.RealTimeDB.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="285"/>
+        <CursorPos Y="310"/>
         <UsageCount Value="10"/>
       </Unit>
     </Units>
@@ -172,7 +186,21 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
-        <Line Value="282"/>
+        <Line Value="284"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Line Value="263"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
+        <Line Value="278"/>
       </Item>
     </BreakPoints>
   </Debugging>

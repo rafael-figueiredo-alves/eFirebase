@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ComCtrls, StdCtrls,
-  ExtCtrls, IpHtml, Iphttpbroker;
+  ExtCtrls, Grids, IpHtml, Types, fpjson;
 
 type
 
@@ -14,6 +14,10 @@ type
 
   TFormMain = class(TForm)
     btEnviarArquivo: TButton;
+    btnReadCollection: TButton;
+    btnAddRecord: TButton;
+    btnUpdateRecord: TButton;
+    btnDeleteRecord: TButton;
     btProcurarArquivo: TButton;
     btTrocarSenha: TButton;
     btLoginEntrar: TButton;
@@ -27,12 +31,17 @@ type
     btVerificarEmailEnviaCode: TButton;
     btVerificarEmailVerificaCode: TButton;
     btApagarConta: TButton;
+    chFieldDone: TCheckBox;
     eStorageArquivo: TEdit;
+    eRealtimeCollection: TEdit;
+    eFieldTask: TEdit;
+    eFieldCategory: TEdit;
     eStoragePasta: TEdit;
     eResetCode: TEdit;
     eResetNovaSenha: TEdit;
     ePerfilNome: TEdit;
     ePerfilURLFoto: TEdit;
+    eRealtimeEndpoint: TEdit;
     eTrocarSenha: TEdit;
     eResetEmail: TEdit;
     eRegistroSenha: TEdit;
@@ -43,6 +52,8 @@ type
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
+    GroupBox4: TGroupBox;
+    GroupBox5: TGroupBox;
     GroupLogin: TGroupBox;
     GroupLogin1: TGroupBox;
     GroupLogin2: TGroupBox;
@@ -55,9 +66,17 @@ type
     layoutUserName21: TPanel;
     layoutUserName22: TPanel;
     layoutUserName23: TPanel;
+    layoutUserName24: TPanel;
+    layoutUserName25: TPanel;
+    layoutUserName26: TPanel;
+    layoutUserName27: TPanel;
     lblLoginSenha12: TLabel;
     lblLoginSenha13: TLabel;
+    lblLoginSenha14: TLabel;
+    lblLoginSenha15: TLabel;
+    lblLoginSenha16: TLabel;
     lblLoginUsername4: TLabel;
+    lblLoginUsername5: TLabel;
     lblPerfilEmailVerificado: TLabel;
     layoutUserName18: TPanel;
     lblLoginSenha11: TLabel;
@@ -104,6 +123,7 @@ type
     layoutUserName: TPanel;
     selectfile: TOpenDialog;
     Panel1: TPanel;
+    DataGrid: TStringGrid;
     TabAuth: TPageControl;
     TabServices: TPageControl;
     TabFirebaseAuth: TTabSheet;
@@ -120,6 +140,10 @@ type
     procedure btEnviarArquivoClick(Sender: TObject);
     procedure btExibirPerfilClick(Sender: TObject);
     procedure btLoginEntrarClick(Sender: TObject);
+    procedure btnAddRecordClick(Sender: TObject);
+    procedure btnDeleteRecordClick(Sender: TObject);
+    procedure btnReadCollectionClick(Sender: TObject);
+    procedure btnUpdateRecordClick(Sender: TObject);
     procedure btProcurarArquivoClick(Sender: TObject);
     procedure btRegistroRegistrarClick(Sender: TObject);
     procedure btResetConfirmarClick(Sender: TObject);
@@ -130,6 +154,8 @@ type
     procedure btVerificarEmailEnviaCodeClick(Sender: TObject);
     procedure btVerificarEmailVerificaCodeClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure DataGridClick(Sender: TObject);
+    procedure DataGridSelection(Sender: TObject; aCol, aRow: Integer);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -138,6 +164,7 @@ type
     PROJECT_ID            : string;
     fID                   : string;
     procedure Add2Log(const texto: string);
+    procedure PreencheGrid(const Dados: TJSONArray);
   public
 
   end;
@@ -185,6 +212,33 @@ end;
 procedure TFormMain.Add2Log(const texto: string);
 begin
   MemoLog.Lines.Add(texto);
+end;
+function RemoveQuotes(const value: string): string;
+begin
+  Result := StringReplace(value, '"', '', [rfReplaceAll]);
+end;
+procedure TFormMain.PreencheGrid(const Dados: TJSONArray);
+var
+ Registro : TJSONObject;
+ i        : Integer;
+begin
+  DataGrid.RowCount := 0;
+
+  if Dados.Count > 0 then
+   begin
+
+    DataGrid.RowCount := Dados.Count + 1;
+
+    for i := 0 to Dados.Count-1 do
+     begin
+       Registro := Dados.Items[i] as TJSONObject;
+       DataGrid.Cells[0, i + 1] := RemoveQuotes(Registro.Find('done').AsJSON);
+       DataGrid.Cells[1, i + 1] := RemoveQuotes(Registro.Find('id').AsJSON);
+       DataGrid.Cells[2, i + 1] := RemoveQuotes(Registro.Find('task').AsJSON);
+       DataGrid.Cells[3, i + 1] := RemoveQuotes(Registro.Find('category').AsJSON);
+     end;
+
+   end;
 end;
 {$EndRegion}
 
@@ -264,6 +318,125 @@ begin
      Add2Log('Firebase Auth -> Login falhou: ' + ErrorMessage(Login.Error) + #13 + 'Status Code = ' + Login.StatusCode.ToString);
      ShowMessage('Firebase Auth -> Login falhou: ' + ErrorMessage(Login.Error) + #13 + 'Status Code = ' + Login.StatusCode.ToString);
    end;
+end;
+
+procedure TFormMain.btnAddRecordClick(Sender: TObject);
+var
+ Registro : TJsonObject;
+ Bd       : ieFirebaseRealtimeResponse;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
+  Registro := TJSONObject.Create;
+  try
+    Registro.Add('task', eFieldTask.Text);
+    Registro.Add('category', eFieldCategory.Text);
+    Registro.Add('done', false);
+
+    Bd := TeFirebase.New
+                      .RealTimeDB(Project_ID)
+                        .AccessToken(fToken)
+                        .Endpoint(eRealtimeEndpoint.Text)
+                        .Collection(eRealtimeCollection.Text)
+                          .CreateRegister(Registro.AsJSON);
+
+  finally
+    Registro.Free;
+  end;
+
+  btnReadCollectionClick(nil);
+end;
+
+procedure TFormMain.btnDeleteRecordClick(Sender: TObject);
+var
+  fDelete : ieFirebaseRealtimeResponse;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
+   if MessageDlg('Deseja realmente apagar o registro selecionado?', TMsgDlgType.mtConfirmation, mbYesNo, 0) = mrNo then
+    Exit;
+
+  fDelete := TeFirebase.New
+                         .RealTimeDB(Project_ID)
+                          .AccessToken(fToken)
+                          .Endpoint(eRealtimeEndpoint.Text)
+                          .Collection(eRealtimeCollection.Text)
+                            .DeleteRegister(fID);
+
+  if fDelete.StatusCode <> 200 then
+   begin
+     ShowMessage('Ocorreu um erro ao tentar excluir o registro!');
+     Exit;
+   end;
+
+  ShowMessage('Registro apagado com sucesso!');
+  btnReadCollectionClick(nil);
+end;
+
+procedure TFormMain.btnReadCollectionClick(Sender: TObject);
+var
+ DataTable : ieFirebaseRealtimeResponse;
+ JArray    : TJSONArray;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
+  DataTable := TeFirebase.New
+                           .RealTimeDB(Project_ID)
+                             .AccessToken(fToken)
+                             .Endpoint(eRealtimeEndPoint.Text)
+                             .Collection(eRealtimeCollection.Text)
+                             .ReadWithoutFilters;
+
+  if DataTable.StatusCode = 200 then
+   begin
+     JArray := DataTable.AsJSONArray;
+     PreencheGrid(JArray);
+     JArray.Free;
+   end;
+end;
+
+procedure TFormMain.btnUpdateRecordClick(Sender: TObject);
+var
+  Body    : TJSONObject;
+  fUpdate : ieFirebaseRealtimeResponse;
+begin
+  if fToken = EmptyStr then
+   begin
+     ShowMessage('Esta função só funcionará após fazer login ou criar uma conta!');
+     Exit;
+   end;
+
+  if fID = EmptyStr then
+   exit;
+
+  Body := TJSONObject.Create;
+  Body.Add('id', fID);
+  Body.Add('task', eFieldTask.Text);
+  Body.Add('category', eFieldCategory.Text);
+  Body.Add('done', chFieldDone.Checked);
+
+  fUpdate := TeFirebase.New
+                         .RealTimeDB(Project_ID)
+                          .AccessToken(fToken)
+                          .Endpoint(eRealtimeEndpoint.Text)
+                          .Collection(eRealtimeCollection.Text)
+                            .UpdateRegister(Body.AsJSON, fID);
+
+  Body.Free;
+
+  btnReadCollectionClick(nil);
 end;
 
 procedure TFormMain.btProcurarArquivoClick(Sender: TObject);
@@ -556,6 +729,22 @@ end;
 procedure TFormMain.Button1Click(Sender: TObject);
 begin
 
+end;
+
+procedure TFormMain.DataGridClick(Sender: TObject);
+begin
+
+end;
+
+procedure TFormMain.DataGridSelection(Sender: TObject; aCol, aRow: Integer);
+begin
+  if DataGrid.RowCount < 1 then
+   Exit;
+
+  eFieldTask.Text := DataGrid.Cells[2, aRow];
+  eFieldCategory.Text := DataGrid.Cells[3, aRow];
+  fID := DataGrid.Cells[1, aRow];
+  chFieldDone.Checked := DataGrid.Cells[0, aRow].ToBoolean;
 end;
 
 

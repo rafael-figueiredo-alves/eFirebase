@@ -60,7 +60,8 @@ uses
 function TRequestLazarus.AddHeaders(const key, value: string): iRequest;
 begin
   Result := Self;
-  FidHTTP.Request.CustomHeaders.AddValue(key, value);
+  if FidHTTP.Request.CustomHeaders.indexof(key) < 0 then
+   FidHTTP.Request.CustomHeaders.AddValue(key, value);
 end;
 
 function TRequestLazarus.AddParameter(const Key, Value: string): iRequest;
@@ -125,6 +126,8 @@ begin
   FIdMultiPartFormDataStream := TIdMultiPartFormDataStream.Create;
 
   FParams := TStringList.Create;
+
+  FIdHTTP.HTTPOptions:= [hoKeepOrigProtocol];
 end;
 
 function TRequestLazarus.Delete: iResponse;
