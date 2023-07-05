@@ -7,6 +7,6 @@
 	"projects": [],
 	"dependencies": {
 		"https://github.com/rafael-figueiredo-alves/dotenv4delphi": "^v1.0.0",
-		"https://github.com/rafael-figueiredo-alves/efirebase": "^v1.0.0"
+		"https://github.com/rafael-figueiredo-alves/efirebase": "^v1.0.5"
 	}
 }

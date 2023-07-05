@@ -32,10 +32,10 @@ object FormMain: TFormMain
         Height = 502
         Top = 30
         Width = 1133
-        ActivePage = TabLogin
+        ActivePage = TabPerfil
         Align = alClient
         BorderSpacing.Around = 30
-        TabIndex = 0
+        TabIndex = 3
         TabOrder = 0
         TabPosition = tpBottom
         object TabLogin: TTabSheet
@@ -925,10 +925,9 @@ object FormMain: TFormMain
                 Left = 10
                 Height = 43
                 Top = 10
-                Width = 188
+                Width = 1
                 Align = alLeft
                 BorderSpacing.Around = 10
-                Caption = 'lblPerfilEmailVerificado'
                 Font.CharSet = ANSI_CHARSET
                 Font.Height = -17
                 Font.Pitch = fpVariable
@@ -1193,17 +1192,17 @@ object FormMain: TFormMain
           Left = 0
           Height = 226
           Top = 0
-          Width = 341
-          Align = alLeft
+          Width = 1149
+          Align = alClient
           BevelOuter = bvNone
           ClientHeight = 226
-          ClientWidth = 341
+          ClientWidth = 1149
           TabOrder = 0
           object ListBox1: TListBox
             Left = 0
             Height = 226
             Top = 0
-            Width = 341
+            Width = 1149
             Align = alClient
             ItemHeight = 0
             TabOrder = 0
@@ -1466,8 +1465,8 @@ object FormMain: TFormMain
             item
               ButtonStyle = cbsCheckboxColumn
               Title.Caption = ''
-              ValueChecked = 'True'
-              ValueUnchecked = 'False'
+              ValueChecked = 'true'
+              ValueUnchecked = 'false'
             end          
             item
               Title.Caption = 'ID'

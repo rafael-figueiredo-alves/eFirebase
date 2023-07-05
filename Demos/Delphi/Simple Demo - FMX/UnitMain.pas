@@ -634,7 +634,6 @@ begin
    exit;
 
   Body := TJSONObject.Create;
-  Body.AddPair('id', fID);
   Body.AddPair('task', eTask.Text);
   Body.AddPair('category', eCategory.Text);
   Body.AddPair('done', chDone.IsChecked);

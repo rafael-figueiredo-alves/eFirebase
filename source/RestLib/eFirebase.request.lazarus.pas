@@ -188,7 +188,10 @@ end;
 function TRequestLazarus.MakeUrl: string;
 var Param: integer;
 begin
-  Result := FBaseURL + '/' + FResource;
+  if FResource <> EmptyStr then
+   Result := FBaseURL + '/' + FResource
+  else
+   Result := FBaseURL;
 
   if FParams.Count > 0 then
    begin

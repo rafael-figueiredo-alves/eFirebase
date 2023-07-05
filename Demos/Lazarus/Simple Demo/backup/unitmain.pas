@@ -222,7 +222,7 @@ var
  Registro : TJSONObject;
  i        : Integer;
 begin
-  DataGrid.RowCount := 0;
+  DataGrid.RowCount := 1;
 
   if Dados.Count > 0 then
    begin
@@ -422,7 +422,6 @@ begin
    exit;
 
   Body := TJSONObject.Create;
-  Body.Add('id', fID);
   Body.Add('task', eFieldTask.Text);
   Body.Add('category', eFieldCategory.Text);
   Body.Add('done', chFieldDone.Checked);

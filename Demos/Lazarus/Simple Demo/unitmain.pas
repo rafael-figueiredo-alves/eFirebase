@@ -222,7 +222,7 @@ var
  Registro : TJSONObject;
  i        : Integer;
 begin
-  DataGrid.RowCount := 0;
+  DataGrid.RowCount := 1;
 
   if Dados.Count > 0 then
    begin
@@ -306,7 +306,6 @@ begin
      //Guardar Tokens para serem usados (extremamente importante, são o que garante que vc está "conectado"
      fToken        := Login.token;
      fRefreshToken := Login.RefreshToken;
-     Add2Log(fRefreshToken);
 
      LblToken.Caption        := fToken;
      LblRefreshToken.Caption := fRefreshToken;
@@ -422,7 +421,6 @@ begin
    exit;
 
   Body := TJSONObject.Create;
-  Body.Add('id', fID);
   Body.Add('task', eFieldTask.Text);
   Body.Add('category', eFieldCategory.Text);
   Body.Add('done', chFieldDone.Checked);
