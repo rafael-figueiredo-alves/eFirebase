@@ -3,8 +3,8 @@
 </p>
 
 <p>
-  <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=Delphi&message=Version%20xe2%2B&color=silver&style=for-the-badge&logo=delphi&logoColor=white" alt="Delphi XE2+ support" /></a>
-  <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=Lazarus&message=Version%202.2.6%20(Testada)&color=silver&style=for-the-badge&logo=lazarus&logoColor=white" alt="Lazarus support" /></a>  
+  <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=Delphi&message=Vers%C3%A3%20oxe2%2B&color=silver&style=for-the-badge&logo=delphi&logoColor=white" alt="Delphi XE2+ support" /></a>
+  <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=Lazarus&message=Vers%C3%A3o%202.2.6%20(Testada)&color=silver&style=for-the-badge&logo=lazarus&logoColor=white" alt="Lazarus support" /></a>  
   <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=platforms&message=cross-platform&color=silver&style=for-the-badge&logo=delphi&logoColor=white" alt="Cross-platform support" /></a>
   <a href="#compatibility"><img src="https://img.shields.io/static/v1?label=applications&message=console%2C%20fmx%2C%20vcl&color=silver&style=for-the-badge&logo=delphi&logoColor=white" alt="Console, FMX, VCL support" /></a>
 </p>
