@@ -53,4 +53,4 @@ Basta baixar os arquivos e adicionar ao seu projeto ou se desejar utilize o [Bos
 
 # Versão
 
-**[eFirebase versão 1.0.5](/../../releases/latest)**
+**[eFirebase versão 1.1.0](/../../releases/latest)**
