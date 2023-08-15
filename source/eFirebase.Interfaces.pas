@@ -85,7 +85,7 @@ type
    function AccessToken(const Token: string): ieFirebaseRealtime;
    function Endpoint(const url_path: string): ieFirebaseRealtime;
    function Collection(const name: string): ieFirebaseRealtime;
-   function ReadWithoutFilters: ieFirebaseRealtimeResponse;
+   function ReadWithoutFilters(const id: string = ''): ieFirebaseRealtimeResponse;
    function Read: ieFirebaseRealtimeFilters;
    function CreateRegister(const body: string): ieFirebaseRealtimeResponse;
    function UpdateRegister(const body: string; id: string = ''): ieFirebaseRealtimeResponse;

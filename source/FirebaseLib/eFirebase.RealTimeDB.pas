@@ -292,13 +292,16 @@ begin
   Result := Self;
 end;
 
-function TeFirebaseRealtimeDB.ReadWithoutFilters: ieFirebaseRealtimeResponse;
+function TeFirebaseRealtimeDB.ReadWithoutFilters(const id: string): ieFirebaseRealtimeResponse;
 var
   cUrl: string;
   ResponseJSON : string;
   Response     : iResponse;
 begin
-  fCollection := fCollection + '.json';
+  if id <> EmptyStr then
+   fCollection := fCollection + '/' + id + '.json'
+  else
+   fCollection := fCollection + '.json';
 
   cUrl := MountUrl;
 
