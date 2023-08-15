@@ -12,8 +12,8 @@
 		},
 		"https://github.com/rafael-figueiredo-alves/efirebase": {
 			"name": "efirebase",
-			"version": "v1.0.5",
-			"hash": "d1a4f1f2b13f20d086e8b5b0849a9037",
+			"version": "v1.1.0",
+			"hash": "e38051cf93f228c89d0929ffd213a55c",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
