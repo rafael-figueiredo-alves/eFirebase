@@ -8,11 +8,9 @@
       <Unit>
         <Filename Value="SimpleDemo.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
+        <IsVisibleTab Value="True"/>
         <UsageCount Value="36"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="unitmain.pas"/>
@@ -21,10 +19,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="unitMain"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="292"/>
-        <CursorPos X="42" Y="308"/>
+        <CursorPos Y="303"/>
         <UsageCount Value="36"/>
       </Unit>
       <Unit>
@@ -44,6 +41,7 @@
       <Unit>
         <Filename Value="modules\efirebase\source\eFirebase.pas"/>
         <EditorIndex Value="-1"/>
+        <TopLine Value="82"/>
         <CursorPos X="2" Y="18"/>
         <UsageCount Value="14"/>
       </Unit>
@@ -57,9 +55,8 @@
       <Unit>
         <Filename Value="C:\lazarus\Indy-master\Lib\Protocols\IdHTTP.pas"/>
         <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="2834"/>
-        <CursorPos Y="2843"/>
+        <TopLine Value="2831"/>
+        <CursorPos X="61" Y="2844"/>
         <UsageCount Value="13"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
@@ -185,9 +182,6 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <General>
-      <ActiveWindowIndexAtStart Value="-1"/>
-    </General>
     <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
