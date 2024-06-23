@@ -8,11 +8,9 @@
       <Unit>
         <Filename Value="SimpleDemo.lpr"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="-1"/>
-        <TopLine Value="-1"/>
-        <CursorPos X="-1" Y="-1"/>
+        <IsVisibleTab Value="True"/>
         <UsageCount Value="36"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="unitmain.pas"/>
@@ -21,11 +19,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="unitMain"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="292"/>
         <CursorPos Y="303"/>
         <UsageCount Value="36"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="modules\efirebase\source\RestLib\eFirebase.request.lazarus.pas"/>
@@ -43,12 +40,10 @@
       </Unit>
       <Unit>
         <Filename Value="modules\efirebase\source\eFirebase.pas"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="82"/>
         <CursorPos X="2" Y="18"/>
         <UsageCount Value="14"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="modules\efirebase\source\FirebaseLib\eFirebase.Auth.pas"/>
@@ -59,11 +54,10 @@
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\Indy-master\Lib\Protocols\IdHTTP.pas"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="2831"/>
         <CursorPos X="61" Y="2844"/>
         <UsageCount Value="13"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
       <Unit>
@@ -188,24 +182,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="3">
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="295" Column="33" TopLine="292"/>
-      </Position>
-      <Position>
-        <Filename Value="C:\lazarus\Indy-master\Lib\Protocols\IdHTTP.pas"/>
-        <Caret Line="2843" TopLine="2834"/>
-      </Position>
-      <Position>
-        <Filename Value="unitmain.pas"/>
-        <Caret Line="303" TopLine="292"/>
-      </Position>
-      <Position>
-        <Filename Value="C:\lazarus\Indy-master\Lib\Protocols\IdHTTP.pas"/>
-        <Caret Line="2844" Column="61" TopLine="2831"/>
-      </Position>
-    </JumpHistory>
+    <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode=""/>
